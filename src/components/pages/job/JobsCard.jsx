@@ -24,7 +24,7 @@ const JobsCard = ({ job }) => {
             <div className="w">{postingDate}</div>
             <div className="w">
               <NavLink className="btn" to={`/job/${id}`}>
-                Apply Now{" "}
+                View Details
               </NavLink>
             </div>
           </div>

@@ -58,7 +58,7 @@ const NavBar = () => {
   );
   return (
     <>
-      <div className="navbar bg-base-100 shadow-md">
+      <div className="navbar bg-base-100 shadow-md border-b-2">
         <div className="container max-w-7xl mx-auto justify-between">
           <div className="navbar-start flex items-center ">
             <div className="dropdown">

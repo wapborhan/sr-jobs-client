@@ -1,11 +1,11 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { JobContex } from "../../../context/JobContext";
 import JobsCard from "./JobsCard";
 
 const Jobs = () => {
   const { allJobs } = useContext(JobContex);
-  console.log(allJobs);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const allTypes = [...new Set(allJobs?.map((job) => job.jobType))];
 
@@ -19,6 +19,15 @@ const Jobs = () => {
           the right freelancers.
         </p>
       </div>
+      <div className="search-bar text-center mb-4">
+        <input
+          type="text"
+          placeholder="Search by Job Title"
+          value={searchTerm}
+          className="input input-bordered w-full max-w-xs"
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
       <Tabs className=" w-full mx-auto text-center">
         <TabList className="tabs tabs-boxed inline-flex   justify-center items-center ">
           {allTypes.map((jobType, index) => (
@@ -31,7 +40,11 @@ const Jobs = () => {
         {allTypes.map((jobType, index) => (
           <TabPanel key={index} className="grid grid-cols-3 gap-5">
             {allJobs
-              .filter((job) => job.jobType === jobType)
+              .filter(
+                (job) =>
+                  job.jobType === jobType &&
+                  job.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
+              )
               .map((job) => (
                 <JobsCard key={job.id} job={job} />
               ))}

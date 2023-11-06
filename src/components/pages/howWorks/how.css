@@ -1,0 +1,73 @@
+.process-box {
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  padding: 1.5rem
+}
+
+.process-box .process-img {
+  width: 110px;
+  height: 110px;
+  line-height: 110px;
+  border-radius: 50%;
+  background-color: rgba(118, 109, 244, .05)
+}
+
+.process-box:hover {
+  -webkit-transform: translateY(-8px);
+  transform: translateY(-8px)
+}
+
+.process-menu.nav-pills .nav-link {
+  color: #314047;
+  margin-bottom: 22px;
+  position: relative;
+  padding: 10px 0
+}
+
+.process-menu.nav-pills .nav-link .number {
+  height: 35px;
+  width: 35px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  background-color: rgba(116, 120, 141, .15);
+  color: #74788d;
+  border-radius: 40px
+}
+
+.process-menu.nav-pills .nav-link.active {
+  background-color: transparent !important;
+  color: #766df4
+}
+
+.process-menu.nav-pills .nav-link.active .number {
+  color: #fff;
+  background-color: #766df4
+}
+
+.process-menu.nav-pills .nav-link::before {
+  content: "";
+  position: absolute;
+  border: 1px dashed rgba(118, 109, 244, .4);
+  height: 65px;
+  left: 17px;
+  top: 54px
+}
+
+.process-menu.nav-pills .nav-link:last-child::before {
+  border: none
+}
+
+body[data-layout-mode=dark] .process-menu .nav-link {
+  color: #fff
+}
+
+body[data-layout-mode=dark] .process-menu .nav-link.active {
+  color: #766df4
+}

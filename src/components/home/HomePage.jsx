@@ -1,3 +1,5 @@
+import Blogs from "../pages/blogs/Blogs";
+import HowItWorks from "../pages/howWorks/HowItWorks";
 import Jobs from "../pages/job/Jobs";
 import Banner from "./banner/Banner";
 
@@ -6,6 +8,8 @@ const HomePage = () => {
     <div>
       <Banner />
       <Jobs />
+      <Blogs />
+      <HowItWorks />
     </div>
   );
 };
