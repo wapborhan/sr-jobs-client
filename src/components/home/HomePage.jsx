@@ -1,7 +1,13 @@
-import React from "react";
+import Jobs from "../pages/job/Jobs";
+import Banner from "./banner/Banner";
 
 const HomePage = () => {
-  return <div>HomePage</div>;
+  return (
+    <div>
+      <Banner />
+      <Jobs />
+    </div>
+  );
 };
 
 export default HomePage;
