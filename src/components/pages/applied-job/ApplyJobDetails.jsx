@@ -1,16 +1,15 @@
-import { useLoaderData } from "react-router-dom";
+import React from "react";
 
-import Modal from "./Modal";
-
-const JobDetails = () => {
-  const job = useLoaderData();
-
+const ApplyJobDetails = ({ job }) => {
+  console.log(job);
   const desc = job?.descriptoion?.split("\n");
-
   return (
     <main className="main bg-white px-6 md:px-16 py-6">
       <div className="flex flex-wrap justify-between max-w-6xl mx-auto">
         <div className="job-post w-full md:w-8/12">
+          <div className="banner mb-5">
+            <img src={job?.picture} alt="" className="w-full h-32" />
+          </div>
           <div className="job-meta mb-4">
             <span className="text-xs text-gray-500">
               Posted: {job?.postingDate}
@@ -34,9 +33,6 @@ const JobDetails = () => {
         </div>
 
         <div className="w-full  md:block md:w-3/12">
-          <div className="banner mb-5">
-            <img src={job?.picture} alt="" className="w-full" />
-          </div>
           <div className="employer-info mb-4 text-center ">
             <img
               className="h-40 w-40 inline-block rounded-full"
@@ -58,11 +54,10 @@ const JobDetails = () => {
               </h3>
             </div>
           </div>
-          <Modal job={job} />
         </div>
       </div>
     </main>
   );
 };
 
-export default JobDetails;
+export default ApplyJobDetails;

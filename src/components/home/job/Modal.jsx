@@ -1,7 +1,7 @@
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useContext } from "react";
 
-const Modal = () => {
+const Modal = ({ job }) => {
   const { user } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
@@ -15,6 +15,7 @@ const Modal = () => {
       name,
       email,
       resume,
+      job,
     };
     console.log(inputData);
 
