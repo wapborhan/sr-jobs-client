@@ -7,12 +7,6 @@ const MyJobCard = ({ job, handleDelete }) => {
 
   return (
     <tr>
-      {/* <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-    <input
-      className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-      type="checkbox"
-    />
-  </td> */}
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <div className="text-sm leading-5 text-gray-900">{username}</div>
       </td>
@@ -41,7 +35,7 @@ const MyJobCard = ({ job, handleDelete }) => {
           Details
         </NavLink>
         <NavLink
-          to={`/job/${_id}`}
+          to={`/update-job/${_id}`}
           className="text-indigo-600 hover:text-indigo-900 focus:outline-none focus:underline"
         >
           Update

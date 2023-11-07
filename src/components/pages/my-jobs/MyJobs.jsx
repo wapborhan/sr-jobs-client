@@ -14,7 +14,7 @@ const MyJobs = () => {
     const query = event.target.value;
     setSearchQuery(query);
 
-    const filtered = jobs.filter((job) =>
+    const filtered = myJobs.filter((job) =>
       job.title.toLowerCase().includes(query.toLowerCase())
     );
 
@@ -83,12 +83,6 @@ const MyJobs = () => {
                 {/* <!-- HEAD start --> */}
                 <thead>
                   <tr className="bg-gray-50 border-b border-gray-200 text-xs leading-4 text-gray-500 uppercase tracking-wider">
-                    {/* <th className="px-6 py-3 text-left font-medium">
-                  <input
-                    className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-                    type="checkbox"
-                  />
-                </th> */}
                     <th className="px-6 py-3 text-left font-medium">
                       Posted By
                     </th>{" "}
@@ -113,22 +107,32 @@ const MyJobs = () => {
                   {/* {jobs?.map((job) => {
                 return <JobCard key={job?._id} job={job} />;
               })} */}
-
-                  {searchQuery === ""
-                    ? myJobs.map((job) => (
+                  {myJobs.length > 0 ? (
+                    searchQuery === "" ? (
+                      myJobs.map((job) => (
                         <MyJobCard
                           key={job._id}
                           job={job}
                           handleDelete={handleDelete}
                         />
                       ))
-                    : filteredJobs.map((job) => (
+                    ) : (
+                      filteredJobs.map((job) => (
                         <MyJobCard
                           key={job._id}
                           job={job}
                           handleDelete={handleDelete}
                         />
-                      ))}
+                      ))
+                    )
+                  ) : (
+                    <>
+                      <td colSpan={7} className="py-6 text-center">
+                        {message}
+                      </td>
+                    </>
+                  )}
+                  {}
                 </tbody>
                 {/* <!-- BODY end --> */}
               </table>
