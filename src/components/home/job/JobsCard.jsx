@@ -2,7 +2,8 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 const JobsCard = ({ job }) => {
-  const { id, jobTitle, companyName, postingDate, jobType, salaryRange } = job;
+  const { _id, title, name, postingDate, jobType, salaryRange } = job;
+  console.log(job);
   return (
     <>
       <div className="card mt-5 border-2 p-5">
@@ -15,15 +16,15 @@ const JobsCard = ({ job }) => {
             />
           </div>
           <div className="content col-span-3 space-y-3 text-left">
-            <h1 className="font-bold">{jobTitle}</h1>
-            <h4>{companyName}</h4>
+            <h1 className="font-bold">{title}</h1>
+            <h4>{name}</h4>
             <h2>{jobType}</h2>
             <h3>{salaryRange}</h3>
           </div>
           <div className="flex mt-6 pt-3 items-center border-t-2  justify-between">
             <div className="w">{postingDate}</div>
             <div className="w">
-              <NavLink className="btn" to={`/job/${id}`}>
+              <NavLink className="btn" to={`/job/${_id}`}>
                 View Details
               </NavLink>
             </div>

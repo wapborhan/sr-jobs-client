@@ -9,6 +9,7 @@ import ErrorPage from "../components/pages/error/ErrorPage";
 import AddJob from "../components/pages/add-job/AddJob";
 import Job from "../components/pages/jobs/Job";
 import AppliedJob from "../components/pages/applied-job/AppliedJob";
+import PrivateRoutes from "./PrivateRoutes";
 
 export const router = createBrowserRouter([
   {
@@ -22,21 +23,33 @@ export const router = createBrowserRouter([
       },
       {
         path: "/add-jobs",
-        element: <AddJob />,
+        element: (
+          <PrivateRoutes>
+            <AddJob />
+          </PrivateRoutes>
+        ),
       },
       {
-        path: "/all-jobs",
+        path: "/job",
         element: <Job />,
       },
       {
         path: "/job/:id",
-        element: <JobDetails />,
+        element: (
+          <PrivateRoutes>
+            <JobDetails />
+          </PrivateRoutes>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:3300/jobs/${params.id}`),
       },
       {
         path: "/applied-jobs",
-        element: <AppliedJob />,
+        element: (
+          <PrivateRoutes>
+            <AppliedJob />
+          </PrivateRoutes>
+        ),
         loader: () => fetch(`http://localhost:3300/applied/`),
       },
       {

@@ -1,15 +1,19 @@
-import { useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
-import { JobContex } from "../../../context/JobContext";
+
 import JobsCard from "./JobsCard";
 
 const Jobs = () => {
-  const { allJobs } = useContext(JobContex);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [allJobs, setAllJobs] = useState([]);
 
-  const allTypes = [...new Set(allJobs?.map((job) => job.jobType))];
+  useEffect(() => {
+    fetch("http://localhost:3300/jobs")
+      .then((res) => res.json())
+      .then((data) => setAllJobs(data));
+  }, []);
 
-  // console.log(allTypes);
+  const allTypes = [...new Set(allJobs?.map((job) => job.categories))];
+
   return (
     <div className="container lg:max-w-7xl px-8 mx-auto my-20">
       <div className="headtitle text-center mb-8 space-y-5">
@@ -30,24 +34,20 @@ const Jobs = () => {
       </div> */}
       <Tabs className=" w-full mx-auto text-center">
         <TabList className="tabs tabs-boxed inline-flex   justify-center items-center ">
-          {allTypes.map((jobType, index) => (
+          {allTypes.map((categories, index) => (
             <Tab className="tab" key={index}>
-              {jobType}
+              {categories}
             </Tab>
           ))}
         </TabList>
 
-        {allTypes.map((jobType, index) => (
+        {allTypes.map((categories, index) => (
           <TabPanel
             key={index}
             className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5"
           >
             {allJobs
-              .filter(
-                (job) =>
-                  job.jobType === jobType &&
-                  job.jobTitle.toLowerCase().includes(searchTerm.toLowerCase())
-              )
+              .filter((job) => job.categories === categories)
               .map((job) => (
                 <JobsCard key={job.id} job={job} />
               ))}

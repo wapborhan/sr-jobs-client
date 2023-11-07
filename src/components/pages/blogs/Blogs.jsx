@@ -9,13 +9,13 @@ const Blogs = () => {
             className="h-6 mr-3"
             version="1.1"
             id="Capa_1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
+            // xmlns="http://www.w3.org/2000/svg"
+            // xmlns:xlink="http://www.w3.org/1999/xlink"
             x="0px"
             y="0px"
             viewBox="0 0 455.005 455.005"
             // style="enable-background:new 0 0 455.005 455.005;"
-            xml:space="preserve"
+            // xml:space="preserve"
           >
             <g>
               <path
@@ -109,13 +109,13 @@ const Blogs = () => {
                 width="13px"
                 version="1.1"
                 id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                // xmlns="http://www.w3.org/2000/svg"
+                // xmlns:xlink="http://www.w3.org/1999/xlink"
                 x="0px"
                 y="0px"
                 viewBox="0 0 512 512"
                 // style="enable-background:new 0 0 512 512;"
-                xml:space="preserve"
+                // xml:space="preserve"
               >
                 <g>
                   <g>
@@ -190,13 +190,13 @@ const Blogs = () => {
                 width="13px"
                 version="1.1"
                 id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                // xmlns="http://www.w3.org/2000/svg"
+                // xmlns:xlink="http://www.w3.org/1999/xlink"
                 x="0px"
                 y="0px"
                 viewBox="0 0 512 512"
                 // style="enable-background:new 0 0 512 512;"
-                xml:space="preserve"
+                // xml:space="preserve"
               >
                 <g>
                   <g>
@@ -271,13 +271,13 @@ const Blogs = () => {
                 width="13px"
                 version="1.1"
                 id="Layer_1"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlns:xlink="http://www.w3.org/1999/xlink"
+                // xmlns="http://www.w3.org/2000/svg"
+                xmlnsXlink="http://www.w3.org/1999/xlink"
                 x="0px"
                 y="0px"
                 viewBox="0 0 512 512"
                 // style="enable-background:new 0 0 512 512;"
-                xml:space="preserve"
+                // xml:space="preserve"
               >
                 <g>
                   <g>

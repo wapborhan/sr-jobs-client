@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 const SignIn = () => {
   const { loginUser } = useContext(AuthContext);
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +22,9 @@ const SignIn = () => {
         const user = result.user;
         console.log(user);
         form.reset();
-        navigate("/");
+        if (user) {
+          navigate(location?.state ? location.state : "/profile");
+        }
       })
       .catch((error) => {
         const errorMessage = error.message;
