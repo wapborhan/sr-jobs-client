@@ -1,7 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const AddJob = () => {
   const [job, setJob] = useState();
+  const { user } = useContext(AuthContext);
+
+  console.log(user);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -19,7 +23,9 @@ const AddJob = () => {
     const inputData = {
       picture,
       title,
-      username,
+      username: user?.displayName,
+      email: user?.email,
+      userPhoto: user?.photoURL,
       categories,
       salary,
       postingDate,
@@ -86,7 +92,8 @@ const AddJob = () => {
                 <input
                   type="text"
                   name="username"
-                  placeholder="{User Name}"
+                  placeholder="User Name"
+                  defaultValue={user?.displayName}
                   className="input input-bordered w-full"
                 />
               </div>

@@ -1,0 +1,105 @@
+import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
+import JobCard from "./JobCard";
+
+const Job = () => {
+  const [jobs, setJobs] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredJobs, setFilteredJobs] = useState([]);
+
+  const handleSearch = (event) => {
+    const query = event.target.value;
+    setSearchQuery(query);
+
+    const filtered = jobs.filter((job) =>
+      job.title.toLowerCase().includes(query.toLowerCase())
+    );
+
+    setFilteredJobs(filtered);
+  };
+
+  useEffect(() => {
+    fetch("http://localhost:3300/jobs")
+      .then((res) => res.json())
+      .then((data) => setJobs(data));
+  }, []);
+
+  return (
+    <div className="w-full h-screen bg-gray-100">
+      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <div className="flex flex-col">
+          <div className="mb-4"></div>
+          <div className="-mb-2 py-4 flex flex-wrap flex-grow justify-between">
+            <div className="flex items-center py-2">
+              <input
+                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                id="inline-searcg"
+                type="text"
+                placeholder="Search"
+                defaultValue={searchQuery}
+                onChange={handleSearch}
+              />
+            </div>
+            <div className="flex items-center py-2">
+              <NavLink
+                to="/add-jobs"
+                className="inline-block px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline"
+              >
+                Create new page
+              </NavLink>
+            </div>
+          </div>
+          <div className="-my-2 py-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+            <div className="align-middle inline-block w-full shadow overflow-x-auto sm:rounded-lg border-b border-gray-200">
+              <table className="min-w-full">
+                {/* <!-- HEAD start --> */}
+                <thead>
+                  <tr className="bg-gray-50 border-b border-gray-200 text-xs leading-4 text-gray-500 uppercase tracking-wider">
+                    {/* <th className="px-6 py-3 text-left font-medium">
+                      <input
+                        className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
+                        type="checkbox"
+                      />
+                    </th> */}
+                    <th className="px-6 py-3 text-left font-medium">
+                      Posted By
+                    </th>{" "}
+                    <th className="px-6 py-3 text-left font-medium">
+                      Posting Date
+                    </th>
+                    <th className="px-6 py-3 text-left font-medium">Title</th>
+                    <th className="px-6 py-3 text-left font-medium">
+                      Categories
+                    </th>
+                    <th className="px-6 py-3 text-left font-medium">
+                      Salary Range
+                    </th>
+                    <th className="px-6 py-3 text-left font-medium">
+                      Deadline
+                    </th>
+                    <th className="px-6 py-3 text-left font-medium">Action</th>
+                  </tr>
+                </thead>
+
+                <tbody className="bg-white">
+                  {/* {jobs?.map((job) => {
+                    return <JobCard key={job?._id} job={job} />;
+                  })} */}
+
+                  {searchQuery === ""
+                    ? jobs.map((job) => <JobCard key={job._id} job={job} />)
+                    : filteredJobs.map((job) => (
+                        <JobCard key={job._id} job={job} />
+                      ))}
+                </tbody>
+                {/* <!-- BODY end --> */}
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Job;

@@ -1,6 +1,6 @@
 import Blogs from "../pages/blogs/Blogs";
 import HowItWorks from "../pages/howWorks/HowItWorks";
-import Jobs from "../pages/job/Jobs";
+import Jobs from "./job/Jobs";
 import Banner from "./banner/Banner";
 
 const HomePage = () => {

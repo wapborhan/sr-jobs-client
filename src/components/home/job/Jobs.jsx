@@ -19,7 +19,7 @@ const Jobs = () => {
           the right freelancers.
         </p>
       </div>
-      <div className="search-bar text-center mb-4">
+      {/* <div className="search-bar text-center mb-4">
         <input
           type="text"
           placeholder="Search by Job Title"
@@ -27,7 +27,7 @@ const Jobs = () => {
           className="input input-bordered w-full max-w-xs"
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      </div>
+      </div> */}
       <Tabs className=" w-full mx-auto text-center">
         <TabList className="tabs tabs-boxed inline-flex   justify-center items-center ">
           {allTypes.map((jobType, index) => (
