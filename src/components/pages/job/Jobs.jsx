@@ -11,7 +11,7 @@ const Jobs = () => {
 
   // console.log(allTypes);
   return (
-    <div className="container max-w-7xl mx-auto my-20">
+    <div className="container lg:max-w-7xl px-8 mx-auto my-20">
       <div className="headtitle text-center mb-8 space-y-5">
         <h1 className="text-3xl"> New & Random Jobs</h1>
         <p className="text-base-500">
@@ -38,7 +38,10 @@ const Jobs = () => {
         </TabList>
 
         {allTypes.map((jobType, index) => (
-          <TabPanel key={index} className="grid grid-cols-3 gap-5">
+          <TabPanel
+            key={index}
+            className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5"
+          >
             {allJobs
               .filter(
                 (job) =>
