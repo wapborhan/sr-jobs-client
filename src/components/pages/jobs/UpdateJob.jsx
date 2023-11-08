@@ -29,7 +29,6 @@ const UpdateJob = () => {
       deadline,
       descriptoion,
     };
-    console.log(updateData);
 
     fetch(`http://localhost:3300/jobs/${_id}`, {
       method: "PUT",

@@ -18,7 +18,6 @@ const Modal = ({ job }) => {
       resume,
       job,
     };
-    console.log(inputData);
 
     fetch("http://localhost:3300/applied", {
       method: "POST",

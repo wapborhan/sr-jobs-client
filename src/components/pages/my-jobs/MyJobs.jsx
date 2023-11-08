@@ -33,7 +33,6 @@ const MyJobs = () => {
   }, [url]);
 
   const handleDelete = (id) => {
-    console.log(id);
     const proceed = confirm("Are You sure you want to delete");
     if (proceed) {
       fetch(`http://localhost:3300/myjobs/${id}`, {
@@ -41,7 +40,6 @@ const MyJobs = () => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
           if (data.deletedCount > 0) {
             alert("deleted successful");
             const remaining = myJobs.filter((booking) => booking._id !== id);
@@ -51,9 +49,8 @@ const MyJobs = () => {
     }
   };
 
-  console.log(myJobs);
   return (
-    <div className="w-full h-screen ">
+    <div className="w-full ">
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="flex flex-col">
           <div className="mb-4"></div>

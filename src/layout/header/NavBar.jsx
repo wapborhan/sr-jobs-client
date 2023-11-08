@@ -5,7 +5,6 @@ import { AuthContext } from "../../Provider/AuthProvider";
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
-  // console.log(user);
 
   const handleLogout = () => {
     logOut();
@@ -14,7 +13,7 @@ const NavBar = () => {
   const links = (
     <>
       <li>
-        <NavLink className="nav-link" to="/">
+        <NavLink className="" to="/">
           Home
         </NavLink>
       </li>
@@ -111,7 +110,6 @@ const NavBar = () => {
                     <li>
                       <NavLink to="/profile" className="justify-between">
                         Profile
-                        <span className="badge">New</span>
                       </NavLink>
                     </li>
                     <li>

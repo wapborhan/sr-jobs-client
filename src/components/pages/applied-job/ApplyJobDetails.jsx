@@ -1,8 +1,10 @@
 import React from "react";
+import { useLoaderData } from "react-router-dom";
 
-const ApplyJobDetails = ({ job }) => {
-  console.log(job);
+const ApplyJobDetails = () => {
+  const { job } = useLoaderData();
   const desc = job?.descriptoion?.split("\n");
+
   return (
     <main className="main bg-white px-6 md:px-16 py-6">
       <div className="flex flex-wrap justify-between max-w-6xl mx-auto">

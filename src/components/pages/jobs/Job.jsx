@@ -25,7 +25,7 @@ const Job = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen ">
+    <div className="w-full ">
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="flex flex-col">
           <div className="mb-4"></div>

@@ -17,24 +17,22 @@ const SignUp = () => {
     const email = form.email.value;
     const password = form.password.value;
 
-    console.log(email, password);
+    if (password.length < 6) {
+      toast("Password is less than 6 characters");
+      return;
+    } else if (!/[A-Z]/.test(password)) {
+      toast("Password don't have a capital letter");
 
-    // if (password.length < 6) {
-    //   toast("Password is less than 6 characters");
-    //   return;
-    // } else if (!/[A-Z]/.test(password)) {
-    //   toast("Password don't have a capital letter");
-
-    //   return;
-    // } else if (!/[!@#$%^&*()_+[\]{}|;:'"<>,.?/~`]/.test(password)) {
-    //   toast("Password don't have a special character");
-    //   return;
-    // }
+      return;
+    } else if (!/[!@#$%^&*()_+[\]{}|;:'"<>,.?/~`]/.test(password)) {
+      toast("Password don't have a special character");
+      return;
+    }
 
     createUser(email, password, photourl, name)
       .then((result) => {
         const user = result.user;
-        // console.log(user);
+
         updateProfile(user, {
           displayName: name,
           photoURL: photourl,
@@ -44,7 +42,6 @@ const SignUp = () => {
       })
       .catch((error) => {
         const errorMessage = error.message;
-
         toast(errorMessage);
       });
   };

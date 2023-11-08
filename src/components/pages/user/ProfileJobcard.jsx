@@ -13,7 +13,7 @@ const ProfileJobcard = ({ user, job }) => {
     descriptoion,
   } = job;
   const desc = job?.descriptoion?.split("\n").slice(0, 3);
-  console.log(job);
+
   return (
     <div className="flex border-2 rounded-md shadow-md mt-5 gap-3 border-b border-solid border-grey-light">
       <div className="w-1/8 text-right pl-3 pt-3">

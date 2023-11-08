@@ -5,8 +5,6 @@ const AddJob = () => {
   const [job, setJob] = useState();
   const { user } = useContext(AuthContext);
 
-  console.log(user);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -32,7 +30,6 @@ const AddJob = () => {
       deadline,
       descriptoion,
     };
-    console.log(inputData);
 
     fetch("http://localhost:3300/jobs", {
       method: "POST",

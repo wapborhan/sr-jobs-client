@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 const JobCard = ({ job }) => {
   const { _id, username, postingDate, title, categories, salary, deadline } =
     job;
-  console.log(job);
 
   return (
     <tr>

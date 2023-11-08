@@ -7,7 +7,6 @@ const Profile = () => {
   const { user } = useContext(AuthContext);
   const [myJobs, setMyJobs] = useState([]);
   const [message, setMessage] = useState("");
-  console.log(user);
 
   const url = `http://localhost:3300/myjobs?email=${user?.email}`;
 

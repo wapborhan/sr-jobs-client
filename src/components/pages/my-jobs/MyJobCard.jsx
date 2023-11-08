@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 const MyJobCard = ({ job, handleDelete }) => {
   const { _id, username, postingDate, title, categories, salary, deadline } =
     job;
-  // console.log(handleDelete);
 
   return (
     <tr>

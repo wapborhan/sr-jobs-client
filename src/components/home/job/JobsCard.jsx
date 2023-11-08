@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import moment from "moment";
 
 const JobsCard = ({ job }) => {
   const {
@@ -9,9 +10,10 @@ const JobsCard = ({ job }) => {
     salary,
     username,
     deadline,
+    postingDate,
     appnumber,
   } = job;
-  console.log(job);
+
   return (
     <>
       <div className="card w-96 bg-base-100 mt-7 border-2 shadow-xl">
@@ -36,7 +38,16 @@ const JobsCard = ({ job }) => {
             Applied : <span className="font-bold">{appnumber}</span>
           </p>
           <p>
-            Deadline : <span className="font-bold">{deadline}</span>
+            Created at :{" "}
+            <span className="font-bold">
+              {moment(postingDate).format("Do MMMM YYYY")}
+            </span>
+          </p>
+          <p>
+            Deadline :{" "}
+            <span className="font-bold">
+              {moment(deadline).format("Do MMMM YYYY")}
+            </span>
           </p>
           <div className="card-actions justify-between mt-6 border-t-2 pt-4 items-center">
             <div className="post font-bold">Post : {username}</div>

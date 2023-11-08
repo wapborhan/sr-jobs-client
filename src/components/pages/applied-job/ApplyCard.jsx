@@ -1,17 +1,10 @@
 import { NavLink } from "react-router-dom";
-import Modal from "./Modal";
 
 const ApplyCard = ({ job }) => {
-  const { name, email, resume } = job;
-  console.log(job);
+  const { name, email, resume, _id } = job;
+
   return (
     <tr>
-      {/* <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-    <input
-      className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
-      type="checkbox"
-    />
-  </td> */}
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <div className="text-sm leading-5 ">{name}</div>
       </td>
@@ -23,9 +16,19 @@ const ApplyCard = ({ job }) => {
           <a href={resume}>Resume Link</a>
         </span>
       </td>
+      <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+          {job?.job?.categories}
+        </span>
+      </td>
 
       <td className="px-6 py-4 whitespace-no-wrap text-left border-b border-gray-200 text-sm leading-5 font-medium">
-        <Modal job={job} />
+        <NavLink
+          to={`/applied-jobs/${_id}`}
+          className=" text-dark text-center block cursor-pointer rounded-full py-2 mb-4"
+        >
+          Job Details
+        </NavLink>
       </td>
     </tr>
   );
