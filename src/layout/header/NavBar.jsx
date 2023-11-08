@@ -125,7 +125,7 @@ const NavBar = () => {
               <>
                 <NavLink
                   to="/signup"
-                  className="btn btn-outline lg:block hidden btn-success"
+                  className="btn btn-outline lg:inline-flex hidden btn-success"
                 >
                   <span className="nav-link">Registration</span>
                 </NavLink>

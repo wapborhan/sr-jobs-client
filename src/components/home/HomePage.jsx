@@ -4,6 +4,7 @@ import Jobs from "./job/Jobs";
 import Banner from "./banner/Banner";
 
 const HomePage = () => {
+  document.title = "SR Jobs | Homepage";
   return (
     <div>
       <Banner />

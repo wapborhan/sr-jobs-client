@@ -1,4 +1,5 @@
 const About = () => {
+  document.title = "SR Jobs | About";
   return (
     <section className="overflow-hidden max-w-7xl lg:mx-auto mx-5 pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]  bg-white dark:bg-dark">
       <div className="container mx-auto">

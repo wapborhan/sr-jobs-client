@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
 const UpdateProfile = () => {
+  document.title = "SR Jobs | Update Profile";
   const { user, updateUser } = useContext(AuthContext);
   const navigate = useNavigate();
 

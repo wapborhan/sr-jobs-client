@@ -4,6 +4,7 @@ import JobCard from "./JobCard";
 import { usePDF } from "react-to-pdf";
 
 const Job = () => {
+  document.title = "SR Jobs | All Jobs";
   const [jobs, setJobs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredJobs, setFilteredJobs] = useState([]);

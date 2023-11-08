@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import ProfileJobcard from "./ProfileJobcard";
 
 const Profile = () => {
+  document.title = "SR Jobs | Profile";
   const { user } = useContext(AuthContext);
   const [myJobs, setMyJobs] = useState([]);
   const [message, setMessage] = useState("");

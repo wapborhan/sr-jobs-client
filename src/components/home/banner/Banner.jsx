@@ -1,4 +1,5 @@
 const Banner = () => {
+  document.title = "SR Jobs | Homepage";
   return (
     <div
       className="hero min-h-[90vh]"

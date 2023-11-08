@@ -4,6 +4,7 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { usePDF } from "react-to-pdf";
 
 const AppliedJob = () => {
+  document.title = "SR Jobs | Applied Job";
   const [applyjobs, setApplyjobs] = useState([]);
   const { user } = useContext(AuthContext);
   const [selectedCategory, setSelectedCategory] = useState("All");

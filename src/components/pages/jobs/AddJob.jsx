@@ -4,6 +4,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const AddJob = () => {
+  document.title = "SR Jobs | Add a Jobs";
   const [job, setJob] = useState();
   const { user } = useContext(AuthContext);
 

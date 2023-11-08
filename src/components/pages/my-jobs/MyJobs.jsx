@@ -6,6 +6,7 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const MyJobs = () => {
+  document.title = "SR Jobs | My Jobs";
   const { user } = useContext(AuthContext);
   const [myJobs, setMyJobs] = useState([]);
   const [message, setMessage] = useState("");
