@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../../Provider/AuthProvider";
@@ -7,6 +7,7 @@ import { updateProfile } from "firebase/auth";
 
 const SignUp = () => {
   const { createUser } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,6 +40,7 @@ const SignUp = () => {
           photoURL: photourl,
         });
         form.reset();
+        navigate("/signin");
       })
       .catch((error) => {
         const errorMessage = error.message;

@@ -53,7 +53,7 @@ const ProfileJobcard = ({ user, job }) => {
               <a href="#">
                 <img
                   src={picture}
-                  alt="tweet image"
+                  alt="No Image Available"
                   className="border w-full h-40 border-solid border-grey-light rounded-md"
                 />
               </a>

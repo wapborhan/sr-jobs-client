@@ -17,7 +17,7 @@ const Banner = () => {
             Find jobs, create trackable resumes and enrich your applications.
           </p>
           <div className="form-control w-full">
-            <div className="input-group w-full">
+            {/* <div className="input-group w-full">
               <input
                 type="text"
                 placeholder="Search…"
@@ -26,7 +26,7 @@ const Banner = () => {
               <button className="btn btn-square w-40 bg-[#766df4] border-[#766df4] hover:bg-[#766df1] hover:border-[#766df1] text-white">
                 Find Jobs
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

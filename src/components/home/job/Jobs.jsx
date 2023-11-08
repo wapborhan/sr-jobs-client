@@ -19,8 +19,8 @@ const Jobs = () => {
       <div className="headtitle text-center mb-8 space-y-5">
         <h1 className="text-3xl"> New & Random Jobs</h1>
         <p className="text-base-500">
-          Post a job to tell us about your project. We'll quickly match you with
-          the right freelancers.
+          Post a job to tell us about your project. {"We'll"} quickly match you
+          with the right freelancers.
         </p>
       </div>
       {/* <div className="search-bar text-center mb-4">
@@ -33,21 +33,33 @@ const Jobs = () => {
         />
       </div> */}
       <Tabs className=" w-full mx-auto text-center">
-        <TabList className="tabs tabs-boxed inline-flex   justify-center items-center ">
-          {allTypes.map((categories, index) => (
-            <Tab className="tab" key={index}>
-              {categories}
+        <div className="tabs tabs-boxed inline-flex   justify-center items-center">
+          <TabList>
+            <Tab className="tab " key="all">
+              All
             </Tab>
-          ))}
-        </TabList>
+            {allTypes.map((categories, index) => (
+              <Tab className="tab" key={index}>
+                {categories}
+              </Tab>
+            ))}
+          </TabList>
+        </div>
 
+        <TabPanel key="all" className="grid grid-cols-3 gap-5">
+          {allJobs.slice(0, 6).map((job) => (
+            <JobsCard key={job.id} job={job} />
+          ))}
+        </TabPanel>
         {allTypes.map((categories, index) => (
           <TabPanel
             key={index}
             className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5"
           >
             {allJobs
+
               .filter((job) => job.categories === categories)
+              .slice(0, 6)
               .map((job) => (
                 <JobsCard key={job.id} job={job} />
               ))}
