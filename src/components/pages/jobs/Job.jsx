@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import JobCard from "./JobCard";
+import { usePDF } from "react-to-pdf";
 
 const Job = () => {
   const [jobs, setJobs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredJobs, setFilteredJobs] = useState([]);
+
+  const { toPDF, targetRef } = usePDF({ filename: "jobs.pdf" });
 
   const handleSearch = (event) => {
     const query = event.target.value;
@@ -40,18 +43,24 @@ const Job = () => {
                 onChange={handleSearch}
               />
             </div>
-            <div className="flex items-center py-2">
+            <div className="flex items-center gap-5 py-2">
               <NavLink
                 to="/add-jobs"
                 className="inline-block px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline"
               >
                 Add Job
-              </NavLink>
+              </NavLink>{" "}
+              <button
+                className="inline-block px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline"
+                onClick={() => toPDF()}
+              >
+                Download PDF
+              </button>
             </div>
           </div>
           <div className="-my-2 py-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
             <div className="align-middle inline-block w-full shadow overflow-x-auto sm:rounded-lg border-b border-gray-200">
-              <table className="min-w-full">
+              <table className="min-w-full" ref={targetRef}>
                 {/* <!-- HEAD start --> */}
                 <thead>
                   <tr className=" border-b border-gray-200 text-xs leading-4 uppercase tracking-wider">

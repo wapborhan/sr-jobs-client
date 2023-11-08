@@ -1,11 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import ApplyCard from "./ApplyCard";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { usePDF } from "react-to-pdf";
 
 const AppliedJob = () => {
   const [applyjobs, setApplyjobs] = useState([]);
   const { user } = useContext(AuthContext);
   const [selectedCategory, setSelectedCategory] = useState("All");
+
+  const { toPDF, targetRef } = usePDF({ filename: "applied-jobs.pdf" });
 
   const url = `https://b8a11-server-side-wapborhan.vercel.app/applied?email=${user?.email}`;
   useEffect(() => {
@@ -44,9 +47,20 @@ const AppliedJob = () => {
                 <option value="Intern">Intern</option>
               </select>
             </div>
+            <div className="d">
+              <button
+                className="inline-block px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline"
+                onClick={() => toPDF()}
+              >
+                Download PDF
+              </button>
+            </div>
           </div>
           <div className="-my-2 py-2 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-            <div className="align-middle inline-block w-full shadow overflow-x-auto sm:rounded-lg border-b border-gray-200">
+            <div
+              className="align-middle inline-block w-full shadow overflow-x-auto sm:rounded-lg border-b border-gray-200"
+              ref={targetRef}
+            >
               <table className="min-w-full">
                 {/* <!-- HEAD start --> */}
                 <thead>

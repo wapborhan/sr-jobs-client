@@ -1,8 +1,52 @@
-# React + Vite
+<h3 align="center">SR JOBS</h3>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Live Link
 
-Currently, two official plugins are available:
+[https://sr-jobs-2df84.web.app/](https://sr-jobs-2df84.web.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Description
+
+SRjobs Ltd. is the first and leading career management site in the country. Eight young business and IT professional backed by strong command over e-business and in-depth understanding of context started this venture on July 2000.
+
+### Built with
+
+- MongoDB
+- ExpressJS
+- ReactJS
+- NodeJS
+- Tailwind
+
+### Installing
+
+To run the Brand Shop project on your local machine, you need to have the following software installed:
+
+- Nodejs
+- Code Editor any (VS code recommended)
+
+#### Steps
+
+1. Clone the repository to your local machine:
+
+```bash
+  git clone https://github.com/Porgramming-Hero-web-course/b8a11-client-side-wapborhan
+```
+
+You can do this by running the following command from the project directory:
+
+```bash
+   npm install
+```
+
+```bash
+   npm run dev
+```
+
+Note: Need server site for run proper
+
+### Features
+
+- **User authentication**: users can sign up, log in, and log out of the platform.
+- **Job ADD**: users can add Job, view Job details, and update own Jobs.
+- **Apply Job**: users can apply Job under deadline.
+- **User Profile**: users can view his/her profile and view information.
+- **Update Profile**: users can Update his/her profile and view information.
