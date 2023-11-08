@@ -25,14 +25,14 @@ const Job = () => {
   }, []);
 
   return (
-    <div className="w-full h-screen bg-gray-100">
+    <div className="w-full h-screen ">
       <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div className="flex flex-col">
           <div className="mb-4"></div>
           <div className="-mb-2 py-4 flex flex-wrap flex-grow justify-between">
             <div className="flex items-center py-2">
               <input
-                className="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+                className="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
                 id="inline-searcg"
                 type="text"
                 placeholder="Search"
@@ -54,7 +54,7 @@ const Job = () => {
               <table className="min-w-full">
                 {/* <!-- HEAD start --> */}
                 <thead>
-                  <tr className="bg-gray-50 border-b border-gray-200 text-xs leading-4 text-gray-500 uppercase tracking-wider">
+                  <tr className=" border-b border-gray-200 text-xs leading-4 uppercase tracking-wider">
                     {/* <th className="px-6 py-3 text-left font-medium">
                       <input
                         className="form-checkbox h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"
@@ -81,7 +81,7 @@ const Job = () => {
                   </tr>
                 </thead>
 
-                <tbody className="bg-white">
+                <tbody className="">
                   {/* {jobs?.map((job) => {
                     return <JobCard key={job?._id} job={job} />;
                   })} */}

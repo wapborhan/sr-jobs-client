@@ -13,10 +13,10 @@ const ApplyCard = ({ job }) => {
     />
   </td> */}
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <div className="text-sm leading-5 text-gray-900">{name}</div>
+        <div className="text-sm leading-5 ">{name}</div>
       </td>
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <div className="text-sm leading-5 text-gray-900">{email}</div>
+        <div className="text-sm leading-5 ">{email}</div>
       </td>
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">

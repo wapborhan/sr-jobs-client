@@ -261,10 +261,10 @@ const Blogs = () => {
               industry.
             </p>
           </div>
-          <div className="px-6 py-3 flex flex-row items-center justify-between bg-gray-100">
+          <div className="px-6 py-3 flex flex-row items-center justify-between ">
             <span
               href="#"
-              className="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center"
+              className="py-1 text-xs font-regular mr-1 flex flex-row items-center"
             >
               <svg
                 height="13px"

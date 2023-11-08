@@ -13,6 +13,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import MyJobs from "../components/pages/my-jobs/MyJobs";
 import UpdateJob from "../components/pages/jobs/UpdateJob";
 import Profile from "../components/pages/user/Profile";
+import UpdateProfile from "../components/pages/user/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: "/profile",
         element: <Profile />,
+      },
+      {
+        path: "/settings",
+        element: <UpdateProfile />,
       },
       {
         path: "/add-jobs",

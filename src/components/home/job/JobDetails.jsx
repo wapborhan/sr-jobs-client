@@ -9,7 +9,7 @@ const JobDetails = () => {
   const desc = job?.descriptoion?.split("\n");
 
   return (
-    <main className="main bg-white px-6 md:px-16 py-6">
+    <main className="main  px-6 md:px-16 py-6">
       <div className="flex flex-wrap justify-between max-w-6xl mx-auto">
         <div className="job-post w-full md:w-8/12">
           <div className="banner mb-5">

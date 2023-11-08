@@ -22,13 +22,13 @@ const Profile = () => {
   return (
     <div className="container max-w-7xl mx-auto my-6">
       <div
-        className="hero h-64 bg-cover bg-blue-400 h-112 rounded-t-lg"
+        className="hero h-64  border-2 bg-cover bg-blue-400 h-112 rounded-t-lg"
         style={{
           backgroundImage:
             "url('https://template.canva.com/EAENvp21inc/1/0/1600w-qt_TMRJF4m0.jpg')",
         }}
       ></div>
-      <div className="bg-white shadow">
+      <div className=" border-2 shadow">
         <div className="container mx-auto flex flex-col lg:flex-row items-center lg:relative">
           <div className="w-full lg:w-1/4">
             <img
@@ -72,13 +72,13 @@ const Profile = () => {
       </div>
       <div className="container mt-10 mx-auto grid grid-cols-3 gap-5 lg:flex-row  text-sm leading-normal">
         <div className="w-full pl-4 lg:pl-0 pr-6 mt-8 mb-4 mx-7">
-          <h1>
-            <span href="#" className="text-black font-bold ">
+          <h1 className="mb-4">
+            <span href="#" className="font-bold text-2xl">
               {user?.displayName}
             </span>
           </h1>
           <h1>
-            <span href="#" className="text-black  ">
+            <span href="#" className="  ">
               {user?.email}
             </span>
           </h1>
@@ -92,7 +92,7 @@ const Profile = () => {
             </span>
           </div>
         </div>
-        <div className="w-full col-span-2 bg-white mb-4">
+        <div className="w-full col-span-2  mb-4">
           <div className="p-3 text-lg font-bold border-b border-solid border-grey-light">
             <span className="text-black mr-6 no-underline hover-underline">
               My Jobs

@@ -1,10 +1,16 @@
+import moment from "moment";
+import ToggleTheme from "../ToggleTheme";
+
 const TopBar = () => {
+  const date = new Date();
   return (
-    <div className="top-bar bg-[#f8f9fc] py-2">
+    <div className="top-bar  border-b-2 py-2">
       <div className="container max-w-7xl mx-auto">
         <div className="flex gap-5 items-center justify-between">
-          <div className="left">Today</div>
-          <div className="right">Dark</div>
+          <div className="left">{moment(date).format("Do MMMM YYYY")}</div>
+          <div className="right">
+            <ToggleTheme />
+          </div>
         </div>
       </div>
     </div>

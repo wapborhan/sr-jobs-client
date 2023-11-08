@@ -14,13 +14,13 @@ const JobCard = ({ job }) => {
         />
       </td> */}
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <div className="text-sm leading-5 text-gray-900">{username}</div>
+        <div className="text-sm leading-5 ">{username}</div>
       </td>
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <div className="text-sm leading-5 text-gray-900">{postingDate}</div>
+        <div className="text-sm leading-5 ">{postingDate}</div>
       </td>
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-        <div className="text-sm leading-5 text-gray-900">{title}</div>
+        <div className="text-sm leading-5 ">{title}</div>
       </td>
       <td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">

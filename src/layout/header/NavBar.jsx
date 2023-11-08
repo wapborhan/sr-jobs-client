@@ -115,7 +115,7 @@ const NavBar = () => {
                       </NavLink>
                     </li>
                     <li>
-                      <a>Settings</a>
+                      <NavLink to="/settings">Settings</NavLink>
                     </li>
                     <li>
                       <a onClick={handleLogout}>Logout</a>
