@@ -1,4 +1,5 @@
 import { useLoaderData } from "react-router-dom";
+import moment from "moment";
 
 import Modal from "./Modal";
 
@@ -11,9 +12,17 @@ const JobDetails = () => {
     <main className="main bg-white px-6 md:px-16 py-6">
       <div className="flex flex-wrap justify-between max-w-6xl mx-auto">
         <div className="job-post w-full md:w-8/12">
+          <div className="banner mb-5">
+            <img
+              src={job?.picture}
+              alt=""
+              className="w-full h-70 rounded-t-lg"
+            />
+          </div>
           <div className="job-meta mb-4">
             <span className="text-xs text-gray-500">
-              Posted: {job?.postingDate}
+              {/* Posted: {job?.postingDate} */}
+              {moment(job?.postingDate).format("Do MMMM YYYY")}
             </span>
 
             <h1 className="job-title text-3xl mb-5">{job?.title}</h1>
@@ -34,9 +43,6 @@ const JobDetails = () => {
         </div>
 
         <div className="w-full  md:block md:w-3/12">
-          <div className="banner mb-5">
-            <img src={job?.picture} alt="" className="w-full" />
-          </div>
           <div className="employer-info mb-4 text-center ">
             <img
               className="h-40 w-40 inline-block rounded-full"
@@ -50,8 +56,8 @@ const JobDetails = () => {
               <h3 className="employer-name text-left text-2xl mt-4">
                 Salary Range: {job?.salary}
               </h3>{" "}
-              <h3 className="employer-name text-left text-2xl mt-4">
-                Deadline: {job?.deadline}
+              <h3 className="employer-name text-left mt-4">
+                Deadline: {moment(job?.deadline).format("Do MMMM YYYY")}
               </h3>{" "}
               <h3 className="employer-name text-left text-2xl mt-4">
                 Applicient: {job?.appnumber}

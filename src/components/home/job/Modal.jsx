@@ -1,5 +1,6 @@
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useContext } from "react";
+import moment from "moment";
 
 const Modal = ({ job }) => {
   const { user } = useContext(AuthContext);
@@ -33,14 +34,32 @@ const Modal = ({ job }) => {
         }
       });
   };
+
+  const postingDate = moment(new Date());
+  const deadlineDate = moment(job?.deadline);
+
+  const deadLine = () => {
+    alert("Deadline");
+  };
+
   return (
     <>
-      <div
-        onClick={() => document.getElementById("my_modal_3").showModal()}
-        className="bg-teal-500 hover:bg-teal-600 text-white text-center block rounded-full py-2 mb-4"
-      >
-        Apply for this job
-      </div>
+      {postingDate > deadlineDate ? (
+        <button
+          onClick={deadLine}
+          className="bg-teal-500  text-white text-center block rounded-full py-2 mb-4 px-4"
+        >
+          Apply for this job
+        </button>
+      ) : (
+        <button
+          onClick={() => document.getElementById("my_modal_3").showModal()}
+          className="bg-teal-500  text-white text-center block rounded-full py-2 mb-4 px-4"
+        >
+          Apply for this job
+        </button>
+      )}
+
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <form method="dialog">
@@ -86,6 +105,7 @@ const Modal = ({ job }) => {
                 type="text"
                 placeholder="Resume Link"
                 name="resume"
+                required
               />
             </div>
             <div className="mt-6">

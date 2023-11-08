@@ -1,5 +1,3 @@
-import React from "react";
-
 const Footer = () => {
   return (
     <div className="relative mt-16 bg-deep-purple-accent-400 bg-deep-purple-accent-400">

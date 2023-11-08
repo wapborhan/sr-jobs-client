@@ -90,7 +90,7 @@ const Blogs = () => {
           <div className="px-6 py-4 mb-auto">
             <a
               href="#"
-              className="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2"
+              className="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out  mb-2"
             >
               Simplest Salad Recipe ever
             </a>
@@ -141,9 +141,9 @@ const Blogs = () => {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
                 ></path>
               </svg>
@@ -171,7 +171,7 @@ const Blogs = () => {
           <div className="px-6 py-4 mb-auto">
             <a
               href="#"
-              className="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2"
+              className="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out mb-2"
             >
               Best FastFood Ideas (Yummy)
             </a>
@@ -222,9 +222,9 @@ const Blogs = () => {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
                 ></path>
               </svg>
@@ -252,7 +252,7 @@ const Blogs = () => {
           <div className="px-6 py-4 mb-auto">
             <a
               href="#"
-              className="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2"
+              className="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out mb-2"
             >
               Why to eat salad?
             </a>
@@ -303,9 +303,9 @@ const Blogs = () => {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"
                 ></path>
               </svg>
