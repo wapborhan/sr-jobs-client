@@ -19,7 +19,7 @@ const Profile = () => {
       });
   }, [url]);
   return (
-    <div className="container max-w-7xl mx-auto my-6">
+    <div className="container max-w-7xl lg:mx-auto px-5 my-6">
       <div
         className="hero h-64  border-2 bg-cover bg-blue-400 h-112 rounded-t-lg"
         style={{
@@ -29,14 +29,14 @@ const Profile = () => {
       ></div>
       <div className=" border-2 shadow">
         <div className="container mx-auto flex flex-col lg:flex-row items-center lg:relative">
-          <div className="w-full lg:w-1/4">
+          <div className="w-full lg:w-1/4 ">
             <img
               src={user?.photoURL}
               alt="logo"
-              className="rounded-full border-2 h-48 w-48 lg:absolute lg:pin-l lg:pin-t lg:-mt-24 ml-7"
+              className="rounded-full border-2 h-48 w-48 lg:absolute lg:pin-l lg:pin-t lg:-mt-24 ml-7 "
             />
           </div>
-          <div className="w-full lg:w-1/2 py-8">
+          <div className="w-full lg:w-1/2 py-8 lg:ml-0 ml-10">
             <ul className="list-reset flex gap-5">
               <li>
                 <NavLink className="nav-link" to="/applied-jobs">
@@ -55,7 +55,7 @@ const Profile = () => {
               </li>
             </ul>
           </div>
-          <div className="w-full lg:w-1/4 flex my-4 lg:my-0 lg:justify-end items-center">
+          <div className="w-full lg:w-1/4  flex my-4 lg:my-0 lg:justify-end items-center">
             <div className="mr-6">
               <button className="bg-teal hover:bg-teal-dark text-white font-medium py-2 px-4 rounded-full">
                 Following
@@ -69,7 +69,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
-      <div className="container mt-10 mx-auto grid grid-cols-3 gap-5 lg:flex-row  text-sm leading-normal">
+      <div className="container mt-10 mx-auto grid lg:grid-cols-3 grid-cols-1 gap-5 lg:flex-row  text-sm leading-normal">
         <div className="w-full pl-4 lg:pl-0 pr-6 mt-8 mb-4 mx-7">
           <h1 className="mb-4">
             <span href="#" className="font-bold text-2xl">

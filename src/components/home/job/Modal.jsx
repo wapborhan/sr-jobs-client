@@ -1,9 +1,13 @@
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useContext } from "react";
 import moment from "moment";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Modal = ({ job }) => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,8 +31,8 @@ const Modal = ({ job }) => {
       .then((response) => response.json())
       .then((data) => {
         if (data.insertedId) {
-          alert("Job Added");
-          // setJob(data);
+          toast("Applied Succesfully");
+          navigate("/applied-jobs");
           form.reset();
         }
       });
@@ -38,7 +42,7 @@ const Modal = ({ job }) => {
   const deadlineDate = moment(job?.deadline);
 
   const deadLine = () => {
-    alert("Deadline");
+    toast("This Job Already Deadlined.");
   };
 
   return (
@@ -58,7 +62,7 @@ const Modal = ({ job }) => {
           Apply for this job
         </button>
       )}
-
+      <ToastContainer />
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <form method="dialog">

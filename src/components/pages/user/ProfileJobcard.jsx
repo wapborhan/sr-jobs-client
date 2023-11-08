@@ -35,7 +35,7 @@ const ProfileJobcard = ({ user, job }) => {
         <div>
           <div className="mb-4">
             <p className="mb-6">{postingDate}</p>
-            <p className="mb-6 font-bold flex gap-4 ">
+            <p className="mb-6 font-bold flex gap-4 flex-wrap">
               <span className=" bg-slate-500 flex-row py-1 px-3 rounded-full text-center text-white">
                 {categories}
               </span>

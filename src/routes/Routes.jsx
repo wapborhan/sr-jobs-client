@@ -15,6 +15,7 @@ import UpdateJob from "../components/pages/jobs/UpdateJob";
 import Profile from "../components/pages/user/Profile";
 import UpdateProfile from "../components/pages/user/UpdateProfile";
 import ApplyJobDetails from "../components/pages/applied-job/ApplyJobDetails";
+import About from "../components/pages/about/About";
 
 export const router = createBrowserRouter([
   {
@@ -103,6 +104,10 @@ export const router = createBrowserRouter([
       {
         path: "/blogs",
         element: <Blogs />,
+      },
+      {
+        path: "/about",
+        element: <About />,
       },
     ],
   },

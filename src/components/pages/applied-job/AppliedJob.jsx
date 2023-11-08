@@ -1,12 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import ApplyCard from "./ApplyCard";
-import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
 const AppliedJob = () => {
   const [applyjobs, setApplyjobs] = useState([]);
   const { user } = useContext(AuthContext);
-  const [filteredJobs, setFilteredJobs] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
   const url = `https://b8a11-server-side-wapborhan.vercel.app/applied?email=${user?.email}`;
@@ -27,7 +25,7 @@ const AppliedJob = () => {
       : applyjobs.filter((job) => job?.job?.categories === selectedCategory);
   return (
     <div className="w-full ">
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-7xl lg:mx-auto mx-5 sm:px-6 lg:px-8">
         <div className="flex flex-col">
           <div className="mb-4"></div>
           <div className="-mb-2 py-4 flex flex-wrap flex-grow justify-between">
@@ -68,9 +66,6 @@ const AppliedJob = () => {
                 </thead>
 
                 <tbody className="">
-                  {/* {applyjobs.map((job) => (
-                    <ApplyCard key={job._id} job={job} />
-                  ))} */}
                   {filteredJobsByCategory.map((job) => (
                     <ApplyCard key={job._id} job={job} />
                   ))}

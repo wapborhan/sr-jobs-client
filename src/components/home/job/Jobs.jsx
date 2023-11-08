@@ -15,7 +15,7 @@ const Jobs = () => {
   const allTypes = [...new Set(allJobs?.map((job) => job.categories))];
 
   return (
-    <div className="container lg:max-w-7xl px-8 mx-auto my-20">
+    <div className="container lg:max-w-7xl px-4 mx-auto my-20">
       <div className="headtitle text-center mb-8 space-y-5">
         <h1 className="text-3xl"> New & Random Jobs</h1>
         <p className="text-base-500">
@@ -46,7 +46,10 @@ const Jobs = () => {
           </TabList>
         </div>
 
-        <TabPanel key="all" className="grid grid-cols-3 gap-5">
+        <TabPanel
+          key="all"
+          className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5"
+        >
           {allJobs.slice(0, 6).map((job) => (
             <JobsCard key={job.id} job={job} />
           ))}

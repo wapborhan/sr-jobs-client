@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import MyJobCard from "./MyJobCard";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const MyJobs = () => {
   const { user } = useContext(AuthContext);
@@ -17,7 +19,6 @@ const MyJobs = () => {
     const filtered = myJobs.filter((job) =>
       job.title.toLowerCase().includes(query.toLowerCase())
     );
-
     setFilteredJobs(filtered);
   };
 
@@ -29,11 +30,13 @@ const MyJobs = () => {
       .then((data) => setMyJobs(data))
       .catch((err) => {
         setMessage("Data couldn't be loaded. Please try again later.");
+        console.log(err);
       });
   }, [url]);
 
   const handleDelete = (id) => {
     const proceed = confirm("Are You sure you want to delete");
+
     if (proceed) {
       fetch(`https://b8a11-server-side-wapborhan.vercel.app/myjobs/${id}`, {
         method: "DELETE",
@@ -41,8 +44,8 @@ const MyJobs = () => {
         .then((res) => res.json())
         .then((data) => {
           if (data.deletedCount > 0) {
-            alert("deleted successful");
-            const remaining = myJobs.filter((booking) => booking._id !== id);
+            toast("deleted successful");
+            const remaining = myJobs.filter((job) => job._id !== id);
             setMyJobs(remaining);
           }
         });
@@ -51,7 +54,7 @@ const MyJobs = () => {
 
   return (
     <div className="w-full ">
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-7xl lg:mx-auto mx-5 sm:px-6 lg:px-8">
         <div className="flex flex-col">
           <div className="mb-4"></div>
           <div className="-mb-2 py-4 flex flex-wrap flex-grow justify-between">
@@ -132,6 +135,7 @@ const MyJobs = () => {
                   {}
                 </tbody>
                 {/* <!-- BODY end --> */}
+                <ToastContainer />
               </table>
             </div>
           </div>

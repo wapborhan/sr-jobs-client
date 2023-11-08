@@ -26,7 +26,7 @@ const Job = () => {
 
   return (
     <div className="w-full ">
-      <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div className="max-w-7xl lg:mx-auto mx-5 sm:px-6 lg:px-8">
         <div className="flex flex-col">
           <div className="mb-4"></div>
           <div className="-mb-2 py-4 flex flex-wrap flex-grow justify-between">

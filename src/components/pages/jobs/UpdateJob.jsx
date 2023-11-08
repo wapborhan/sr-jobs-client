@@ -1,6 +1,8 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useLoaderData } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UpdateJob = () => {
   const job = useLoaderData();
@@ -38,10 +40,9 @@ const UpdateJob = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.modifiedCount > 0) {
-          alert("Job Data Updated");
-          // setCoffee(data);
+          toast("Update Job Information");
         } else if (data.modifiedCount === 0) {
-          alert("Nothing Modified");
+          toast("Nothing Modified");
         }
       });
   };
@@ -192,6 +193,7 @@ const UpdateJob = () => {
               />
             </div>
           </div>
+          <ToastContainer />
         </form>
       </div>
     </div>

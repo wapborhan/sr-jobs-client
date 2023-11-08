@@ -123,7 +123,10 @@ const NavBar = () => {
               </>
             ) : (
               <>
-                <NavLink to="/signup" className="btn btn-outline btn-success">
+                <NavLink
+                  to="/signup"
+                  className="btn btn-outline lg:block hidden btn-success"
+                >
                   <span className="nav-link">Registration</span>
                 </NavLink>
                 <NavLink to="/signin" className="btn btn-outline btn-info">

@@ -1,5 +1,7 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AddJob = () => {
   const [job, setJob] = useState();
@@ -39,7 +41,7 @@ const AddJob = () => {
       .then((response) => response.json())
       .then((data) => {
         if (data.insertedId) {
-          alert("Job Added");
+          toast("Job Added Succesfully");
           setJob(data);
           form.reset();
         }
@@ -53,7 +55,7 @@ const AddJob = () => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="form  mx-40 my-10 space-y-4">
+          <div className="form  lg:mx-40 mx-5 my-10 space-y-4">
             <div className="frist flex gap-5 justify-between">
               <div className="form-control w-full">
                 <label className="label">
@@ -182,6 +184,7 @@ const AddJob = () => {
                 className="rounded-lg font-h2 border-2-[#331A15] bg-[#D2B48C] w-full p-3 font-bold text-[18px] text-[#331A15] cursor-pointer"
               />
             </div>
+            <ToastContainer />
           </div>
         </form>
       </div>

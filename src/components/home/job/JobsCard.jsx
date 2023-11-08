@@ -16,7 +16,7 @@ const JobsCard = ({ job }) => {
 
   return (
     <>
-      <div className="card w-96 bg-base-100 mt-7 border-2 shadow-xl">
+      <div className="card lg:w-96 w-full bg-base-100 mt-7 border-2 shadow-xl">
         <figure>
           {picture ? (
             <img src={picture} className="h-40" />
