@@ -19,7 +19,7 @@ const Modal = ({ job }) => {
       job,
     };
 
-    fetch("http://localhost:3300/applied", {
+    fetch("https://b8a11-server-side-wapborhan.vercel.app/applied", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inputData),

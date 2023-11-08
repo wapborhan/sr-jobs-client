@@ -19,7 +19,7 @@ const Job = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3300/jobs")
+    fetch("https://b8a11-server-side-wapborhan.vercel.app/jobs")
       .then((res) => res.json())
       .then((data) => setJobs(data));
   }, []);

@@ -30,7 +30,7 @@ const UpdateJob = () => {
       descriptoion,
     };
 
-    fetch(`http://localhost:3300/jobs/${_id}`, {
+    fetch(`https://b8a11-server-side-wapborhan.vercel.app/jobs/${_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updateData),

@@ -54,7 +54,9 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3300/jobs/${params.id}`),
+          fetch(
+            `https://b8a11-server-side-wapborhan.vercel.app/jobs/${params.id}`
+          ),
       },
       {
         path: "/update-job/:id",
@@ -64,7 +66,9 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3300/jobs/${params.id}`),
+          fetch(
+            `https://b8a11-server-side-wapborhan.vercel.app/jobs/${params.id}`
+          ),
       },
       {
         path: "/applied-jobs",
@@ -73,7 +77,8 @@ export const router = createBrowserRouter([
             <AppliedJob />
           </PrivateRoutes>
         ),
-        loader: () => fetch(`http://localhost:3300/applied`),
+        loader: () =>
+          fetch(`https://b8a11-server-side-wapborhan.vercel.app/applied`),
       },
       {
         path: "/applied-jobs/:id",
@@ -83,7 +88,9 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3300/applied/${params.id}`),
+          fetch(
+            `https://b8a11-server-side-wapborhan.vercel.app/applied/${params.id}`
+          ),
       },
       {
         path: "/my-jobs",

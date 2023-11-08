@@ -9,7 +9,7 @@ const AppliedJob = () => {
   const [filteredJobs, setFilteredJobs] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("All");
 
-  const url = `http://localhost:3300/applied?email=${user?.email}`;
+  const url = `https://b8a11-server-side-wapborhan.vercel.app/applied?email=${user?.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())
