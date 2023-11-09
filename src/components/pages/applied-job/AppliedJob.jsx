@@ -2,27 +2,21 @@ import { useContext, useEffect, useState } from "react";
 import ApplyCard from "./ApplyCard";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { usePDF } from "react-to-pdf";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const AppliedJob = () => {
   document.title = "SR Jobs | Applied Job";
   const [applyjobs, setApplyjobs] = useState([]);
   const { user } = useContext(AuthContext);
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const axiosSecure = useAxiosSecure();
 
   const { toPDF, targetRef } = usePDF({ filename: "applied-jobs.pdf" });
 
-  const url = `/applied?email=${user?.email}`;
-
+  const url = `https://b8a11-server-side-wapborhan.vercel.app/applied?email=${user?.email}`;
   useEffect(() => {
-    axiosSecure
-      .get(url)
-      .then((res) => setApplyjobs(res.data))
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [url, axiosSecure]);
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => setApplyjobs(data));
+  }, [url]);
 
   const handleCategoryChange = (event) => {
     const category = event.target.value;
@@ -32,7 +26,7 @@ const AppliedJob = () => {
   const filteredJobsByCategory =
     selectedCategory === "All"
       ? applyjobs
-      : applyjobs?.filter((job) => job?.job?.categories === selectedCategory);
+      : applyjobs.filter((job) => job?.job?.categories === selectedCategory);
   return (
     <div className="w-full ">
       <div className="max-w-7xl lg:mx-auto mx-5 sm:px-6 lg:px-8">
@@ -87,8 +81,8 @@ const AppliedJob = () => {
                 </thead>
 
                 <tbody className="">
-                  {filteredJobsByCategory?.map((job) => (
-                    <ApplyCard key={job?._id} job={job} />
+                  {filteredJobsByCategory.map((job) => (
+                    <ApplyCard key={job._id} job={job} />
                   ))}
                 </tbody>
               </table>
