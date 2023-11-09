@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import JobCard from "./JobCard";
 import { usePDF } from "react-to-pdf";
+import Loader from "../../loader/Loader";
 
 const Job = () => {
   document.title = "SR Jobs | All Jobs";
@@ -96,11 +97,19 @@ const Job = () => {
                     return <JobCard key={job?._id} job={job} />;
                   })} */}
 
-                  {searchQuery === ""
-                    ? jobs.map((job) => <JobCard key={job._id} job={job} />)
-                    : filteredJobs.map((job) => (
+                  {jobs.length > 0 ? (
+                    searchQuery === "" ? (
+                      jobs.map((job) => <JobCard key={job._id} job={job} />)
+                    ) : (
+                      filteredJobs.map((job) => (
                         <JobCard key={job._id} job={job} />
-                      ))}
+                      ))
+                    )
+                  ) : (
+                    <td colSpan="7">
+                      <Loader />
+                    </td>
+                  )}
                 </tbody>
                 {/* <!-- BODY end --> */}
               </table>

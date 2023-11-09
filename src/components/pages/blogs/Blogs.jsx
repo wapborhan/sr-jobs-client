@@ -82,7 +82,7 @@ const Blogs = () => {
           <a href="#">
             <div className="relative">
               <img
-                className="w-full"
+                className="w-full h-48"
                 src="https://i.ibb.co/pwqkfDq/Screenshot-2023-11-08-233749.png"
                 alt="Sunset in the mountains"
               />

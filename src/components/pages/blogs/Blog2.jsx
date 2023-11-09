@@ -4,7 +4,7 @@ const Blog2 = () => {
       <a onClick={() => document.getElementById("my_modal_2").showModal()}>
         <div className="relative">
           <img
-            className="w-full"
+            className="w-full h-48"
             src="https://miro.medium.com/v2/resize:fit:1400/1*f7ztMaMM0etsFHpEfkdiwA.png"
             alt="Sunset in the mountains"
           />

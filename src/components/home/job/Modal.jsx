@@ -42,21 +42,25 @@ const Modal = ({ job }) => {
   const deadlineDate = moment(job?.deadline);
 
   const deadLine = () => {
-    toast("This Job Already Deadlined.");
+    if (job.email === user.email) {
+      toast("You cann't apply own job.");
+    } else {
+      toast("This Job Already Deadlined.");
+    }
   };
 
   return (
     <>
-      {postingDate > deadlineDate ? (
+      {postingDate < deadlineDate ? (
         <button
-          onClick={deadLine}
+          onClick={() => document.getElementById("my_modal_3").showModal()}
           className="bg-teal-500  text-white text-center block rounded-full py-2 mb-4 px-4"
         >
           Apply for this job
         </button>
       ) : (
         <button
-          onClick={() => document.getElementById("my_modal_3").showModal()}
+          onClick={deadLine}
           className="bg-teal-500  text-white text-center block rounded-full py-2 mb-4 px-4"
         >
           Apply for this job

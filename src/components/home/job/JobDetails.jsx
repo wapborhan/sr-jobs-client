@@ -2,9 +2,12 @@ import { useLoaderData } from "react-router-dom";
 import moment from "moment";
 
 import Modal from "./Modal";
+import { useContext } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const JobDetails = () => {
   const job = useLoaderData();
+  const { user } = useContext(AuthContext);
 
   const desc = job?.descriptoion?.split("\n");
 

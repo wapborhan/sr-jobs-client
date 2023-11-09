@@ -4,7 +4,7 @@ const Blog1 = () => {
       <a onClick={() => document.getElementById("my_modal_1").showModal()}>
         <div className="relative">
           <img
-            className="w-full"
+            className="w-full h-48"
             src="https://frontegg.com/wp-content/webp-express/webp-images/uploads/2022/04/Access-Token.png.webp"
             alt="Sunset in the mountains"
           />

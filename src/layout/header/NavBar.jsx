@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import "./navbar.css";
 
 const NavBar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -48,11 +49,6 @@ const NavBar = () => {
           Blogs
         </NavLink>
       </li>
-      <li className="nav-item">
-        <NavLink to="/about" className="nav-link">
-          About Us
-        </NavLink>
-      </li>
     </>
   );
   return (
@@ -89,7 +85,7 @@ const NavBar = () => {
             </a>
           </div>
           <div className="navbar-center hidden lg:flex">
-            <ul className="menu menu-horizontal px-1  gap-3">{links}</ul>
+            <ul className="menus menu-horizontal px-1  gap-3">{links}</ul>
           </div>
           <div className="navbar-end flex gap-3 items-center justify-end">
             {user?.email ? (

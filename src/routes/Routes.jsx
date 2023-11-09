@@ -16,6 +16,8 @@ import Profile from "../components/pages/user/Profile";
 import UpdateProfile from "../components/pages/user/UpdateProfile";
 import ApplyJobDetails from "../components/pages/applied-job/ApplyJobDetails";
 import About from "../components/pages/about/About";
+import Terms from "../components/pages/terms/Terms";
+import Privacy from "../components/pages/privacy/Privacy";
 
 export const router = createBrowserRouter([
   {
@@ -78,8 +80,7 @@ export const router = createBrowserRouter([
             <AppliedJob />
           </PrivateRoutes>
         ),
-        loader: () =>
-          fetch(`https://b8a11-server-side-wapborhan.vercel.app/applied`),
+        // loader: () => fetch(`https://b8a11-server-side-wapborhan.vercel.app/applied`),
       },
       {
         path: "/applied-jobs/:id",
@@ -108,6 +109,14 @@ export const router = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/terms",
+        element: <Terms />,
+      },
+      {
+        path: "/privacy",
+        element: <Privacy />,
       },
     ],
   },
