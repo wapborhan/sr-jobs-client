@@ -34,7 +34,7 @@ const AddJob = () => {
       descriptoion,
     };
 
-    fetch("https://b8a11-server-side-wapborhan.vercel.app/jobs", {
+    fetch("http://localhost:3300/jobs", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(inputData),

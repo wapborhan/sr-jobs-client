@@ -1,9 +1,0 @@
-ul.menus li a.active {
-  border-bottom: 4px solid #473cd7;
-  padding-bottom: 20px;
-}
-
-ul.menus li a {
-  cursor: pointer !important;
-  padding: 20px 10px;
-}

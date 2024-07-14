@@ -11,7 +11,7 @@ const AppliedJob = () => {
 
   const { toPDF, targetRef } = usePDF({ filename: "applied-jobs.pdf" });
 
-  const url = `https://b8a11-server-side-wapborhan.vercel.app/applied?email=${user?.email}`;
+  const url = `${import.meta.env.BACKEND_URL}/applied?email=${user?.email}`;
   useEffect(() => {
     fetch(url)
       .then((res) => res.json())

@@ -9,7 +9,7 @@ const Profile = () => {
   const [myJobs, setMyJobs] = useState([]);
   const [message, setMessage] = useState("");
 
-  const url = `https://b8a11-server-side-wapborhan.vercel.app/myjobs?email=${user?.email}`;
+  const url = `http://localhost:3300/myjobs?email=${user?.email}`;
 
   useEffect(() => {
     fetch(url)

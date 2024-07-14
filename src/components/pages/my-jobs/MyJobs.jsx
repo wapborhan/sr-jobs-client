@@ -23,7 +23,7 @@ const MyJobs = () => {
     setFilteredJobs(filtered);
   };
 
-  const url = `https://b8a11-server-side-wapborhan.vercel.app/myjobs?email=${user?.email}`;
+  const url = `http://localhost:3300/myjobs?email=${user?.email}`;
 
   useEffect(() => {
     fetch(url)
@@ -39,7 +39,7 @@ const MyJobs = () => {
     const proceed = confirm("Are You sure you want to delete");
 
     if (proceed) {
-      fetch(`https://b8a11-server-side-wapborhan.vercel.app/myjobs/${id}`, {
+      fetch(`http://localhost:3300/myjobs/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

@@ -24,7 +24,7 @@ const Job = () => {
   };
 
   useEffect(() => {
-    fetch("https://b8a11-server-side-wapborhan.vercel.app/jobs")
+    fetch("http://localhost:3300/jobs")
       .then((res) => res.json())
       .then((data) => setJobs(data));
   }, []);

@@ -1,9 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../layout/Root";
-import HomePage from "../components/home/HomePage";
+import HomePage from "../views/HomePage";
 import SignUp from "../components/pages/signup/SignUp";
 import SignIn from "../components/pages/signin/SignIn";
-import JobDetails from "../components/home/job/JobDetails";
+// import JobDetails from "../components/home/job/JobDetails";
 import Blogs from "../components/pages/blogs/Blogs";
 import ErrorPage from "../components/pages/error/ErrorPage";
 import AddJob from "../components/pages/jobs/AddJob";
@@ -49,18 +49,16 @@ export const router = createBrowserRouter([
         path: "/job",
         element: <Job />,
       },
-      {
-        path: "/job/:id",
-        element: (
-          <PrivateRoutes>
-            <JobDetails />
-          </PrivateRoutes>
-        ),
-        loader: ({ params }) =>
-          fetch(
-            `https://b8a11-server-side-wapborhan.vercel.app/jobs/${params.id}`
-          ),
-      },
+      // {
+      //   path: "/job/:id",
+      //   element: (
+      //     <PrivateRoutes>
+      //       <JobDetails />
+      //     </PrivateRoutes>
+      //   ),
+      //   loader: ({ params }) =>
+      //     fetch(`${import.meta.env.BACKEND_URL}/jobs/${params.id}`),
+      // },
       {
         path: "/update-job/:id",
         element: (
@@ -69,9 +67,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://b8a11-server-side-wapborhan.vercel.app/jobs/${params.id}`
-          ),
+          fetch(`${import.meta.env.BACKEND_URL}/jobs/${params.id}`),
       },
       {
         path: "/applied-jobs",
@@ -80,7 +76,7 @@ export const router = createBrowserRouter([
             <AppliedJob />
           </PrivateRoutes>
         ),
-        // loader: () => fetch(`https://b8a11-server-side-wapborhan.vercel.app/applied`),
+        // loader: () => fetch(`${import.meta.env.BACKEND_URL}/applied`),
       },
       {
         path: "/applied-jobs/:id",
@@ -90,9 +86,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(
-            `https://b8a11-server-side-wapborhan.vercel.app/applied/${params.id}`
-          ),
+          fetch(`${import.meta.env.BACKEND_URL}/applied/${params.id}`),
       },
       {
         path: "/my-jobs",
