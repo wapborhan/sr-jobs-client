@@ -22133,3 +22133,7 @@ a.apply-now-button:hover {
 		transform: translateY(0)
 	}
 }
+
+.cursor-pointer {
+	cursor: pointer;
+}
