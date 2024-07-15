@@ -1,5 +1,5 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 
 const ProfileNav = () => {
@@ -64,6 +64,11 @@ const ProfileNav = () => {
             <div className="utf-header-notifications-dropdown-block">
               <ul className="utf-user-menu-dropdown-nav">
                 <li>
+                  <Link to="/dashboard/profile">
+                    <i className="icon-feather-user"></i> My Profile
+                  </Link>
+                </li>
+                <li>
                   <a href="dashboard.html">
                     <i className="icon-material-outline-dashboard"></i>
                     Dashboard
@@ -86,11 +91,7 @@ const ProfileNav = () => {
                     Bookmarks Jobs
                   </a>
                 </li>
-                <li>
-                  <a href="dashboard-my-profile.html">
-                    <i className="icon-feather-user"></i> My Profile
-                  </a>
-                </li>
+
                 <li>
                   <a onClick={handleLogout} className="cursor-pointer">
                     <i className="icon-material-outline-power-settings-new"></i>

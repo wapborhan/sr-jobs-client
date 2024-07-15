@@ -1,4 +1,4 @@
-import { AuthContext } from "../../../Provider/AuthProvider";
+import { AuthContext } from "../../Provider/AuthProvider";
 import { useContext } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";

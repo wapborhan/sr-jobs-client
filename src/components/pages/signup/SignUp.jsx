@@ -38,7 +38,7 @@ const SignUp = () => {
           photoURL: photourl,
         });
         form.reset();
-        navigate("/profile");
+        navigate("/dashboard/profile");
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -51,7 +51,7 @@ const SignUp = () => {
       .then((result) => {
         const user = result.user;
         if (user) {
-          navigate(location?.state ? location.state : "/profile");
+          navigate(location?.state ? location.state : "/dashboard/profile");
         }
       })
       .catch((error) => {

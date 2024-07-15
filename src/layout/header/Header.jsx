@@ -11,7 +11,7 @@ const Header = () => {
             <div className="utf-left-side">
               <div id="logo">
                 <NavLink to="/">
-                  <img src="images/logo-dark.png" alt="" />
+                  <img src="/images/logo-dark.png" alt="" />
                 </NavLink>
               </div>
               <NavBar />

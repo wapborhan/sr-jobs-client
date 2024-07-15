@@ -21,7 +21,7 @@ const SignIn = () => {
 
         form.reset();
         if (user) {
-          navigate(location?.state ? location.state : "/profile");
+          navigate(location?.state ? location.state : "/dashboard/profile");
         }
       })
       .catch((error) => {
@@ -35,7 +35,7 @@ const SignIn = () => {
       .then((result) => {
         const user = result.user;
         if (user) {
-          navigate(location?.state ? location.state : "/profile");
+          navigate(location?.state ? location.state : "/dashboard/profile");
         }
       })
       .catch((error) => {

@@ -18,7 +18,7 @@ const UpdateProfile = () => {
     updateUser(updatename, photo)
       .then(() => {
         toast("Profile updated");
-        navigate("/profile");
+        navigate("/dashboard/profile");
       })
       .catch((error) => {
         toast(error.message);

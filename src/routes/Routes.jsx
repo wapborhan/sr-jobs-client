@@ -3,7 +3,6 @@ import Root from "../layout/Root";
 import HomePage from "../views/HomePage";
 import SignUp from "../components/pages/signup/SignUp";
 import SignIn from "../components/pages/signin/SignIn";
-// import JobDetails from "../components/home/job/JobDetails";
 import Blogs from "../components/pages/blogs/Blogs";
 import ErrorPage from "../components/pages/error/ErrorPage";
 import AddJob from "../components/pages/jobs/AddJob";
@@ -12,12 +11,14 @@ import AppliedJob from "../components/pages/applied-job/AppliedJob";
 import PrivateRoutes from "./PrivateRoutes";
 import MyJobs from "../components/pages/my-jobs/MyJobs";
 import UpdateJob from "../components/pages/jobs/UpdateJob";
-import Profile from "../components/pages/user/Profile";
 import UpdateProfile from "../components/pages/user/UpdateProfile";
 import ApplyJobDetails from "../components/pages/applied-job/ApplyJobDetails";
 import About from "../components/pages/about/About";
 import Terms from "../components/pages/terms/Terms";
 import Privacy from "../components/pages/privacy/Privacy";
+import JobDetails from "../components/job/JobDetails";
+import DashLayout from "../layout/DashLayout";
+import Profile from "../pages/dashboard/profile/Profile";
 
 export const router = createBrowserRouter([
   {
@@ -28,10 +29,6 @@ export const router = createBrowserRouter([
       {
         path: "/",
         element: <HomePage />,
-      },
-      {
-        path: "/profile",
-        element: <Profile />,
       },
       {
         path: "/settings",
@@ -49,16 +46,16 @@ export const router = createBrowserRouter([
         path: "/job",
         element: <Job />,
       },
-      // {
-      //   path: "/job/:id",
-      //   element: (
-      //     <PrivateRoutes>
-      //       <JobDetails />
-      //     </PrivateRoutes>
-      //   ),
-      //   loader: ({ params }) =>
-      //     fetch(`${import.meta.env.BACKEND_URL}/jobs/${params.id}`),
-      // },
+      {
+        path: "/job/:id",
+        element: (
+          <PrivateRoutes>
+            <JobDetails />
+          </PrivateRoutes>
+        ),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.BACKEND_URL}/jobs/${params.id}`),
+      },
       {
         path: "/update-job/:id",
         element: (
@@ -111,6 +108,17 @@ export const router = createBrowserRouter([
       {
         path: "/privacy",
         element: <Privacy />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashLayout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "profile",
+        element: <Profile />,
       },
     ],
   },

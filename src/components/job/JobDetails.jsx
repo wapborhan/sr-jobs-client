@@ -3,7 +3,7 @@ import moment from "moment";
 
 import Modal from "./Modal";
 import { useContext } from "react";
-import { AuthContext } from "../../../Provider/AuthProvider";
+import { AuthContext } from "../../Provider/AuthProvider";
 
 const JobDetails = () => {
   const job = useLoaderData();
