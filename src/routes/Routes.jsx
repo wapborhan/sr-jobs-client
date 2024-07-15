@@ -20,6 +20,9 @@ import JobDetails from "../components/job/JobDetails";
 import DashLayout from "../layout/DashLayout";
 import Profile from "../pages/dashboard/profile/Profile";
 import Dashboard from "../pages/dashboard/mainDashboard/Dashboard";
+import AddJobs from "../pages/dashboard/jobs/AddJobs";
+import ViewJobs from "../pages/dashboard/jobs/ViewJobs";
+import BookMarkJobs from "../pages/dashboard/jobs/BookMarkJobs";
 
 export const router = createBrowserRouter([
   {
@@ -123,7 +126,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "jobs/add",
-        element: <Dashboard />,
+        element: <AddJobs />,
+      },
+      {
+        path: "jobs/view",
+        element: <ViewJobs />,
+      },
+      {
+        path: "bookmarks",
+        element: <BookMarkJobs />,
       },
       {
         path: "profile",

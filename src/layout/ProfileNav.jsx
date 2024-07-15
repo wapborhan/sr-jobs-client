@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect, useRef } from "react";
-import { Link, NavLink, useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Provider/AuthProvider";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../Provider/AuthProvider";
 
 const ProfileNav = () => {
   const [menu, setMenu] = useState(false);
@@ -26,6 +26,10 @@ const ProfileNav = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [menuRef]);
+
+  const handleNavLinkClick = () => {
+    setMenu(false);
+  };
 
   console.log(user);
   return (
@@ -64,32 +68,41 @@ const ProfileNav = () => {
             <div className="utf-header-notifications-dropdown-block">
               <ul className="utf-user-menu-dropdown-nav">
                 <li>
-                  <Link to="/dashboard/profile">
+                  <NavLink to="/dashboard/profile" onClick={handleNavLinkClick}>
                     <i className="icon-feather-user"></i> My Profile
-                  </Link>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="dashboard.html">
+                  <NavLink to="/dashboard/home" onClick={handleNavLinkClick}>
                     <i className="icon-material-outline-dashboard"></i>
                     Dashboard
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="dashboard-jobs-post.html">
+                  <NavLink
+                    to="/dashboard/jobs/add"
+                    onClick={handleNavLinkClick}
+                  >
                     <i className="icon-line-awesome-user-secret"></i> Manage
                     Jobs Post
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="dashboard-manage-jobs.html">
+                  <NavLink
+                    to="/dashboard/jobs/view"
+                    onClick={handleNavLinkClick}
+                  >
                     <i className="icon-material-outline-group"></i> Manage Jobs
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="dashboard-bookmarks.html">
+                  <NavLink
+                    to="/dashboard/bookmarks"
+                    onClick={handleNavLinkClick}
+                  >
                     <i className="icon-material-outline-star-border"></i>
                     Bookmarks Jobs
-                  </a>
+                  </NavLink>
                 </li>
 
                 <li>

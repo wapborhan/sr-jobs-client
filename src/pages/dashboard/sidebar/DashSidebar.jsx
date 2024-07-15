@@ -5,8 +5,17 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 const DashSidebar = () => {
   const { user } = useContext(AuthContext);
   return (
-    <div className="utf-dashboard-sidebar-item">
+    <div className="utf-dashboard-sidebar-item ">
       <div className="utf-dashboard-sidebar-item-inner" data-simplebar>
+        <div
+          className="simplebar-track vertical"
+          style={{ visibility: "visible" }}
+        >
+          <div
+            className="simplebar-scrollbar"
+            style={{ visibility: "visible", top: "0px", height: "39px" }}
+          ></div>
+        </div>
         <div className="utf-dashboard-nav-container">
           {/* <!-- Responsive Navigation Trigger -->  */}
           <a href="#" className="utf-dashboard-responsive-trigger-item">
@@ -47,23 +56,23 @@ const DashSidebar = () => {
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="dashboard-manage-jobs.html">
+                  <NavLink to="/dashboard/jobs/view">
                     <i className="icon-material-outline-group"></i> Manage Jobs{" "}
                     <span className="nav-tag">5</span>
                   </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <NavLink to="dashboard-manage-resume.html">
                     <i className="icon-material-outline-supervisor-account"></i>{" "}
                     Manage Resume
                   </NavLink>
-                </li>
+                </li> */}
                 <li>
-                  <a href="dashboard-bookmarks.html">
+                  <NavLink to="/dashboard/bookmarks">
                     <i className="icon-feather-heart"></i> Bookmarks Jobs
-                  </a>
+                  </NavLink>
                 </li>
-                <li>
+                {/* <li>
                   <a href="#">
                     <i className="icon-line-awesome-file-text"></i> Freelancer
                     Tasks
@@ -94,13 +103,13 @@ const DashSidebar = () => {
                       </a>
                     </li>
                   </ul>
-                </li>
-                <li>
+                </li> */}
+                {/* <li>
                   <a href="dashboard-reviews.html">
                     <i className="icon-material-outline-rate-review"></i>{" "}
                     Reviews
                   </a>
-                </li>
+                </li> */}
                 <li className="actives">
                   <NavLink to="/dashboard/profile">
                     <i className="icon-feather-user"></i> My Profile

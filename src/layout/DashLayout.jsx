@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
-import Header from "./header/Header";
+import DashHeader from "./DashHeader";
 import BackToTop from "../components/shared/BackToTop";
 import DashSidebar from "../pages/dashboard/sidebar/DashSidebar";
 
 const DashLayout = () => {
   return (
     <div id="wrapper">
-      <Header />
+      <DashHeader />
       <div className="utf-dashboard-container-aera">
         <DashSidebar />
         <div className="utf-dashboard-content-container-aera" data-simplebar>
