@@ -1,4 +1,9 @@
+import { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { AuthContext } from "../../../Provider/AuthProvider";
+
 const DashSidebar = () => {
+  const { user } = useContext(AuthContext);
   return (
     <div className="utf-dashboard-sidebar-item">
       <div className="utf-dashboard-sidebar-item-inner" data-simplebar>
@@ -20,42 +25,38 @@ const DashSidebar = () => {
             <div className="utf-dashboard-nav-inner">
               <div className="dashboard-profile-box">
                 <span className="avatar-img">
-                  <img
-                    alt=""
-                    src="images/user-avatar-placeholder.png"
-                    className="photo"
-                  />
+                  <img alt="" src={user && user?.photoURL} className="photo" />
                 </span>
                 <div className="user-profile-text">
-                  <span className="fullname">John Williams</span>
+                  <span className="fullname">{user && user?.displayName}</span>
                   <span className="user-role">Software Engineer</span>
                 </div>
               </div>
               <div className="clearfix"></div>
               <ul>
                 <li>
-                  <a href="dashboard.html">
+                  <NavLink to="/dashboard/home">
                     <i className="icon-material-outline-dashboard"></i>{" "}
                     Dashboard
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="dashboard-jobs-post.html">
+                  <NavLink to="/dashboard/jobs/add">
                     <i className="icon-line-awesome-user-secret"></i> Manage
                     Jobs Post
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="dashboard-manage-jobs.html">
+                  <NavLink to="dashboard-manage-jobs.html">
                     <i className="icon-material-outline-group"></i> Manage Jobs{" "}
                     <span className="nav-tag">5</span>
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
-                  <a href="dashboard-manage-resume.html">
+                  <NavLink to="dashboard-manage-resume.html">
                     <i className="icon-material-outline-supervisor-account"></i>{" "}
                     Manage Resume
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
                   <a href="dashboard-bookmarks.html">
@@ -100,10 +101,10 @@ const DashSidebar = () => {
                     Reviews
                   </a>
                 </li>
-                <li className="active">
-                  <a href="dashboard-my-profile.html">
+                <li className="actives">
+                  <NavLink to="/dashboard/profile">
                     <i className="icon-feather-user"></i> My Profile
-                  </a>
+                  </NavLink>
                 </li>
                 <li>
                   <a href="index-1.html">

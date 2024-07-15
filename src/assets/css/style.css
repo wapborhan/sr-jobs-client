@@ -16698,7 +16698,6 @@ a.utf-dashboard-responsive-trigger-item {
 
 .utf-dashboard-nav ul li {
 	display: block;
-	border-left: 4px solid transparent;
 	transition: 0.3s;
 	line-height: 25px;
 	font-size: 15px;
@@ -16708,6 +16707,7 @@ a.utf-dashboard-responsive-trigger-item {
 
 .utf-dashboard-nav ul li a {
 	color: #ffffff;
+	border-left: 4px solid transparent;
 	display: block;
 	padding: 12px 25px;
 	transition: 0.3s;
@@ -16732,28 +16732,28 @@ a.utf-dashboard-responsive-trigger-item {
 	left: -8px;
 }
 
-.utf-dashboard-nav ul li.active-submenu a i,
-.utf-dashboard-nav ul li.active a i,
+.utf-dashboard-nav ul li a.active-submenu i,
+.utf-dashboard-nav ul li a.active i,
 .utf-dashboard-nav ul li:hover a i {
 	color: #66676b;
 }
 
-.utf-dashboard-nav ul li.active-submenu,
-.utf-dashboard-nav ul li.active,
+.utf-dashboard-nav ul li a.active-submenu,
+.utf-dashboard-nav ul li a.active,
 .utf-dashboard-nav ul li:hover {
 	border-color: #66676b;
 	background-color: rgba(102, 103, 107, 0.04);
 }
 
-.utf-dashboard-nav ul li.active,
+.utf-dashboard-nav ul li a.active,
 .utf-dashboard-nav ul li:hover,
-.utf-dashboard-nav ul li.active-submenu {
+.utf-dashboard-nav ul li a.active-submenu {
 	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
 
 .utf-dashboard-nav ul li.active-submenu a,
 .utf-dashboard-nav ul li:hover a,
-.utf-dashboard-nav ul li.active a {
+.utf-dashboard-nav ul li a.active {
 	color: #66676b;
 }
 
@@ -16888,7 +16888,7 @@ a.utf-dashboard-responsive-trigger-item {
 }
 
 .utf-dashboard-nav ul li.active-submenu a:after,
-.utf-dashboard-nav ul li.active a:after,
+.utf-dashboard-nav ul li a.active:after,
 .utf-dashboard-nav ul li:hover a:after {
 	color: #66676b;
 	background: rgba(102, 103, 107, 0.13);
@@ -21436,7 +21436,7 @@ a.headline-link:after {
 	border-left: 6px solid #1ca774;
 }
 
-.utf-dashboard-nav ul li.active a i {
+.utf-dashboard-nav ul li a.active i {
 	background: #1ca774;
 	color: #ffffff !important;
 }
@@ -21457,7 +21457,7 @@ a.headline-link:after {
 }
 
 .utf-dashboard-nav ul li:hover a,
-.utf-dashboard-nav ul li.active a {
+.utf-dashboard-nav ul li a.active {
 	color: #1ca774;
 }
 
@@ -21509,7 +21509,7 @@ ul.utf-user-menu-dropdown-nav li a:hover i,
 .utf-dashboard-nav ul:before,
 .utf-dashboard-nav ul li.active-submenu a i,
 .utf-dashboard-nav ul li.active-submenu a:after,
-.utf-dashboard-nav ul li.active a:after,
+.utf-dashboard-nav ul li a.active:after,
 .utf-dashboard-nav ul li:hover a:after,
 .dashboard-box .headline h3 i,
 .help-icon,
@@ -21677,7 +21677,7 @@ a.utf-header-notifications-button {
 }
 
 .utf-dashboard-nav ul li:hover,
-.utf-dashboard-nav ul li.active {
+.utf-dashboard-nav ul li a.active {
 	border-color: #ffffff;
 }
 
@@ -21978,13 +21978,13 @@ a.apply-now-button:hover {
 }
 
 .utf-dashboard-nav ul li.active-submenu,
-.utf-dashboard-nav ul li.active,
+.utf-dashboard-nav ul li a.active,
 .utf-dashboard-nav ul li:hover {
 	background-color: rgba(255, 255, 255, 0.08);
 }
 
 .utf-dashboard-nav ul li.active-submenu a:after,
-.utf-dashboard-nav ul li.active a:after,
+.utf-dashboard-nav ul li a.active:after,
 .utf-dashboard-nav ul li:hover a:after {
 	background: rgba(255, 138, 0, 0.13);
 }

@@ -19,6 +19,7 @@ import Privacy from "../components/pages/privacy/Privacy";
 import JobDetails from "../components/job/JobDetails";
 import DashLayout from "../layout/DashLayout";
 import Profile from "../pages/dashboard/profile/Profile";
+import Dashboard from "../pages/dashboard/mainDashboard/Dashboard";
 
 export const router = createBrowserRouter([
   {
@@ -116,6 +117,14 @@ export const router = createBrowserRouter([
     element: <DashLayout />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        path: "home",
+        element: <Dashboard />,
+      },
+      {
+        path: "jobs/add",
+        element: <Dashboard />,
+      },
       {
         path: "profile",
         element: <Profile />,
