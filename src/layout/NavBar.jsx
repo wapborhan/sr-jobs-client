@@ -14,6 +14,9 @@ const NavBar = () => {
             <NavLink to="/job">Find Jobs</NavLink>
           </li>
           <li>
+            <NavLink to="/company">Browse Companies</NavLink>
+          </li>
+          <li>
             <NavLink href="/">Contact</NavLink>
           </li>
           <li>

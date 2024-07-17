@@ -5780,7 +5780,7 @@ ul.utf-job-deatails-content-item li i {
 
 .utf-job-listing:hover {
 	box-shadow: 0 2px 18px rgba(0, 0, 0, 0.14);
-	transform: scale(1.01);
+	/* transform: scale(1.01); */
 }
 
 .utf-job-listing:hover .utf-job-listing-details .utf-job-listing-description h3.utf-job-listing-title {
@@ -6014,7 +6014,7 @@ ul.utf-job-deatails-content-item li i {
 }
 
 .compact-list-layout .utf-job-listing:hover {
-	transform: scale(1.01);
+	/* transform: scale(1.01); */
 	box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
 	overflow: hidden;
 	border: 1px solid #1ca774 !important;
@@ -10141,13 +10141,13 @@ ul.main_popular_categories_list li a {
 ul.main_popular_categories_list li a:hover {
 	background: #1ca774;
 	color: #fff;
-	transform: scale(1.04);
+	/* transform: scale(1.04); */
 	transition: 0.35s;
 }
 
 ul.main_popular_categories_list li a:hover .utf_box {
 	background: #1ca774;
-	transform: scale(1.04);
+	/* transform: scale(1.04); */
 }
 
 ul.main_popular_categories_list li a:hover .utf_box i {
