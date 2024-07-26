@@ -1,17 +1,25 @@
 const JobSearch = ({ searchQuery, handleSearch }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log();
+    handleSearch(e.target.searchData.value);
+  };
   return (
     <div className="inner_search_block_section padding-top-0 padding-bottom-40">
       <div className="container">
         <div className="col-md-12">
-          <div className="utf-intro-banner-search-form-block">
+          <form
+            className="utf-intro-banner-search-form-block"
+            onSubmit={handleSubmit}
+          >
             <div className="utf-intro-search-field-item">
               <i className="icon-feather-search"></i>
               <input
                 id="intro-keywords"
                 type="text"
                 placeholder="Search Jobs Keywords..."
+                name="searchData"
                 defaultValue={searchQuery}
-                onChange={handleSearch}
               />
             </div>
             <div className="utf-intro-search-field-item">
@@ -35,14 +43,11 @@ const JobSearch = ({ searchQuery, handleSearch }) => {
               </select>
             </div>
             <div className="utf-intro-search-button">
-              <button
-                className="button ripple-effect"
-                // onclick="window.location.href='jobs-list-layout-leftside.html'"
-              >
+              <button type="submit" className="button ripple-effect">
                 <i className="icon-material-outline-search"></i> Search
               </button>
             </div>
-          </div>
+          </form>
           <p className="utf-trending-silver-item">
             <span className="utf-trending-black-item">
               Trending Jobs Keywords:

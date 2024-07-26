@@ -50,6 +50,18 @@ const DashSidebar = () => {
                   </NavLink>
                 </li>
                 <li>
+                  <NavLink to="/dashboard/company/add">
+                    <i className="icon-material-outline-dashboard"></i> Add
+                    Company
+                  </NavLink>
+                </li>{" "}
+                <li>
+                  <NavLink to="/dashboard/company/view">
+                    <i className="icon-material-outline-dashboard"></i> View
+                    Company
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink to="/dashboard/jobs/add">
                     <i className="icon-line-awesome-user-secret"></i> Manage
                     Jobs Post

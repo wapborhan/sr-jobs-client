@@ -31,7 +31,6 @@ const ProfileNav = () => {
     setMenu(false);
   };
 
-  console.log(user);
   return (
     <>
       <div className="utf-right-side" ref={menuRef}>

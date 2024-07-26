@@ -1,13 +1,19 @@
 import CompanyCard from "../../../components/job/CompanyCard";
+import useCompany from "../../../hooks/useCompany";
 
 const Company = () => {
+  const [allCompany] = useCompany();
+
   return (
     <div className="container">
       <div className="row">
         <div className="utf-companies-list-aera">
           <div className="col-xl-12">
             <div className="row">
-              <CompanyCard />
+              {allCompany.map((company, idx) => {
+                return <CompanyCard company={company} key={idx} />;
+              })}
+
               <div className="col-xl-4 col-md-6 col-sm-12">
                 <div className="utf-company-inner-alignment">
                   <a href="single-company-profile.html" className="company">

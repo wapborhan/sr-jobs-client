@@ -14,7 +14,7 @@ const JobLeftSide = () => {
         <select
           className="selectpicker"
           data-live-search="true"
-          data-selected-text-htmlFormat="count"
+          // data-selected-text-htmlFormat="count"
           data-size="7"
           title="All Categories"
         >

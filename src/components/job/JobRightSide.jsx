@@ -1,7 +1,7 @@
 import { usePDF } from "react-to-pdf";
 import JobCardTwo from "./JobCardTwo";
 
-const JobRightSide = () => {
+const JobRightSide = ({ jobs }) => {
   const { toPDF, targetRef } = usePDF({ filename: "jobs.pdf" });
   return (
     <>
@@ -9,7 +9,13 @@ const JobRightSide = () => {
         <h4>
           <i className="icon-material-outline-search"></i> Search Jobs Listing
           Results
-        </h4>
+        </h4>{" "}
+        <button
+          className="inline-block px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline"
+          onClick={() => toPDF()}
+        >
+          Download PDF
+        </button>
       </div>
       <div className="utf-notify-box-aera margin-top-15">
         <div className="utf-switch-container-item">
@@ -24,15 +30,16 @@ const JobRightSide = () => {
             <option>Random</option>
           </select>
         </div>
-        <button
-          className="inline-block px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline"
-          onClick={() => toPDF()}
-        >
-          Download PDF
-        </button>
       </div>
-      <div className="utf-listings-container-part compact-list-layout margin-top-35">
-        <JobCardTwo />
+      <div
+        className="utf-listings-container-part compact-list-layout margin-top-35"
+        ref={targetRef}
+      >
+        {jobs.length > 0
+          ? jobs.map((job, idx) => {
+              return <JobCardTwo key={idx} job={job} />;
+            })
+          : "Loading"}
       </div>
       {/* <!-- Pagination --> */}
       <div className="clearfix"></div>

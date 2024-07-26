@@ -22137,3 +22137,7 @@ a.apply-now-button:hover {
 .cursor-pointer {
 	cursor: pointer;
 }
+
+.text-danger {
+	color: red !important;
+}

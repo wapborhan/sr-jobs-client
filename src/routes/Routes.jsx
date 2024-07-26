@@ -23,6 +23,7 @@ import BookMarkJobs from "../pages/dashboard/jobs/BookMarkJobs";
 import Job from "../pages/main/jobs/Job";
 import Company from "../pages/main/company/Company";
 import CompanyDetails from "../pages/main/company/CompanyDetails";
+import AddCompany from "../pages/dashboard/company/AddCompany";
 
 export const router = createBrowserRouter([
   {
@@ -41,9 +42,9 @@ export const router = createBrowserRouter([
       {
         path: "job/:id",
         element: (
-          <PrivateRoutes>
-            <JobDetails />
-          </PrivateRoutes>
+          // <PrivateRoutes>
+          <JobDetails />
+          // </PrivateRoutes>
         ),
         loader: ({ params }) =>
           fetch(`${import.meta.env.BACKEND_URL}/jobs/${params.id}`),
@@ -90,6 +91,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "jobs/view",
+        element: <ViewJobs />,
+      },
+      {
+        path: "company/add",
+        element: <AddCompany />,
+      },
+      {
+        path: "company/view",
         element: <ViewJobs />,
       },
       // {

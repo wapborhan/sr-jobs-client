@@ -1,46 +1,66 @@
-const JobCardTwo = () => {
+import moment from "moment";
+import { Link } from "react-router-dom";
+
+const JobCardTwo = ({ job }) => {
+  const {
+    title,
+    salaryRange,
+    postingDate,
+    picture,
+    _id,
+    location,
+    categories,
+    jobType,
+    companyId,
+  } = job;
+  // console.log(job);
   return (
-    <a href="single-job-page.html" className="utf-job-listing">
+    <div className="utf-job-listing">
       <div className="utf-job-listing-details">
         <div className="utf-job-listing-company-logo">
-          {" "}
-          <img src="images/company_logo_1.png" alt="" />{" "}
+          <Link to={`/company/${companyId}`}>
+            <img src={picture} alt="" />
+          </Link>
         </div>
         <div className="utf-job-listing-description">
-          <span className="dashboard-status-button utf-job-status-item green">
-            <i className="icon-material-outline-business-center"></i> Full Time
+          <span
+            className={`dashboard-status-button utf-job-status-item ${
+              jobType === "Full Time" ? "green" : "yellow"
+            }`}
+          >
+            <i className="icon-material-outline-business-center"></i> {jobType}
           </span>
           <h3 className="utf-job-listing-title">
-            Web Designer, Graphic Designer, UI/UX Designer & Art{" "}
-            <span
+            <Link to={_id}>{title}</Link>
+
+            {/* <span
               className="utf-verified-badge"
               title="Verified Employer"
               data-tippy-placement="top"
-            ></span>
+            ></span> */}
           </h3>
           <div className="utf-job-listing-footer">
             <ul>
               <li>
-                <i className="icon-feather-briefcase"></i> Software Developer
+                <i className="icon-feather-briefcase"></i> {categories}
               </li>
               <li>
                 <i className="icon-material-outline-account-balance-wallet"></i>{" "}
-                $35000-$38000
+                {salaryRange}
               </li>
               <li>
-                <i className="icon-material-outline-location-on"></i> Drive
-                Potsdam, NY 676
+                <i className="icon-material-outline-location-on"></i> {location}
               </li>
               <li>
-                <i className="icon-material-outline-access-time"></i> 15 Minute
-                Ago
+                <i className="icon-material-outline-access-time"></i>{" "}
+                {moment(postingDate).format("dddd, MMMM Do YYYY, ")}
               </li>
             </ul>
           </div>
         </div>
         <span className="bookmark-icon"></span>
       </div>
-    </a>
+    </div>
   );
 };
 
