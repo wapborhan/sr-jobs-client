@@ -47,7 +47,7 @@ export const router = createBrowserRouter([
           // </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`${import.meta.env.BACKEND_URL}/jobs/${params.id}`),
+          fetch(`${import.meta.env.VITE_BACKEND_URL}/jobs/${params.id}`),
       },
       {
         path: "company",
@@ -56,6 +56,8 @@ export const router = createBrowserRouter([
       {
         path: "company/:id",
         element: <CompanyDetails />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_BACKEND_URL}/company/${params.id}`),
       },
 
       {

@@ -22,6 +22,7 @@ const CompanyCard = ({ company }) => {
           <p className="text-muted">
             <i className="icon-material-outline-location-on"></i> {compAdress}
           </p>
+          <div className="utf-star-rating" data-rating="4.5"></div>
         </div>
       </div>
     </div>
