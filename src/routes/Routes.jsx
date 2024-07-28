@@ -24,6 +24,7 @@ import Job from "../pages/main/jobs/Job";
 import Company from "../pages/main/company/Company";
 import CompanyDetails from "../pages/main/company/CompanyDetails";
 import AddCompany from "../pages/dashboard/company/AddCompany";
+import ViewCompany from "../pages/dashboard/company/ViewCompany";
 
 export const router = createBrowserRouter([
   {
@@ -101,7 +102,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "company/view",
-        element: <ViewJobs />,
+        element: <ViewCompany />,
       },
       // {
       //   path: "jobs/update/:id",
