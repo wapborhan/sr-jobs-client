@@ -1,6 +1,39 @@
+import { Controller, useForm } from "react-hook-form";
+import CreatableSelect from "react-select/creatable";
+import Select from "react-select";
+import useCategories from "../../../hooks/useCategories";
+import DatePicker from "react-datepicker";
+import { useState } from "react";
+
 const AddJobs = () => {
+  const [categories] = useCategories();
+  const [date, setDate] = useState(new Date(Date.now()));
+
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm({
+    defaultValues: {
+      skillsAbilities: [],
+    },
+  });
+
+  const handleChange = (dateChange) => {
+    setValue("dateOfBirth", dateChange, {
+      shouldDirty: true,
+    });
+    setDate(dateChange);
+  };
+
+  const onSubmit = (data) => console.log(data);
   return (
-    <div className="utf-dashboard-content-inner-aera">
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="utf-dashboard-content-inner-aera"
+    >
       <div className="row">
         <div className="col-xl-12">
           <div className="dashboard-box">
@@ -11,100 +44,93 @@ const AddJobs = () => {
               <div className="row">
                 <div className="col-xl-6 col-md-6 col-sm-6">
                   <div className="utf-submit-field">
-                    <h5>First Name</h5>
+                    <h5>Job Title </h5>{" "}
                     <input
                       type="text"
                       className="utf-with-border"
-                      placeholder="First Name"
+                      placeholder="Job Title"
+                      {...register("jobTitle", { required: true })}
                     />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Last Name</h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Last Name"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Email Address</h5>
-                    <input
-                      type="email"
-                      className="utf-with-border"
-                      placeholder="Email Address"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Phone Number</h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Phone Number"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Designation</h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Designation"
-                    />
+                    {errors.jobTitle && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="col-xl-6 col-md-6 col-sm-6">
                   <div className="utf-submit-field">
                     <h5>Job Category</h5>
-                    <select
-                      className="selectpicker utf-with-border"
-                      data-size="7"
-                      title="Select Category"
-                    >
-                      <option>Accounting and Finance</option>
-                      <option>Clerical & Data Entry</option>
-                      <option>Counseling</option>
-                      <option>Court Administration</option>
-                      <option>Human Resources</option>
-                      <option>Investigative</option>
-                      <option>IT and Computers</option>
-                      <option>Law Enforcement</option>
-                      <option>Management</option>
-                      <option>Miscellaneous</option>
-                      <option>Public Relations</option>
-                    </select>
+                    <Controller
+                      name="jobCategories"
+                      control={control}
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          className="w-100 selectct"
+                          // components={{
+                          //   DropdownIndicator: null,
+                          // }}
+                          options={categories}
+                          styles={{
+                            control: (baseStyles, state) => ({
+                              ...baseStyles,
+                              boxShadow: "none",
+                              paddingTop: 0,
+                              paddingBottom: 0,
+                              margin: 0,
+                            }),
+                          }}
+                        />
+                      )}
+                    />
+                    {errors.jobCategories && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="col-xl-6 col-md-6 col-sm-6">
                   <div className="utf-submit-field">
-                    <h5>Experience</h5>
-                    <select
-                      className="selectpicker utf-with-border"
-                      data-value="0 To 6 Years"
-                      data-size="7"
-                      title="Select Experience"
-                    >
-                      <option>1 Year</option>
-                      <option>1.5 Year</option>
-                      <option>2 Year</option>
-                      <option>2.5 Year</option>
-                      <option>3 Year</option>
-                    </select>
+                    <h5>Vacancy</h5>
+                    <input
+                      type="text"
+                      className="utf-with-border"
+                      placeholder="Vacancy"
+                      {...register("vacancy", { required: true })}
+                    />
+                    {errors.vacancy && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="col-xl-6 col-md-6 col-sm-6">
+                  <div className="utf-submit-field">
+                    <h5>Qualification</h5>
+                    <input
+                      type="text"
+                      className="utf-with-border"
+                      placeholder="Qualification"
+                      {...register("qualification", { required: true })}
+                    />
+                    {errors.qualification && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="col-xl-4 col-md-4 col-sm-6">
                   <div className="utf-submit-field">
                     <h5>Job Type</h5>
                     <select
-                      className="selectpicker utf-with-border"
+                      className="selectpickers utf-with-border"
                       data-size="7"
                       title="Select Job Type"
+                      {...register("jobType", { required: true })}
                     >
                       <option>Full Time Jobs</option>
                       <option>Part Time Jobs</option>
@@ -112,6 +138,55 @@ const AddJobs = () => {
                       <option>Internship Jobs</option>
                       <option>Temporary Jobs</option>
                     </select>
+                    {errors.jobType && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="col-xl-4 col-md-4 col-sm-6">
+                  <div className="utf-submit-field">
+                    <h5>Experience</h5>
+                    <select
+                      className="selectpickers utf-with-border"
+                      data-value="0 To 6 Years"
+                      data-size="7"
+                      title="Select Experience"
+                      {...register("experience", { required: true })}
+                    >
+                      <option>1 Year</option>
+                      <option>1.5 Year</option>
+                      <option>2 Year</option>
+                      <option>2.5 Year</option>
+                      <option>3 Year</option>
+                    </select>{" "}
+                    {errors.experience && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="col-xl-4 col-md-4 col-sm-6">
+                  <div className="utf-submit-field">
+                    <h5>Gender</h5>
+                    <select
+                      className="selectpickers utf-with-border"
+                      data-value="0 To 6 Years"
+                      data-size="7"
+                      title="Select Gender"
+                      {...register("gender", { required: true })}
+                    >
+                      <option>Both</option>
+                      <option>Male</option>
+                      <option>Female</option>
+                    </select>{" "}
+                    {errors.gender && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="col-xl-6 col-md-6 col-sm-6">
@@ -122,8 +197,14 @@ const AddJobs = () => {
                         className="utf-with-border"
                         type="text"
                         placeholder="Type Address"
+                        {...register("location", { required: true })}
                       />
                       <i className="icon-material-outline-location-on"></i>
+                      {errors.location && (
+                        <span className="text-danger">
+                          This field is required
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -137,8 +218,14 @@ const AddJobs = () => {
                             className="utf-with-border"
                             type="text"
                             placeholder="Min Salary"
+                            {...register("minSalary", { required: true })}
                           />
                           <i className="currency">USD</i>
+                          {errors.minSalary && (
+                            <span className="text-danger">
+                              This field is required
+                            </span>
+                          )}
                         </div>
                       </div>
                       <div className="col-xl-6 col-md-6 col-sm-6">
@@ -147,14 +234,52 @@ const AddJobs = () => {
                             className="utf-with-border"
                             type="text"
                             placeholder="Max Salary"
+                            {...register("maxSalary", { required: true })}
                           />
                           <i className="currency">USD</i>
+                          {errors.maxSalary && (
+                            <span className="text-danger">
+                              This field is required
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-12 col-md-12 col-sm-12">
+                <div className="col-xl-6 col-md-6 col-sm-6">
+                  <div className="utf-submit-field">
+                    <h5>Image Url</h5>{" "}
+                    <input
+                      type="text"
+                      className="utf-with-border"
+                      placeholder="Image Url"
+                      {...register("image", { required: true })}
+                    />
+                    {errors.image && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </div>{" "}
+                <div className="col-xl-6 col-md-6 col-sm-6">
+                  <div className="utf-submit-field">
+                    <h5>Google Map Link</h5>{" "}
+                    <input
+                      type="text"
+                      className="utf-with-border"
+                      placeholder="Google Map Link"
+                      {...register("locMapLink", { required: true })}
+                    />
+                    {errors.locMapLink && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="col-xl-8 col-md-8 col-sm-12">
                   <div className="utf-submit-field">
                     <h5>
                       Job Skills{" "}
@@ -166,40 +291,81 @@ const AddJobs = () => {
                     </h5>
                     <div className="keywords-container">
                       <div className="keyword-input-container">
-                        <input
+                        <Controller
+                          name="skillsAbilities"
+                          control={control}
+                          render={({ field: { onChange, value, ref } }) => (
+                            <CreatableSelect
+                              components={{
+                                DropdownIndicator: null,
+                              }}
+                              inputRef={ref}
+                              isMulti
+                              onChange={onChange}
+                              value={value}
+                              placeholder="Type something and press enter..."
+                            />
+                          )}
+                        />
+                        {errors.skillsAbilities && (
+                          <span className="text-danger">
+                            This field is required
+                          </span>
+                        )}
+                        {/* <input
                           type="text"
                           className="keyword-input utf-with-border"
                           placeholder="CSS, Photoshop, Js, Bootstrap"
                         />
                         <button className="keyword-input-button ripple-effect">
                           <i className="icon-material-outline-add"></i>
-                        </button>
+                        </button> */}
                       </div>
                       <div className="keywords-list"></div>
                       <div className="clearfix"></div>
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-12 col-md-12 col-sm-12">
+                <div className="col-xl-4 col-md-4 col-sm-12">
                   <div className="utf-submit-field">
-                    <h5>Upload Resume</h5>
-                    <div className="uploadButton margin-top-15 margin-bottom-30">
-                      <input
-                        className="uploadButton-input"
-                        type="file"
-                        accept="image/*, application/pdf"
-                        id="upload"
-                        multiple
-                      />
-                      <label
-                        className="uploadButton-button ripple-effect"
-                        for="upload"
-                      >
-                        Upload Resume
-                      </label>
-                      <span className="uploadButton-file-name">
-                        Upload Resume (Docx, Doc, PDF) File.
-                      </span>
+                    <h5>
+                      Deadline{" "}
+                      <i
+                        className="help-icon"
+                        data-tippy-placement="top"
+                        title="Maximum of 6 Skills"
+                      ></i>
+                    </h5>
+                    <div className="keywords-container">
+                      <div className="keyword-input-container">
+                        <Controller
+                          name="deadline"
+                          control={control}
+                          defaultValue={date}
+                          render={() => (
+                            <DatePicker
+                              selected={date}
+                              placeholderText="Select date"
+                              onChange={handleChange}
+                            />
+                          )}
+                        />
+                        {errors.deadline && (
+                          <span className="text-danger">
+                            This field is required
+                          </span>
+                        )}
+                        {/* <input
+                          type="text"
+                          className="keyword-input utf-with-border"
+                          placeholder="CSS, Photoshop, Js, Bootstrap"
+                        />
+                        <button className="keyword-input-button ripple-effect">
+                          <i className="icon-material-outline-add"></i>
+                        </button> */}
+                      </div>
+                      <div className="keywords-list"></div>
+                      <div className="clearfix"></div>
                     </div>
                   </div>
                 </div>
@@ -211,208 +377,32 @@ const AddJobs = () => {
                       rows="2"
                       className="utf-with-border"
                       placeholder="Career Description..."
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-xl-12">
-          <div className="dashboard-box">
-            <div className="headline">
-              <h3>Personal Detail & Address</h3>
-            </div>
-            <div className="content with-padding padding-bottom-10">
-              <div className="row">
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field datepicker">
-                    <h5>Birth Date</h5>
-                    <input className="utf-with-border" type="date" />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Address</h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Address"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>City</h5>
-                    <select
-                      className="selectpicker utf-with-border"
-                      data-size="7"
-                      title="Select City"
-                    >
-                      <option>Allahabad</option>
-                      <option>Faizabad</option>
-                      <option>Sultanpur</option>
-                      <option>Pratapgarh</option>
-                      <option>Basti</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>State</h5>
-                    <select
-                      className="selectpicker utf-with-border"
-                      data-size="7"
-                      title="Select State"
-                    >
-                      <option>Allahabad</option>
-                      <option>Faizabad</option>
-                      <option>Sultanpur</option>
-                      <option>Pratapgarh</option>
-                      <option>Basti</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Country</h5>
-                    <select
-                      className="selectpicker utf-with-border"
-                      data-size="7"
-                      title="Select Country"
-                    >
-                      <option>Allahabad</option>
-                      <option>Faizabad</option>
-                      <option>Sultanpur</option>
-                      <option>Pratapgarh</option>
-                      <option>Basti</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Zip Code</h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="000000"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Father Name</h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Father Name"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Hobbies(With Comma)</h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Hobbies(With Comma)"
-                    />
+                      {...register("jobsDescription", { required: true })}
+                    ></textarea>{" "}
+                    {errors.jobsDescription && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="col-xl-12 col-md-12 col-sm-12">
                   <div className="utf-submit-field">
-                    <h5>Job Description</h5>
+                    <h5>Education Description</h5>
                     <textarea
-                      cols="20"
+                      cols="40"
                       rows="2"
                       className="utf-with-border"
-                      placeholder="Job Description..."
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="col-xl-12">
-          <div className="dashboard-box">
-            <div className="headline">
-              <h3>Social Accounts</h3>
-            </div>
-            <div className="content with-padding padding-bottom-10">
-              <div className="row">
-                <div className="col-xl-6 col-md-6 col-sm-12">
-                  <div className="utf-submit-field">
-                    <h5>
-                      <i className="icon-brand-facebook"></i> Facebook
-                    </h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="https://www.facebook.com/"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-12">
-                  <div className="utf-submit-field">
-                    <h5>
-                      <i className="icon-brand-twitter"></i> Twitter
-                    </h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="https://twitter.com/"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-12">
-                  <div className="utf-submit-field">
-                    <h5>
-                      <i className="icon-brand-linkedin"></i> LinkedIn
-                    </h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="https://www.linkedin.com/"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-12">
-                  <div className="utf-submit-field">
-                    <h5>
-                      <i className="icon-brand-google"></i> Google +
-                    </h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="https://www.google.com/"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-12">
-                  <div className="utf-submit-field">
-                    <h5>
-                      <i className="icon-brand-pinterest"></i> Pinterest
-                    </h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="https://www.pinterest.com/"
-                    />
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-12">
-                  <div className="utf-submit-field">
-                    <h5>
-                      <i className="icon-feather-instagram"></i> Instagram
-                    </h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="https://www.instagram.com/"
-                    />
+                      placeholder="Education Description..."
+                      {...register("educationQualification", {
+                        required: true,
+                      })}
+                    ></textarea>{" "}
+                    {errors.educationQualification && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
@@ -421,14 +411,14 @@ const AddJobs = () => {
         </div>
       </div>
       <div className="utf-centered-button">
-        <a
-          href="javascript:void(0);"
+        <button
+          type="submit"
           className="button utf-ripple-effect-dark utf-button-sliding-icon margin-top-0"
         >
           Submit Jobs <i className="icon-feather-plus"></i>
-        </a>
+        </button>
       </div>
-    </div>
+    </form>
   );
 };
 

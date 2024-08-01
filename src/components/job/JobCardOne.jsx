@@ -1,45 +1,51 @@
 import { Link } from "react-router-dom";
 
-const JobCardOne = () => {
+const JobCardOne = ({ job }) => {
+  const {
+    _id,
+    title,
+    picture,
+    salary,
+    postingDate,
+    categories,
+    location,
+    type,
+  } = job;
+
   return (
     <>
-      <div
-        href="single-job-page.html"
-        className="utf-job-listing utf-apply-button-item"
-      >
+      <div className="utf-job-listing utf-apply-button-item">
         <div className="utf-job-listing-details">
           <div className="utf-job-listing-company-logo">
-            <img src="images/company_logo_1.png" alt="" />
+            <img src={picture} alt="" />
           </div>
           <div className="utf-job-listing-description">
             <span className="dashboard-status-button utf-job-status-item green">
               <i className="icon-material-outline-business-center"></i>
-              Full Time
+              {type}
             </span>
-            <h3 className="utf-job-listing-title">
-              Web Designer, Graphic Designer, UI/UX Designer & Art
-            </h3>
+            <h3 className="utf-job-listing-title">{title}</h3>
             <div className="utf-job-listing-footer">
               <ul>
                 <li>
-                  <i className="icon-feather-briefcase"></i> Graphic Designer
+                  <i className="icon-feather-briefcase"></i> {categories}
                 </li>
                 <li>
                   <i className="icon-material-outline-account-balance-wallet"></i>
-                  $35000-$38000
+                  {salary}
                 </li>
                 <li>
                   <i className="icon-material-outline-location-on"></i>
-                  Drive Potsdam, NY 676
+                  {location}
                 </li>
                 <li>
-                  <i className="icon-material-outline-access-time"></i> 15
-                  Minute Ago
+                  <i className="icon-material-outline-access-time"></i>{" "}
+                  {postingDate}
                 </li>
               </ul>
             </div>
           </div>
-          <Link to={`/job/1`}>
+          <Link to={`/job/${_id}`}>
             <span className="list-apply-button ripple-effect">
               Browse Job <i className="icon-line-awesome-bullhorn"></i>
             </span>

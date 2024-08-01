@@ -2,19 +2,18 @@ import { useEffect, useState } from "react";
 import JobSearch from "../../../components/job/JobSearch";
 import JobLeftSide from "../../../components/job/JobLeftSide";
 import JobRightSide from "../../../components/job/JobRightSide";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import useJobs from "../../../hooks/useJobs";
 
 const Job = () => {
   document.title = "SR Jobs | All Jobs";
-  const [jobs, setJobs] = useState([]);
+  const [allJobs] = useJobs();
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredJobs, setFilteredJobs] = useState(jobs);
-  const axiosPublic = useAxiosPublic();
+  const [filteredJobs, setFilteredJobs] = useState(allJobs);
 
   const handleSearch = (data) => {
     setSearchQuery(data);
 
-    const filtered = jobs.filter((job) =>
+    const filtered = allJobs.filter((job) =>
       job.title.toLowerCase().includes(data.toLowerCase())
     );
 
@@ -22,14 +21,8 @@ const Job = () => {
   };
 
   useEffect(() => {
-    axiosPublic.get("/jobs").then((res) => {
-      setJobs(res.data);
-      setFilteredJobs(res.data);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  console.log(filteredJobs);
+    setFilteredJobs(allJobs);
+  }, [allJobs]);
 
   return (
     <>
@@ -40,7 +33,7 @@ const Job = () => {
             <JobLeftSide searchQuery={searchQuery} />
           </div>
           <div className="col-xl-9 col-lg-8">
-            <JobRightSide jobs={filteredJobs} />
+            <JobRightSide jobs={filteredJobs} allJobs={allJobs} />
           </div>
         </div>
       </div>

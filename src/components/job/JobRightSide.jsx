@@ -3,6 +3,8 @@ import JobCardTwo from "./JobCardTwo";
 
 const JobRightSide = ({ jobs }) => {
   const { toPDF, targetRef } = usePDF({ filename: "jobs.pdf" });
+
+  console.log(jobs);
   return (
     <>
       <div className="utf-inner-search-section-title">
@@ -19,7 +21,7 @@ const JobRightSide = ({ jobs }) => {
       </div>
       <div className="utf-notify-box-aera margin-top-15">
         <div className="utf-switch-container-item">
-          <span>Showing 1–10 of 50 Jobs Results :</span>
+          <span>Showing 1–10 of {jobs.length} Jobs Results :</span>
         </div>
         <div className="sort-by">
           <span>Sort By:</span>
@@ -36,7 +38,7 @@ const JobRightSide = ({ jobs }) => {
         ref={targetRef}
       >
         {jobs.length > 0
-          ? jobs.map((job, idx) => {
+          ? jobs.slice(0, 15).map((job, idx) => {
               return <JobCardTwo key={idx} job={job} />;
             })
           : "Loading"}

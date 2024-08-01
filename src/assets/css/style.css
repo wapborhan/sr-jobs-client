@@ -80,9 +80,20 @@ select {
 }
 
 select {
-	padding: 15px 18px;
+	/* padding: 15px 18px; */
 	cursor: pointer;
 }
+
+.selectct>div>div {
+	padding: 0 8px;
+}
+
+.selectct>div>div>div {
+	margin: 0;
+	padding: 0;
+}
+
+
 
 input {
 	-webkit-transition: all 0.1s ease-in-out;
@@ -22140,4 +22151,8 @@ a.apply-now-button:hover {
 
 .text-danger {
 	color: red !important;
+}
+
+.w-100 {
+	width: 100%;
 }

@@ -48,7 +48,7 @@ export const router = createBrowserRouter([
           // </PrivateRoutes>
         ),
         loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_BACKEND_URL}/jobs/${params.id}`),
+          fetch(`${import.meta.env.VITE_BACKEND_URL}/job/${params.id}`),
       },
       {
         path: "company",

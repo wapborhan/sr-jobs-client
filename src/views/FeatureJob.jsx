@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import JobCardOne from "../components/job/JobCardOne";
+import useJobs from "../hooks/useJobs";
 
 const FeatureJob = () => {
+  const [allJobs] = useJobs();
   return (
     <div className="section gray padding-top-60 padding-bottom-60">
       <div className="container">
@@ -21,10 +23,11 @@ const FeatureJob = () => {
             </div>
             <div className="utf-listings-container-part compact-list-layout margin-top-35">
               {/*  */}
-              <JobCardOne />
-              <JobCardOne />
-              <JobCardOne />
-              <JobCardOne />
+              {allJobs.length > 0
+                ? allJobs.slice(0, 4).map((job, idx) => {
+                    return <JobCardOne key={idx} job={job} />;
+                  })
+                : "Loading..."}
 
               {/*  */}
             </div>

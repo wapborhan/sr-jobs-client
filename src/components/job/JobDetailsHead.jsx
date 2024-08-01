@@ -1,4 +1,12 @@
-const JobDetailsHead = () => {
+import { Link } from "react-router-dom";
+import useSingleCompany from "../../hooks/useSingleCompany";
+
+const JobDetailsHead = ({ job }) => {
+  const { companyId, jobType, title, categories, deadline } = job;
+  const [singleCompany] = useSingleCompany(companyId);
+
+  const { compLogoUrl, compAdress, _id, compName } = singleCompany;
+  const country = compAdress && compAdress.split(",").slice(-1)[0];
   return (
     <div
       className="single-page-header"
@@ -10,18 +18,18 @@ const JobDetailsHead = () => {
             <div className="utf-single-page-header-inner-aera">
               <div className="utf-left-side">
                 <div className="utf-header-image">
-                  <a href="single-company-profile.html">
-                    <img src="/images/company_logo_1.png" alt="" />
-                  </a>
+                  <Link to={`/company/${_id}`}>
+                    <img src={compLogoUrl} alt={compName} />
+                  </Link>
                 </div>
                 <div className="utf-header-details">
                   <span className="dashboard-status-button utf-job-status-item green">
                     <i className="icon-material-outline-business-center"></i>{" "}
-                    Full Time
+                    {jobType}
                   </span>
                   <ul>
                     <li>
-                      Afghanistan{" "}
+                      {compAdress && country}{" "}
                       <img
                         className="flag"
                         src="/images/flags/af.svg"
@@ -32,7 +40,7 @@ const JobDetailsHead = () => {
                     </li>
                   </ul>
                   <h3>
-                    Business Manager{" "}
+                    {title}
                     <span
                       className="utf-verified-badge"
                       title="Verified"
@@ -41,7 +49,11 @@ const JobDetailsHead = () => {
                   </h3>
                   <h5>
                     <i className="icon-material-outline-business-center"></i>{" "}
-                    Web Designer
+                    {categories}
+                  </h5>
+                  <h5>
+                    <i className="icon-material-outline-business-center"></i>{" "}
+                    {deadline}
                   </h5>
                   <div className="utf-star-rating" data-rating="4.9"></div>
                 </div>

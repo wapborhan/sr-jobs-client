@@ -4,6 +4,7 @@ const JobSearch = ({ searchQuery, handleSearch }) => {
     // console.log();
     handleSearch(e.target.searchData.value);
   };
+
   return (
     <div className="inner_search_block_section padding-top-0 padding-bottom-40">
       <div className="container">
@@ -26,9 +27,9 @@ const JobSearch = ({ searchQuery, handleSearch }) => {
               <select
                 className="selectpicker default"
                 data-live-search="true"
-                data-selected-text-format="count"
-                data-size="5"
-                title="Select Location"
+                // data-selected-text-format="count"
+                // data-size="5"
+                // title="Select Location"
               >
                 <option>Afghanistan</option>
                 <option>Albania</option>

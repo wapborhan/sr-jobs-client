@@ -6,7 +6,7 @@ const JobCardTwo = ({ job }) => {
     title,
     salaryRange,
     postingDate,
-    picture,
+    image,
     _id,
     location,
     categories,
@@ -19,7 +19,7 @@ const JobCardTwo = ({ job }) => {
       <div className="utf-job-listing-details">
         <div className="utf-job-listing-company-logo">
           <Link to={`/company/${companyId}`}>
-            <img src={picture} alt="" />
+            <img src={image} alt="" />
           </Link>
         </div>
         <div className="utf-job-listing-description">

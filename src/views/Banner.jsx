@@ -1,5 +1,16 @@
+import { Controller, useForm } from "react-hook-form";
+import Select from "react-select";
+
 const Banner = () => {
   document.title = "SR Jobs | Homepage";
+
+  const { control, handleSubmit } = useForm({
+    defaultValues: {
+      firstName: "",
+      select: {},
+    },
+  });
+  const onSubmit = (data) => console.log(data);
 
   return (
     <div
@@ -22,7 +33,10 @@ const Banner = () => {
 
         <div className="row">
           <div className="col-md-12">
-            <div className="utf-intro-banner-search-form-block margin-top-40">
+            <form
+              className="utf-intro-banner-search-form-block margin-top-40"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className="utf-intro-search-field-item">
                 <input
                   id="intro-keywords"
@@ -32,7 +46,31 @@ const Banner = () => {
                 <i className="icon-feather-search"></i>
               </div>
               <div className="utf-intro-search-field-item">
-                <select
+                <Controller
+                  name="select"
+                  control={control}
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      className="w-100"
+                      options={[
+                        { value: "chocolate", label: "Chocolate" },
+                        { value: "strawberry", label: "Strawberry" },
+                        { value: "vanilla", label: "Vanilla" },
+                      ]}
+                      styles={{
+                        control: (baseStyles, state) => ({
+                          ...baseStyles,
+                          borderColor: state.isFocused ? "grey" : "red",
+                          boxShadow: "none",
+                          border: state.isFocused ? "none" : "none",
+                          outline: "none",
+                        }),
+                      }}
+                    />
+                  )}
+                />
+                {/* <select
                   className="selectpicker default"
                   data-live-search="true"
                   data-selected-text-format="count"
@@ -49,7 +87,7 @@ const Banner = () => {
                   <option>Grenada</option>
                   <option>Guatemala</option>
                   <option>Iceland</option>
-                </select>
+                </select> */}
               </div>
               <div className="utf-intro-search-button">
                 <button
@@ -59,7 +97,7 @@ const Banner = () => {
                   <i className="icon-material-outline-search"></i> Search Jobs
                 </button>
               </div>
-            </div>
+            </form>
             <p className="utf-trending-silver-item">
               <span className="utf-trending-black-item">
                 Trending Jobs Keywords:
