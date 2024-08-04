@@ -4,10 +4,12 @@ import Select from "react-select";
 import useCategories from "../../../hooks/useCategories";
 import DatePicker from "react-datepicker";
 import useCompany from "../../../hooks/useCompany";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const AddJobs = () => {
   const [categories] = useCategories();
   const [allCompany] = useCompany();
+  const axiosPublic = useAxiosPublic();
 
   const {
     control,
@@ -22,6 +24,7 @@ const AddJobs = () => {
   });
   const companys = allCompany.map((company) => ({
     label: `${company.compName}`,
+    value: `${company.compName}`,
     compName: company.compName,
     _id: company._id,
     compLogoUrl: company.compLogoUrl,
@@ -29,9 +32,39 @@ const AddJobs = () => {
 
   const onSubmit = (data) => {
     const inputData = {
-      ...data,
+      companyInf: {
+        _id: data?.companyInf?._id,
+        compName: data?.companyInf?.compName,
+        compLogoUrl: data?.companyInf?.compLogoUrl,
+      },
+      postedDate: new Date(),
+      title: data?.jobTitle,
+      categories: data?.jobCategories,
+      vacancy: data?.vacancy,
+      qualification: data?.qualification,
+      jobType: data?.jobType,
+      experience: data?.experience,
+      gender: data?.gender,
+      location: data?.location,
+      salaryRange: `$${data?.minSalary} - $${data?.maxSalary}`,
+      image: data?.image,
+      locMapLink: data?.locMapLink,
+      deadline: data?.deadline,
+      skillsAbilities: data?.skillsAbilities,
+      educationQualification: data?.educationQualification,
+      jobsDescription: data?.jobsDescription,
     };
     console.log(inputData);
+
+    axiosPublic
+      .post("/jobs", inputData)
+      .then((res) => {
+        alert("Post Succesfull.");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   };
   return (
     <form
