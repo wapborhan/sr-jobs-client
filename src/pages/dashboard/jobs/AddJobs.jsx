@@ -3,32 +3,36 @@ import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
 import useCategories from "../../../hooks/useCategories";
 import DatePicker from "react-datepicker";
-import { useState } from "react";
+import useCompany from "../../../hooks/useCompany";
 
 const AddJobs = () => {
   const [categories] = useCategories();
-  const [date, setDate] = useState(new Date(Date.now()));
+  const [allCompany] = useCompany();
 
   const {
     control,
     register,
     handleSubmit,
     formState: { errors },
-    setValue,
   } = useForm({
     defaultValues: {
       skillsAbilities: [],
+      deadline: null,
     },
   });
+  const companys = allCompany.map((company) => ({
+    label: `${company.compName}`,
+    compName: company.compName,
+    _id: company._id,
+    compLogoUrl: company.compLogoUrl,
+  }));
 
-  const handleChange = (dateChange) => {
-    setValue("dateOfBirth", dateChange, {
-      shouldDirty: true,
-    });
-    setDate(dateChange);
+  const onSubmit = (data) => {
+    const inputData = {
+      ...data,
+    };
+    console.log(inputData);
   };
-
-  const onSubmit = (data) => console.log(data);
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -44,18 +48,28 @@ const AddJobs = () => {
               <div className="row">
                 <div className="col-xl-6 col-md-6 col-sm-6">
                   <div className="utf-submit-field">
-                    <h5>Job Title </h5>{" "}
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Job Title"
-                      {...register("jobTitle", { required: true })}
+                    <h5>Company</h5>
+                    <Controller
+                      control={control}
+                      name="companyInf"
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          className="w-100 selectct"
+                          options={companys}
+                          name="compName"
+                          styles={{
+                            control: (baseStyles) => ({
+                              ...baseStyles,
+                              boxShadow: "none",
+                              paddingTop: 0,
+                              paddingBottom: 0,
+                              margin: 0,
+                            }),
+                          }}
+                        />
+                      )}
                     />
-                    {errors.jobTitle && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
                   </div>
                 </div>
                 <div className="col-xl-6 col-md-6 col-sm-6">
@@ -68,12 +82,9 @@ const AddJobs = () => {
                         <Select
                           {...field}
                           className="w-100 selectct"
-                          // components={{
-                          //   DropdownIndicator: null,
-                          // }}
                           options={categories}
                           styles={{
-                            control: (baseStyles, state) => ({
+                            control: (baseStyles) => ({
                               ...baseStyles,
                               boxShadow: "none",
                               paddingTop: 0,
@@ -81,10 +92,34 @@ const AddJobs = () => {
                               margin: 0,
                             }),
                           }}
+                          onChange={(selectedOption) => {
+                            field.onChange(
+                              selectedOption ? selectedOption.value : null
+                            );
+                          }}
+                          value={categories.find(
+                            (option) => option.value === field.value
+                          )}
                         />
                       )}
                     />
                     {errors.jobCategories && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </div>
+                <div className="col-xl-6 col-md-6 col-sm-6">
+                  <div className="utf-submit-field">
+                    <h5>Job Title </h5>{" "}
+                    <input
+                      type="text"
+                      className="utf-with-border"
+                      placeholder="Job Title"
+                      {...register("jobTitle", { required: true })}
+                    />
+                    {errors.jobTitle && (
                       <span className="text-danger">
                         This field is required
                       </span>
@@ -121,6 +156,47 @@ const AddJobs = () => {
                         This field is required
                       </span>
                     )}
+                  </div>
+                </div>
+                <div className="col-xl-6 col-md-6 col-sm-12">
+                  <div className="utf-submit-field w-100">
+                    <h5>
+                      Deadline{" "}
+                      <i className="help-icon" data-tippy-placement="top"></i>
+                    </h5>
+                    <div className="keywords-container">
+                      <div className="keyword-input-container w-100">
+                        <Controller
+                          name="deadline"
+                          control={control}
+                          className="w-100"
+                          render={({ field }) => (
+                            <DatePicker
+                              {...field}
+                              className="w-100"
+                              selected={field.value}
+                              placeholderText="Select date"
+                              onChange={(date) => field.onChange(date)}
+                            />
+                          )}
+                        />
+                        {errors.deadline && (
+                          <span className="text-danger">
+                            This field is required
+                          </span>
+                        )}
+                        {/* <input
+                          type="text"
+                          className="keyword-input utf-with-border"
+                          placeholder="CSS, Photoshop, Js, Bootstrap"
+                        />
+                        <button className="keyword-input-button ripple-effect">
+                          <i className="icon-material-outline-add"></i>
+                        </button> */}
+                      </div>
+                      <div className="keywords-list"></div>
+                      <div className="clearfix"></div>
+                    </div>
                   </div>
                 </div>
                 <div className="col-xl-4 col-md-4 col-sm-6">
@@ -216,7 +292,7 @@ const AddJobs = () => {
                         <div className="utf-input-with-icon">
                           <input
                             className="utf-with-border"
-                            type="text"
+                            type="number"
                             placeholder="Min Salary"
                             {...register("minSalary", { required: true })}
                           />
@@ -232,7 +308,7 @@ const AddJobs = () => {
                         <div className="utf-input-with-icon">
                           <input
                             className="utf-with-border"
-                            type="text"
+                            type="number"
                             placeholder="Max Salary"
                             {...register("maxSalary", { required: true })}
                           />
@@ -301,56 +377,18 @@ const AddJobs = () => {
                               }}
                               inputRef={ref}
                               isMulti
-                              onChange={onChange}
-                              value={value}
+                              onChange={(newValue) => {
+                                onChange(newValue.map((item) => item.value));
+                              }}
+                              value={value?.map((val) => ({
+                                value: val,
+                                label: val,
+                              }))}
                               placeholder="Type something and press enter..."
                             />
                           )}
                         />
                         {errors.skillsAbilities && (
-                          <span className="text-danger">
-                            This field is required
-                          </span>
-                        )}
-                        {/* <input
-                          type="text"
-                          className="keyword-input utf-with-border"
-                          placeholder="CSS, Photoshop, Js, Bootstrap"
-                        />
-                        <button className="keyword-input-button ripple-effect">
-                          <i className="icon-material-outline-add"></i>
-                        </button> */}
-                      </div>
-                      <div className="keywords-list"></div>
-                      <div className="clearfix"></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-4 col-md-4 col-sm-12">
-                  <div className="utf-submit-field">
-                    <h5>
-                      Deadline{" "}
-                      <i
-                        className="help-icon"
-                        data-tippy-placement="top"
-                        title="Maximum of 6 Skills"
-                      ></i>
-                    </h5>
-                    <div className="keywords-container">
-                      <div className="keyword-input-container">
-                        <Controller
-                          name="deadline"
-                          control={control}
-                          defaultValue={date}
-                          render={() => (
-                            <DatePicker
-                              selected={date}
-                              placeholderText="Select date"
-                              onChange={handleChange}
-                            />
-                          )}
-                        />
-                        {errors.deadline && (
                           <span className="text-danger">
                             This field is required
                           </span>
