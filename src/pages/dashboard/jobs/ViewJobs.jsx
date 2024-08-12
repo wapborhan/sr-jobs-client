@@ -1,4 +1,50 @@
+import { useLoaderData } from "react-router-dom";
+import JobCard from "../../../components/dashboard/JobCard";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+
 const ViewJobs = () => {
+  const loadJobs = useLoaderData();
+  const [allJobs, setAllJobs] = useState(loadJobs);
+  const [dummyState, setDummyState] = useState(false);
+  const axiosPublic = useAxiosPublic();
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic
+          .delete(`/job/${id}`)
+          .then((res) => {
+            const updatedData = allJobs.filter((item) => item._id !== id);
+            setAllJobs(updatedData);
+            setDummyState(!dummyState); // Force re-render
+            Swal.fire({
+              title: "Deleted!",
+              text: `Your Job "${res?.data?.title}" has been deleted.`,
+              icon: "success",
+            });
+          })
+          .catch((err) => {
+            console.error("Delete failed, error:", err);
+            Swal.fire({
+              title: "Error!",
+              text: "There was a problem deleting the job.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
+
   return (
     <div className="utf-dashboard-content-inner-aera">
       <div className="row">
@@ -9,330 +55,16 @@ const ViewJobs = () => {
             </div>
             <div className="content">
               <ul className="utf-dashboard-box-list">
-                <li>
-                  <div className="utf-job-listing">
-                    <div className="utf-job-listing-details">
-                      <a
-                        href="dashboard-manage-resume.html"
-                        className="utf-job-listing-company-logo"
-                      >
-                        <img src="/images/company_logo_1.png" alt="" />
-                      </a>
-                      <div className="utf-job-listing-description">
-                        <span className="dashboard-status-button utf-status-item green">
-                          Pending Approval
-                        </span>
-                        <h3 className="utf-job-listing-title">
-                          <a href="dashboard-manage-resume.html">
-                            Application Developer & Web Designer
-                          </a>
-                          <span className="dashboard-status-button green">
-                            <i className="icon-material-outline-business-center"></i>{" "}
-                            Full Time
-                          </span>
-                        </h3>
-                        <div className="utf-job-listing-footer">
-                          <ul>
-                            <li>
-                              <i className="icon-feather-briefcase"></i>{" "}
-                              Software Developer
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-date-range"></i>{" "}
-                              10 Jan, 2021
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-account-balance-wallet"></i>{" "}
-                              $35000-$38000
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-location-on"></i>{" "}
-                              2767 Concord Street, Charlotte
-                            </li>
-                          </ul>
-                          <div className="utf-buttons-to-right">
-                            <a
-                              href="#"
-                              className="button green ripple-effect ico"
-                              title="Edit"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-edit"></i>
-                            </a>
-                            <a
-                              href="#"
-                              className="button red ripple-effect ico"
-                              title="Remove"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-trash-2"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="utf-job-listing">
-                    <div className="utf-job-listing-details">
-                      <a
-                        href="dashboard-manage-resume.html"
-                        className="utf-job-listing-company-logo"
-                      >
-                        <img src="/images/company_logo_2.png" alt="" />
-                      </a>
-                      <div className="utf-job-listing-description">
-                        <span className="dashboard-status-button utf-status-item yellow">
-                          Expiring
-                        </span>
-                        <h3 className="utf-job-listing-title">
-                          <a href="dashboard-manage-resume.html">
-                            IT Department Manager & Blogger-Entrepenour
-                          </a>
-                          <span className="dashboard-status-button yellow">
-                            <i className="icon-material-outline-business-center"></i>{" "}
-                            Part Time
-                          </span>
-                        </h3>
-                        <div className="utf-job-listing-footer">
-                          <ul>
-                            <li>
-                              <i className="icon-feather-briefcase"></i>{" "}
-                              Software Developer
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-date-range"></i>{" "}
-                              10 Jan, 2021
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-account-balance-wallet"></i>{" "}
-                              $35000-$38000
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-location-on"></i>{" "}
-                              2767 Concord Street, Charlotte
-                            </li>
-                          </ul>
-                          <div className="utf-buttons-to-right">
-                            <a
-                              href="#"
-                              className="button green ripple-effect ico"
-                              title="Edit"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-edit"></i>
-                            </a>
-                            <a
-                              href="#"
-                              className="button red ripple-effect ico"
-                              title="Remove"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-trash-2"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="utf-job-listing">
-                    <div className="utf-job-listing-details">
-                      <a
-                        href="dashboard-manage-resume.html"
-                        className="utf-job-listing-company-logo"
-                      >
-                        <img src="images/company_logo_3.png" alt="" />
-                      </a>
-                      <div className="utf-job-listing-description">
-                        <span className="dashboard-status-button utf-status-item yellow">
-                          Expiring
-                        </span>
-                        <h3 className="utf-job-listing-title">
-                          <a href="dashboard-manage-resume.html">
-                            Web Designer and Graphic Designer
-                          </a>
-                          <span className="dashboard-status-button green">
-                            <i className="icon-material-outline-business-center"></i>{" "}
-                            Full Time
-                          </span>
-                        </h3>
-                        <div className="utf-job-listing-footer">
-                          <ul>
-                            <li>
-                              <i className="icon-feather-briefcase"></i>{" "}
-                              Software Developer
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-date-range"></i>{" "}
-                              10 Jan, 2021
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-account-balance-wallet"></i>{" "}
-                              $35000-$38000
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-location-on"></i>{" "}
-                              2767 Concord Street, Charlotte
-                            </li>
-                          </ul>
-                          <div className="utf-buttons-to-right">
-                            <a
-                              href="#"
-                              className="button green ripple-effect ico"
-                              title="Edit"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-edit"></i>
-                            </a>
-                            <a
-                              href="#"
-                              className="button red ripple-effect ico"
-                              title="Remove"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-trash-2"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="utf-job-listing">
-                    <div className="utf-job-listing-details">
-                      <a
-                        href="dashboard-manage-resume.html"
-                        className="utf-job-listing-company-logo"
-                      >
-                        <img src="images/company_logo_4.png" alt="" />
-                      </a>
-                      <div className="utf-job-listing-description">
-                        <span className="dashboard-status-button utf-status-item red">
-                          Expired
-                        </span>
-                        <h3 className="utf-job-listing-title">
-                          <a href="dashboard-manage-resume.html">
-                            Head of Developers & MySQL Developers
-                          </a>
-                          <span className="dashboard-status-button green">
-                            <i className="icon-material-outline-business-center"></i>{" "}
-                            Full Time
-                          </span>
-                        </h3>
-                        <div className="utf-job-listing-footer">
-                          <ul>
-                            <li>
-                              <i className="icon-feather-briefcase"></i>{" "}
-                              Software Developer
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-date-range"></i>{" "}
-                              10 Jan, 2021
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-account-balance-wallet"></i>{" "}
-                              $35000-$38000
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-location-on"></i>{" "}
-                              2767 Concord Street, Charlotte
-                            </li>
-                          </ul>
-                          <div className="utf-buttons-to-right">
-                            <a
-                              href="#"
-                              className="button green ripple-effect ico"
-                              title="Edit"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-edit"></i>
-                            </a>
-                            <a
-                              href="#"
-                              className="button red ripple-effect ico"
-                              title="Remove"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-trash-2"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-
-                <li>
-                  <div className="utf-job-listing">
-                    <div className="utf-job-listing-details">
-                      <a
-                        href="dashboard-manage-resume.html"
-                        className="utf-job-listing-company-logo"
-                      >
-                        <img src="images/company_logo_5.png" alt="" />
-                      </a>
-                      <div className="utf-job-listing-description">
-                        <span className="dashboard-status-button utf-status-item red">
-                          Expired
-                        </span>
-                        <h3 className="utf-job-listing-title">
-                          <a href="dashboard-manage-resume.html">
-                            Website Developer & Software Developer
-                          </a>
-                          <span className="dashboard-status-button green">
-                            <i className="icon-material-outline-business-center"></i>{" "}
-                            Full Time
-                          </span>
-                        </h3>
-                        <div className="utf-job-listing-footer">
-                          <ul>
-                            <li>
-                              <i className="icon-feather-briefcase"></i>{" "}
-                              Software Developer
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-date-range"></i>{" "}
-                              10 Jan, 2021
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-account-balance-wallet"></i>{" "}
-                              $35000-$38000
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-location-on"></i>{" "}
-                              2767 Concord Street, Charlotte
-                            </li>
-                          </ul>
-                          <div className="utf-buttons-to-right">
-                            <a
-                              href="#"
-                              className="button green ripple-effect ico"
-                              title="Edit"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-edit"></i>
-                            </a>
-                            <a
-                              href="#"
-                              className="button red ripple-effect ico"
-                              title="Remove"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-trash-2"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
+                {allJobs &&
+                  allJobs.map((job) => {
+                    return (
+                      <JobCard
+                        key={job._id}
+                        job={job}
+                        handleDelete={handleDelete}
+                      />
+                    );
+                  })}
               </ul>
             </div>
           </div>

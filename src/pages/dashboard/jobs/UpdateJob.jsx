@@ -1,20 +1,23 @@
 import { Controller, useForm } from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
-import useCategories from "../../../hooks/useCategories";
+// import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import DatePicker from "react-datepicker";
-import useCompany from "../../../hooks/useCompany";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useLoaderData } from "react-router-dom";
+import useFormData from "../../../hooks/useFormData";
+import { useState } from "react";
 
-const AddJobs = () => {
-  const [categories] = useCategories();
-  const [allCompany] = useCompany();
-  const axiosPublic = useAxiosPublic();
+const UpdateJob = () => {
+  const jodData = useLoaderData();
+  const [categoriesList, jobTypeList, experienceList, genderList] =
+    useFormData();
+  // const axiosPublic = useAxiosPublic();
 
   const {
     control,
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -22,13 +25,40 @@ const AddJobs = () => {
       deadline: null,
     },
   });
-  const companys = allCompany.map((company) => ({
-    label: `${company?.compName}`,
-    value: `${company?.compName}`,
-    compName: company?.compName,
-    _id: company?._id,
-    compLogoUrl: company?.compLogoUrl,
-  }));
+
+  const {
+    title,
+    vacancy,
+    qualification,
+    deadline,
+    location,
+    image,
+    locMapLink,
+    educationQualification,
+    jobsDescription,
+    categories,
+    jobType,
+    experience,
+    gender,
+    salaryRange,
+    skillsAbilities,
+  } = jodData;
+
+  // console.log(jodData);
+
+  const catIndex = categoriesList.findIndex(
+    (category) => category.value === categories
+  );
+  const typeIndex = jobTypeList.findIndex(
+    (category) => category.value === jobType
+  );
+  const experienceIndex = experienceList.findIndex(
+    (category) => category.value === experience
+  );
+  const genderIndex = genderList.findIndex(
+    (category) => category.value === gender
+  );
+  const range = salaryRange.split("-");
 
   const onSubmit = (data) => {
     const inputData = {
@@ -54,18 +84,47 @@ const AddJobs = () => {
       educationQualification: data?.educationQualification,
       jobsDescription: data?.jobsDescription,
     };
-    // console.log(inputData);
+    console.log(inputData);
 
-    axiosPublic
-      .post("/jobs", inputData)
-      .then((res) => {
-        alert("Post Succesfull.");
-        console.log(res);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    // axiosPublic
+    //   .post("/jobs", inputData)
+    //   .then((res) => {
+    //     alert("Post Succesfull.");
+    //     console.log(res);
+    //   })
+    //   .catch((err) => {
+    //     console.error(err);
+    //   });
   };
+
+  const handleChange = (newValue) => {
+    // Update form state with selected values
+    setValue(
+      "skillsAbilities",
+      newValue.map((item) => item.value),
+      { shouldDirty: true }
+    );
+    setValues(
+      newValue.map((item) => {
+        value: item.value;
+        label: item.value;
+      })
+    );
+  };
+
+  const newSkillsAbilities = skillsAbilities.map((val) => ({
+    value: val,
+    label: val,
+  }));
+
+  const orderOptions = (values) => {
+    return values
+      .filter((v) => v.isFixed)
+      .concat(values.filter((v) => !v.isFixed));
+  };
+
+  const [skilsValue, setValues] = useState(orderOptions(newSkillsAbilities));
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -79,30 +138,21 @@ const AddJobs = () => {
             </div>
             <div className="content with-padding padding-bottom-10">
               <div className="row">
-                <div className="col-xl-6 col-md-6 col-sm-6">
+                <div className="col-xl-12 col-md-12 col-sm-12">
                   <div className="utf-submit-field">
-                    <h5>Company</h5>
-                    <Controller
-                      control={control}
-                      name="companyInf"
-                      render={({ field }) => (
-                        <Select
-                          {...field}
-                          className="w-100 selectct"
-                          options={companys}
-                          name="compName"
-                          styles={{
-                            control: (baseStyles) => ({
-                              ...baseStyles,
-                              boxShadow: "none",
-                              paddingTop: 0,
-                              paddingBottom: 0,
-                              margin: 0,
-                            }),
-                          }}
-                        />
-                      )}
+                    <h5>Job Title </h5>{" "}
+                    <input
+                      type="text"
+                      className="utf-with-border"
+                      placeholder="Job Title"
+                      defaultValue={title}
+                      {...register("jobTitle", { required: true })}
                     />
+                    {errors.jobTitle && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
                   </div>
                 </div>
                 <div className="col-xl-6 col-md-6 col-sm-6">
@@ -115,7 +165,8 @@ const AddJobs = () => {
                         <Select
                           {...field}
                           className="w-100 selectct"
-                          options={categories}
+                          options={categoriesList}
+                          defaultValue={categoriesList[catIndex]}
                           styles={{
                             control: (baseStyles) => ({
                               ...baseStyles,
@@ -130,7 +181,7 @@ const AddJobs = () => {
                               selectedOption ? selectedOption.value : null
                             );
                           }}
-                          value={categories.find(
+                          value={categoriesList.find(
                             (option) => option.value === field.value
                           )}
                         />
@@ -145,27 +196,12 @@ const AddJobs = () => {
                 </div>
                 <div className="col-xl-6 col-md-6 col-sm-6">
                   <div className="utf-submit-field">
-                    <h5>Job Title </h5>{" "}
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Job Title"
-                      {...register("jobTitle", { required: true })}
-                    />
-                    {errors.jobTitle && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
                     <h5>Vacancy</h5>
                     <input
                       type="text"
                       className="utf-with-border"
                       placeholder="Vacancy"
+                      defaultValue={vacancy}
                       {...register("vacancy", { required: true })}
                     />
                     {errors.vacancy && (
@@ -182,6 +218,7 @@ const AddJobs = () => {
                       type="text"
                       className="utf-with-border"
                       placeholder="Qualification"
+                      defaultValue={qualification}
                       {...register("qualification", { required: true })}
                     />
                     {errors.qualification && (
@@ -202,12 +239,14 @@ const AddJobs = () => {
                         <Controller
                           name="deadline"
                           control={control}
-                          className="w-100"
+                          // className="w-100"
                           render={({ field }) => (
                             <DatePicker
                               {...field}
-                              className="w-100"
-                              selected={field.value}
+                              className="datePick !w-100"
+                              showIcon
+                              dateFormat="dd-MM-yyyy"
+                              selected={deadline}
                               placeholderText="Select date"
                               onChange={(date) => field.onChange(date)}
                             />
@@ -218,14 +257,6 @@ const AddJobs = () => {
                             This field is required
                           </span>
                         )}
-                        {/* <input
-                          type="text"
-                          className="keyword-input utf-with-border"
-                          placeholder="CSS, Photoshop, Js, Bootstrap"
-                        />
-                        <button className="keyword-input-button ripple-effect">
-                          <i className="icon-material-outline-add"></i>
-                        </button> */}
                       </div>
                       <div className="keywords-list"></div>
                       <div className="clearfix"></div>
@@ -235,18 +266,36 @@ const AddJobs = () => {
                 <div className="col-xl-4 col-md-4 col-sm-6">
                   <div className="utf-submit-field">
                     <h5>Job Type</h5>
-                    <select
-                      className="selectpickers utf-with-border"
-                      data-size="7"
-                      title="Select Job Type"
-                      {...register("jobType", { required: true })}
-                    >
-                      <option>Full Time Jobs</option>
-                      <option>Part Time Jobs</option>
-                      <option>Work Form Home</option>
-                      <option>Internship Jobs</option>
-                      <option>Temporary Jobs</option>
-                    </select>
+                    <Controller
+                      name="jobType"
+                      control={control}
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          className="w-100 selectct"
+                          options={jobTypeList}
+                          defaultValue={jobTypeList[typeIndex]}
+                          styles={{
+                            control: (baseStyles) => ({
+                              ...baseStyles,
+                              boxShadow: "none",
+                              paddingTop: 0,
+                              paddingBottom: 0,
+                              margin: 0,
+                            }),
+                          }}
+                          onChange={(selectedOption) => {
+                            field.onChange(
+                              selectedOption ? selectedOption.value : null
+                            );
+                          }}
+                          value={jobTypeList.find(
+                            (option) => option.value === field.value
+                          )}
+                        />
+                      )}
+                    />
+
                     {errors.jobType && (
                       <span className="text-danger">
                         This field is required
@@ -257,19 +306,13 @@ const AddJobs = () => {
                 <div className="col-xl-4 col-md-4 col-sm-6">
                   <div className="utf-submit-field">
                     <h5>Experience</h5>
-                    <select
-                      className="selectpickers utf-with-border"
-                      data-value="0 To 6 Years"
-                      data-size="7"
-                      title="Select Experience"
-                      {...register("experience", { required: true })}
-                    >
-                      <option>1 Year</option>
-                      <option>1.5 Year</option>
-                      <option>2 Year</option>
-                      <option>2.5 Year</option>
-                      <option>3 Year</option>
-                    </select>{" "}
+                    <Select
+                      className="basic-single selectct"
+                      classNamePrefix="select"
+                      defaultValue={experienceList[experienceIndex]}
+                      name="experience"
+                      options={experienceList}
+                    />
                     {errors.experience && (
                       <span className="text-danger">
                         This field is required
@@ -280,17 +323,13 @@ const AddJobs = () => {
                 <div className="col-xl-4 col-md-4 col-sm-6">
                   <div className="utf-submit-field">
                     <h5>Gender</h5>
-                    <select
-                      className="selectpickers utf-with-border"
-                      data-value="0 To 6 Years"
-                      data-size="7"
-                      title="Select Gender"
-                      {...register("gender", { required: true })}
-                    >
-                      <option>Both</option>
-                      <option>Male</option>
-                      <option>Female</option>
-                    </select>{" "}
+                    <Select
+                      className="basic-single selectct"
+                      classNamePrefix="select"
+                      defaultValue={genderList[genderIndex]}
+                      name="gender"
+                      options={genderList}
+                    />
                     {errors.gender && (
                       <span className="text-danger">
                         This field is required
@@ -306,6 +345,7 @@ const AddJobs = () => {
                         className="utf-with-border"
                         type="text"
                         placeholder="Type Address"
+                        defaultValue={location}
                         {...register("location", { required: true })}
                       />
                       <i className="icon-material-outline-location-on"></i>
@@ -327,6 +367,7 @@ const AddJobs = () => {
                             className="utf-with-border"
                             type="number"
                             placeholder="Min Salary"
+                            defaultValue={range[0].replace(/\$\s*/, "").trim()}
                             {...register("minSalary", { required: true })}
                           />
                           <i className="currency">USD</i>
@@ -343,6 +384,7 @@ const AddJobs = () => {
                             className="utf-with-border"
                             type="number"
                             placeholder="Max Salary"
+                            defaultValue={range[1].replace(/\$\s*/, "").trim()}
                             {...register("maxSalary", { required: true })}
                           />
                           <i className="currency">USD</i>
@@ -363,6 +405,7 @@ const AddJobs = () => {
                       type="text"
                       className="utf-with-border"
                       placeholder="Image Url"
+                      defaultValue={image}
                       {...register("image", { required: true })}
                     />
                     {errors.image && (
@@ -379,6 +422,7 @@ const AddJobs = () => {
                       type="text"
                       className="utf-with-border"
                       placeholder="Google Map Link"
+                      defaultValue={locMapLink}
                       {...register("locMapLink", { required: true })}
                     />
                     {errors.locMapLink && (
@@ -410,30 +454,25 @@ const AddJobs = () => {
                               }}
                               inputRef={ref}
                               isMulti
-                              onChange={(newValue) => {
-                                onChange(newValue.map((item) => item.value));
-                              }}
-                              value={value?.map((val) => ({
-                                value: val,
-                                label: val,
-                              }))}
+                              // onChange={(newValue) => {
+                              //   onChange(newValue.map((item) => item.value));
+                              // }}
+                              onChange={handleChange}
+                              // value={value?.map((val) => ({
+                              //   value: val,
+                              //   label: val,
+                              // }))}
+                              value={skilsValue}
                               placeholder="Type something and press enter..."
                             />
                           )}
                         />
+
                         {errors.skillsAbilities && (
                           <span className="text-danger">
                             This field is required
                           </span>
                         )}
-                        {/* <input
-                          type="text"
-                          className="keyword-input utf-with-border"
-                          placeholder="CSS, Photoshop, Js, Bootstrap"
-                        />
-                        <button className="keyword-input-button ripple-effect">
-                          <i className="icon-material-outline-add"></i>
-                        </button> */}
                       </div>
                       <div className="keywords-list"></div>
                       <div className="clearfix"></div>
@@ -448,6 +487,7 @@ const AddJobs = () => {
                       rows="2"
                       className="utf-with-border"
                       placeholder="Career Description..."
+                      defaultValue={jobsDescription}
                       {...register("jobsDescription", { required: true })}
                     ></textarea>{" "}
                     {errors.jobsDescription && (
@@ -464,6 +504,7 @@ const AddJobs = () => {
                       cols="40"
                       rows="2"
                       className="utf-with-border"
+                      defaultValue={educationQualification}
                       placeholder="Education Description..."
                       {...register("educationQualification", {
                         required: true,
@@ -493,4 +534,4 @@ const AddJobs = () => {
   );
 };
 
-export default AddJobs;
+export default UpdateJob;

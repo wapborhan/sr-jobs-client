@@ -103,6 +103,13 @@ input {
 	transition: all 0.1s ease-in-out;
 }
 
+input.datePick {
+	padding-left: 35px;
+	display: flex;
+	align-items: center;
+	width: 100% !important;
+}
+
 input:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,

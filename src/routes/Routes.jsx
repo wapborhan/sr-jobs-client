@@ -25,6 +25,7 @@ import Company from "../pages/main/company/Company";
 import CompanyDetails from "../pages/main/company/CompanyDetails";
 import AddCompany from "../pages/dashboard/company/AddCompany";
 import ViewCompany from "../pages/dashboard/company/ViewCompany";
+import UpdateJob from "../pages/dashboard/jobs/UpdateJob";
 
 export const router = createBrowserRouter([
   {
@@ -95,6 +96,13 @@ export const router = createBrowserRouter([
       {
         path: "jobs/view",
         element: <ViewJobs />,
+        loader: () => fetch(`${import.meta.env.VITE_BACKEND_URL}/jobs`),
+      },
+      {
+        path: "jobs/edit/:id",
+        element: <UpdateJob />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_BACKEND_URL}/job/${params.id}`),
       },
       {
         path: "company/add",
@@ -108,7 +116,7 @@ export const router = createBrowserRouter([
       //   path: "jobs/update/:id",
       //   element: (
       //     <PrivateRoutes>
-      //       <UpdateJob />
+      // <UpdateJob />
       //     </PrivateRoutes>
       //   ),
       //   loader: ({ params }) =>
