@@ -3,7 +3,7 @@ import JobCardOne from "../components/job/JobCardOne";
 import useJobs from "../hooks/useJobs";
 
 const FeatureJob = () => {
-  const [allJobs] = useJobs();
+  const [allJobs] = useJobs({ jobCat: "all", jobSerch: "" });
   return (
     <div className="section gray padding-top-60 padding-bottom-60">
       <div className="container">
@@ -24,10 +24,10 @@ const FeatureJob = () => {
             <div className="utf-listings-container-part compact-list-layout margin-top-35">
               {/*  */}
               {allJobs.length > 0
-                ? allJobs.slice(0, 4).map((job, idx) => {
+                ? allJobs.slice(0, 5).map((job, idx) => {
                     return <JobCardOne key={idx} job={job} />;
                   })
-                : "Loading..."}
+                : "No Job Found"}
 
               {/*  */}
             </div>

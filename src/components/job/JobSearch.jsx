@@ -17,7 +17,7 @@ const JobSearch = ({ handleSearch }) => {
   };
 
   return (
-    <div className="inner_search_block_section padding-top-0 padding-bottom-40">
+    <div className="inner_search_block_section padding-top-40 padding-bottom-40">
       <div className="container">
         <div className="col-md-12">
           <form
@@ -41,7 +41,8 @@ const JobSearch = ({ handleSearch }) => {
                 render={({ field }) => (
                   <Select
                     {...field}
-                    className="w-100"
+                    className="w-100 curson-pointer"
+                    placeholder="Select Categories"
                     options={categoriesList}
                     onChange={(selectedOption) => {
                       field.onChange(
@@ -58,6 +59,7 @@ const JobSearch = ({ handleSearch }) => {
                         boxShadow: "none",
                         border: state.isFocused ? "none" : "none",
                         outline: "none",
+                        cursor: "pointer",
                       }),
                     }}
                   />
@@ -70,13 +72,6 @@ const JobSearch = ({ handleSearch }) => {
               </button>
             </div>
           </form>
-          <p className="utf-trending-silver-item">
-            <span className="utf-trending-black-item">
-              Trending Jobs Keywords:
-            </span>{" "}
-            Web Designer, Web Developer, Graphic Designer, PHP Developer, IOS
-            Developer, Android Developer
-          </p>
         </div>
       </div>
     </div>

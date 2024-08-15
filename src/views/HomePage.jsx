@@ -11,7 +11,7 @@ const HomePage = () => {
     <>
       <Banner />
       <JobCategories />
-      {/* <FeatureJob /> */}
+      <FeatureJob />
       <AppDownload />
       <HowWorks />
       <Awards />

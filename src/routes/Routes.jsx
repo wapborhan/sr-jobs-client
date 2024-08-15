@@ -5,11 +5,9 @@ import SignUp from "../components/pages/signup/SignUp";
 import SignIn from "../components/pages/signin/SignIn";
 import Blogs from "../components/pages/blogs/Blogs";
 import ErrorPage from "../components/pages/error/ErrorPage";
-import AppliedJob from "../components/pages/applied-job/AppliedJob";
 import PrivateRoutes from "./PrivateRoutes";
 import MyJobs from "../components/pages/my-jobs/MyJobs";
 import UpdateProfile from "../components/pages/user/UpdateProfile";
-import ApplyJobDetails from "../components/pages/applied-job/ApplyJobDetails";
 import About from "../components/pages/about/About";
 import Terms from "../components/pages/terms/Terms";
 import Privacy from "../components/pages/privacy/Privacy";
@@ -34,14 +32,8 @@ export const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
-      {
-        path: "/",
-        element: <HomePage />,
-      },
-      {
-        path: "job",
-        element: <Job />,
-      },
+      { path: "/", element: <HomePage /> },
+      { path: "job", element: <Job /> },
       {
         path: "job/:id",
         element: (
@@ -52,10 +44,7 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_BACKEND_URL}/job/${params.id}`),
       },
-      {
-        path: "company",
-        element: <Company />,
-      },
+      { path: "company", element: <Company /> },
       {
         path: "company/:id",
         element: <CompanyDetails />,
@@ -63,22 +52,10 @@ export const router = createBrowserRouter([
           fetch(`${import.meta.env.VITE_BACKEND_URL}/company/${params.id}`),
       },
 
-      {
-        path: "/blogs",
-        element: <Blogs />,
-      },
-      {
-        path: "/about",
-        element: <About />,
-      },
-      {
-        path: "/terms",
-        element: <Terms />,
-      },
-      {
-        path: "/privacy",
-        element: <Privacy />,
-      },
+      { path: "/blogs", element: <Blogs /> },
+      { path: "/about", element: <About /> },
+      { path: "/terms", element: <Terms /> },
+      { path: "/privacy", element: <Privacy /> },
     ],
   },
   {
@@ -86,14 +63,8 @@ export const router = createBrowserRouter([
     element: <DashLayout />,
     errorElement: <ErrorPage />,
     children: [
-      {
-        path: "home",
-        element: <Dashboard />,
-      },
-      {
-        path: "jobs/add",
-        element: <AddJobs />,
-      },
+      { path: "home", element: <Dashboard /> },
+      { path: "jobs/add", element: <AddJobs /> },
       {
         path: "jobs/view",
         element: <ViewJobs />,
@@ -105,43 +76,8 @@ export const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_BACKEND_URL}/job/${params.id}`),
       },
-      {
-        path: "company/add",
-        element: <AddCompany />,
-      },
-      {
-        path: "company/view",
-        element: <ViewCompany />,
-      },
-      // {
-      //   path: "jobs/update/:id",
-      //   element: (
-      //     <PrivateRoutes>
-      // <UpdateJob />
-      //     </PrivateRoutes>
-      //   ),
-      //   loader: ({ params }) =>
-      //     fetch(`${import.meta.env.BACKEND_URL}/jobs/${params.id}`),
-      // },
-      {
-        path: "applied-jobs",
-        element: (
-          <PrivateRoutes>
-            <AppliedJob />
-          </PrivateRoutes>
-        ),
-        loader: () => fetch(`${import.meta.env.BACKEND_URL}/applied`),
-      },
-      {
-        path: "applied-jobs/:id",
-        element: (
-          <PrivateRoutes>
-            <ApplyJobDetails />
-          </PrivateRoutes>
-        ),
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.BACKEND_URL}/applied/${params.id}`),
-      },
+      { path: "company/add", element: <AddCompany /> },
+      { path: "company/view", element: <ViewCompany /> },
       {
         path: "my-jobs",
         element: (
@@ -150,10 +86,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
-      {
-        path: "bookmarks",
-        element: <BookMarkJobs />,
-      },
+      { path: "bookmarks", element: <BookMarkJobs /> },
       {
         path: "profile/",
         element: <Profile />,
@@ -167,18 +100,9 @@ export const router = createBrowserRouter([
         element: <Users />,
         loader: () => fetch(`${import.meta.env.VITE_BACKEND_URL}/users`),
       },
-      {
-        path: "settings",
-        element: <UpdateProfile />,
-      },
+      { path: "settings", element: <UpdateProfile /> },
     ],
   },
-  {
-    path: "/signin",
-    element: <SignIn />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
+  { path: "/signin", element: <SignIn /> },
+  { path: "/signup", element: <SignUp /> },
 ]);

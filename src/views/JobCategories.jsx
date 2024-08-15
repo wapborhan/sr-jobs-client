@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const JobCategories = () => {
   return (
     <div className="section margin-top-60 margin-bottom-70">
@@ -18,8 +20,8 @@ const JobCategories = () => {
             </div>
           </div>
           <div className="col-xl-3 col-md-6 col-lg-4">
-            <a
-              href="jobs-list-layout-leftside.html"
+            <Link
+              to={`/job?text=&cat="Design, Art & Multimedia"`}
               className="photo-box photo-category-box small"
               data-background-image="images/job-category-01.jpg"
             >
@@ -33,7 +35,7 @@ const JobCategories = () => {
                 <h3>Design, Art & Multimedia</h3>
                 <span>2,612 Jobs</span>
               </div>
-            </a>
+            </Link>
           </div>
           <div className="col-xl-3 col-md-6 col-lg-4">
             <a

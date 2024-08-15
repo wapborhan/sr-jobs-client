@@ -11,6 +11,7 @@ const Job = () => {
   const [jobCat, setJobCat] = useState(
     searchParams.size > 0 ? searchParams.get("cat") : "all"
   );
+  // eslint-disable-next-line no-unused-vars
   const [jobSerch, setJobSerch] = useState(
     searchParams.size > 0 ? searchParams.get("text") : ""
   );
