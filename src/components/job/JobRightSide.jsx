@@ -41,7 +41,7 @@ const JobRightSide = ({ jobs }) => {
           ? jobs.slice(0, 15).map((job, idx) => {
               return <JobCardTwo key={idx} job={job} />;
             })
-          : "Loading"}
+          : "No Job Found"}
       </div>
       {/* <!-- Pagination --> */}
       <div className="clearfix"></div>

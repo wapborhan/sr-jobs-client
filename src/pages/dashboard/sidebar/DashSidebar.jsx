@@ -122,9 +122,14 @@ const DashSidebar = () => {
                     Reviews
                   </a>
                 </li> */}
-                <li className="actives">
+                {/* <li className="actives">
                   <NavLink to="/dashboard/profile">
                     <i className="icon-feather-user"></i> My Profile
+                  </NavLink>
+                </li>{" "} */}
+                <li className="actives">
+                  <NavLink to="/dashboard/users">
+                    <i className="icon-feather-user"></i> Users
                   </NavLink>
                 </li>
                 <li>

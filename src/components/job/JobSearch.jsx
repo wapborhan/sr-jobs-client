@@ -1,8 +1,19 @@
-const JobSearch = ({ searchQuery, handleSearch }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log();
-    handleSearch(e.target.searchData.value);
+import { Controller, useForm } from "react-hook-form";
+import Select from "react-select";
+import useFormData from "../../hooks/useFormData";
+
+const JobSearch = ({ handleSearch }) => {
+  const [categoriesList] = useFormData();
+
+  const { control, register, handleSubmit } = useForm({
+    defaultValues: {
+      searchCategories: {},
+      searchText: "",
+    },
+  });
+  const onSubmit = (data) => {
+    // console.log(data);
+    handleSearch(data);
   };
 
   return (
@@ -11,7 +22,7 @@ const JobSearch = ({ searchQuery, handleSearch }) => {
         <div className="col-md-12">
           <form
             className="utf-intro-banner-search-form-block"
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <div className="utf-intro-search-field-item">
               <i className="icon-feather-search"></i>
@@ -19,29 +30,39 @@ const JobSearch = ({ searchQuery, handleSearch }) => {
                 id="intro-keywords"
                 type="text"
                 placeholder="Search Jobs Keywords..."
-                name="searchData"
-                defaultValue={searchQuery}
+                // defaultValue={searchQuery}
+                {...register("searchText")}
               />
             </div>
             <div className="utf-intro-search-field-item">
-              <select
-                className="selectpicker default"
-                data-live-search="true"
-                // data-selected-text-format="count"
-                // data-size="5"
-                // title="Select Location"
-              >
-                <option>Afghanistan</option>
-                <option>Albania</option>
-                <option>Algeria</option>
-                <option>Brazil</option>
-                <option>Burundi</option>
-                <option>Bulgaria</option>
-                <option>Germany</option>
-                <option>Grenada</option>
-                <option>Guatemala</option>
-                <option>Iceland</option>
-              </select>
+              <Controller
+                name="searchCategories"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    className="w-100"
+                    options={categoriesList}
+                    onChange={(selectedOption) => {
+                      field.onChange(
+                        selectedOption ? selectedOption.value : null
+                      );
+                    }}
+                    value={categoriesList.find(
+                      (option) => option.value === field.value
+                    )}
+                    styles={{
+                      control: (baseStyles, state) => ({
+                        ...baseStyles,
+                        borderColor: state.isFocused ? "grey" : "red",
+                        boxShadow: "none",
+                        border: state.isFocused ? "none" : "none",
+                        outline: "none",
+                      }),
+                    }}
+                  />
+                )}
+              />
             </div>
             <div className="utf-intro-search-button">
               <button type="submit" className="button ripple-effect">

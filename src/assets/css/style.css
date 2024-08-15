@@ -10101,7 +10101,7 @@ screen and (-ms-high-contrast: none) {
 
 ul.main_popular_categories_list {
 	display: block;
-	margin: 0 auto;
+	margin: 15px auto;
 	text-align: center;
 	padding: 0;
 }
@@ -17929,6 +17929,19 @@ Dashboard Invoices List
 /* ----------------------------------
 Submit Forms
 ------------------------------------- */
+.utf-flex-field {
+	margin-bottom: 20px;
+}
+
+.utf-flex-field h5 {
+	font-size: 16px;
+}
+
+.utf-flex-field h4 {
+	font-size: 20px;
+	font-weight: 900;
+}
+
 .utf-submit-field {
 	margin-bottom: 20px;
 	display: block;
@@ -22162,4 +22175,8 @@ a.apply-now-button:hover {
 
 .w-100 {
 	width: 100%;
+}
+
+.text-capitalize {
+	text-transform: capitalize;
 }

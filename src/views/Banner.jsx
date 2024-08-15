@@ -1,16 +1,23 @@
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
+import useFormData from "../hooks/useFormData";
+import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
   document.title = "SR Jobs | Homepage";
+  const navigate = useNavigate();
+  const [categoriesList] = useFormData();
 
-  const { control, handleSubmit } = useForm({
+  const { control, register, handleSubmit } = useForm({
     defaultValues: {
-      firstName: "",
-      select: {},
+      searchCategories: {},
+      categories: "all",
     },
   });
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    console.log(data);
+    navigate(`/job?text=${data?.searchText}&cat=${data?.categories}`);
+  };
 
   return (
     <div
@@ -41,23 +48,28 @@ const Banner = () => {
                 <input
                   id="intro-keywords"
                   type="text"
+                  {...register("searchText")}
                   placeholder="Search Jobs Keywords..."
                 />
                 <i className="icon-feather-search"></i>
               </div>
               <div className="utf-intro-search-field-item">
                 <Controller
-                  name="select"
+                  name="categories"
                   control={control}
                   render={({ field }) => (
                     <Select
                       {...field}
                       className="w-100"
-                      options={[
-                        { value: "chocolate", label: "Chocolate" },
-                        { value: "strawberry", label: "Strawberry" },
-                        { value: "vanilla", label: "Vanilla" },
-                      ]}
+                      options={categoriesList}
+                      onChange={(selectedOption) => {
+                        field.onChange(
+                          selectedOption ? selectedOption.value : null
+                        );
+                      }}
+                      value={categoriesList.find(
+                        (option) => option.value === field.value
+                      )}
                       styles={{
                         control: (baseStyles, state) => ({
                           ...baseStyles,
@@ -70,42 +82,13 @@ const Banner = () => {
                     />
                   )}
                 />
-                {/* <select
-                  className="selectpicker default"
-                  data-live-search="true"
-                  data-selected-text-format="count"
-                  data-size="5"
-                  title="Select Location"
-                >
-                  <option>Afghanistan</option>
-                  <option>Albania</option>
-                  <option>Algeria</option>
-                  <option>Brazil</option>
-                  <option>Burundi</option>
-                  <option>Bulgaria</option>
-                  <option>Germany</option>
-                  <option>Grenada</option>
-                  <option>Guatemala</option>
-                  <option>Iceland</option>
-                </select> */}
               </div>
               <div className="utf-intro-search-button">
-                <button
-                  className="button ripple-effect"
-                  // onclick="window.location.href='jobs-list-layout-leftside.html'"
-                >
+                <button className="button ripple-effect">
                   <i className="icon-material-outline-search"></i> Search Jobs
                 </button>
               </div>
             </form>
-            <p className="utf-trending-silver-item">
-              <span className="utf-trending-black-item">
-                Trending Jobs Keywords:
-              </span>
-              <a href="#">Web Designer</a> <a href="#">Web Developer</a>
-              <a href="#">Graphic Designer</a> <a href="#">PHP Developer</a>
-              <a href="#">IOS Developer</a> <a href="#">Android Developer</a>
-            </p>
           </div>
         </div>
 

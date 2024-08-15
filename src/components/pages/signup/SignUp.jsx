@@ -4,18 +4,33 @@ import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { updateProfile } from "firebase/auth";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const SignUp = () => {
   const { createUser, loginWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
+  const axiosPublic = useAxiosPublic();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const form = e.target;
-    const photourl = form.photourl.value;
-    const name = form.name.value;
+    const username = form.username.value;
     const email = form.email.value;
     const password = form.password.value;
+
+    if (username.length < 5) {
+      toast("Username is less than 5 characters");
+      return;
+    } else if (/\s/.test(username)) {
+      toast("Username contains a space, which is not allowed");
+      return;
+    } else if (/[A-Z]/.test(username)) {
+      toast("Username must not contain uppercase letters");
+      return;
+    } else if (/[^a-z0-9]/.test(username)) {
+      toast("Username contains invalid characters.");
+      return;
+    }
 
     if (password.length < 6) {
       toast("Password is less than 6 characters");
@@ -29,14 +44,36 @@ const SignUp = () => {
       return;
     }
 
-    createUser(email, password, photourl, name)
+    createUser(email, password, username)
       .then((result) => {
         const user = result.user;
 
         updateProfile(user, {
-          displayName: name,
-          photoURL: photourl,
+          displayName: username,
         });
+
+        const userData = {
+          username: username,
+          email: user?.email,
+          name: "",
+          photoUrl: "",
+          accountType: "candidate",
+          companyName: "",
+          address: "",
+          bio: "",
+          socialLinks: [],
+          userType: "user",
+        };
+
+        axiosPublic
+          .post(`/users`, userData)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+
         form.reset();
         navigate("/dashboard/profile");
       })
@@ -90,17 +127,8 @@ const SignUp = () => {
                     <input
                       className="utf-with-border"
                       type="text"
-                      name="photourl"
-                      placeholder="Photo URL"
-                      required
-                    />
-                  </div>
-                  <div className="utf-no-border">
-                    <input
-                      className="utf-with-border"
-                      type="text"
-                      placeholder="Full Name"
-                      name="name"
+                      placeholder="User Name"
+                      name="username"
                       required
                     />
                   </div>

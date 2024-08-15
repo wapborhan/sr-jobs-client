@@ -1,12 +1,16 @@
 import { useContext, useState, useEffect, useRef } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../Provider/AuthProvider";
+import useSingleUser from "../hooks/useSingleUser";
 
 const ProfileNav = () => {
   const [menu, setMenu] = useState(false);
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const menuRef = useRef(null);
+  const [singleUser] = useSingleUser(user?.email);
+
+  console.log(singleUser);
 
   const handleLogout = () => {
     logOut();
@@ -57,9 +61,9 @@ const ProfileNav = () => {
                 {user && (
                   <>
                     <div className="user-avatar status-online">
-                      <img src={user?.photoURL} alt="pic" />
+                      <img src={singleUser?.photoUrl} alt="SR" />
                     </div>
-                    <div className="user-name"> {user?.displayName}</div>
+                    <div className="user-name"> {singleUser?.name}</div>
                   </>
                 )}
               </div>
@@ -67,7 +71,10 @@ const ProfileNav = () => {
             <div className="utf-header-notifications-dropdown-block">
               <ul className="utf-user-menu-dropdown-nav">
                 <li>
-                  <NavLink to="/dashboard/profile" onClick={handleNavLinkClick}>
+                  <NavLink
+                    to={`/dashboard/profile?email=${singleUser?.email}`}
+                    onClick={handleNavLinkClick}
+                  >
                     <i className="icon-feather-user"></i> My Profile
                   </NavLink>
                 </li>

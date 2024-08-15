@@ -3,11 +3,13 @@ import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 
 const SignIn = () => {
   const { loginUser, loginWithGoogle } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const axiosPublic = useAxiosPublic();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,8 +22,13 @@ const SignIn = () => {
         const user = result.user;
 
         form.reset();
+
         if (user) {
-          navigate(location?.state ? location.state : "/dashboard/profile");
+          navigate(
+            location?.state
+              ? location.state
+              : `/dashboard/profile/${user?.displayName}`
+          );
         }
       })
       .catch((error) => {
@@ -34,8 +41,35 @@ const SignIn = () => {
     loginWithGoogle()
       .then((result) => {
         const user = result.user;
+
+        const userData = {
+          username: user?.displayName.toLowerCase().replace(/\s+/g, ""),
+          email: user?.email,
+          name: user?.displayName,
+          photoUrl: user?.photoURL,
+          accountType: "candidate",
+          companyName: "",
+          address: "",
+          bio: "",
+          socialLinks: [],
+          userType: "user",
+        };
+
+        axiosPublic
+          .post(`/users`, userData)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+
         if (user) {
-          navigate(location?.state ? location.state : "/dashboard/profile");
+          navigate(
+            location?.state
+              ? location.state
+              : `/dashboard/profile/${user?.displayName}`
+          );
         }
       })
       .catch((error) => {

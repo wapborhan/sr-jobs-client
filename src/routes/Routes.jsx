@@ -26,6 +26,7 @@ import CompanyDetails from "../pages/main/company/CompanyDetails";
 import AddCompany from "../pages/dashboard/company/AddCompany";
 import ViewCompany from "../pages/dashboard/company/ViewCompany";
 import UpdateJob from "../pages/dashboard/jobs/UpdateJob";
+import Users from "../pages/dashboard/users/Users";
 
 export const router = createBrowserRouter([
   {
@@ -154,8 +155,17 @@ export const router = createBrowserRouter([
         element: <BookMarkJobs />,
       },
       {
-        path: "profile",
+        path: "profile/",
         element: <Profile />,
+        loader: ({ params }) =>
+          fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/user?email=${params.email}`
+          ),
+      },
+      {
+        path: "users",
+        element: <Users />,
+        loader: () => fetch(`${import.meta.env.VITE_BACKEND_URL}/users`),
       },
       {
         path: "settings",
