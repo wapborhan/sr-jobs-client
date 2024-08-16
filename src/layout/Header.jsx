@@ -5,13 +5,17 @@ import ProfileNav from "./ProfileNav";
 const Header = () => {
   return (
     <>
-      <header id="utf-header-container-block">
+      <header id="utf-header-container-block" style={{ position: "fixed" }}>
         <div id="header">
           <div className="container">
             <div className="utf-left-side">
               <div id="logo">
                 <NavLink to="/">
-                  <img src="/images/logo-dark.png" alt="" />
+                  <img
+                    src="/images/logo-dark.png"
+                    alt=""
+                    style={{ height: "40%" }}
+                  />
                 </NavLink>
               </div>
               <NavBar />

@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
-import useFormData from "../hooks/useFormData";
-import CatCard from "../components/job/CatCard";
+import CatCard from "../../../components/job/CatCard";
+import useFormData from "../../../hooks/useFormData";
 
-const JobCategories = () => {
+const Categories = () => {
   const [categoriesList] = useFormData();
 
   return (
@@ -24,22 +24,13 @@ const JobCategories = () => {
             </div>
           </div>
           {categoriesList &&
-            categoriesList.slice(0, 8).map((cat) => {
+            categoriesList.map((cat) => {
               return <CatCard key={cat.label} cat={cat} />;
             })}
-
-          <div className="col-xl-12 utf-centered-button margin-top-10">
-            <Link
-              to="/jobs-categorie"
-              className="button utf-ripple-effect-dark utf-button-sliding-icon margin-top-0"
-            >
-              View All Categories <i className="icon-feather-chevron-right"></i>
-            </Link>
-          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default JobCategories;
+export default Categories;

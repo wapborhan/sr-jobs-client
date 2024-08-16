@@ -1,7 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 import useFormData from "../hooks/useFormData";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Banner = () => {
   document.title = "SR Jobs | Homepage";
@@ -16,14 +16,18 @@ const Banner = () => {
   });
   const onSubmit = (data) => {
     console.log(data);
-    navigate(`/job?text=${data?.searchText}&cat=${data?.categories}`);
+    navigate(`/job?text=${data?.searchText}&cat=all}`);
   };
 
   return (
     <div
       className="intro-banner"
       data-background-image="images/home-background-03.jpg"
-      style={{ backgroundImage: `url("images/home-background-03.jpg")` }}
+      style={{
+        backgroundImage: `url("images/home-background-03.jpg")`,
+        backgroundPosition: "top center",
+        backgroundSize: "cover",
+      }}
     >
       <div className="container">
         <div className="row">
@@ -97,44 +101,44 @@ const Banner = () => {
             <div className="main_popular_categories">
               <ul className="main_popular_categories_list">
                 <li>
-                  <a href="listings_grid_with_sidebar.html">
+                  <Link to="/job?text=&cat=all">
                     <div className="utf_box">
                       <i className="icon-line-awesome-laptop"></i>
                       <p>IT Engineer</p>
                     </div>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="listings_grid_with_sidebar.html">
+                  <Link to="/job?text=&cat=all">
                     <div className="utf_box">
                       <i className="icon-feather-pie-chart"></i>
                       <p>Marketing</p>
                     </div>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="listings_grid_with_sidebar.html">
+                  <Link to="/job?text=&cat=all">
                     <div className="utf_box">
                       <i className="icon-line-awesome-bank"></i>
                       <p>Banking</p>
                     </div>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="listings_grid_with_sidebar.html">
+                  <Link to="/job?text=&cat=all">
                     <div className="utf_box">
                       <i className="icon-line-awesome-medkit"></i>
                       <p>Health Care</p>
                     </div>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="listings_grid_with_sidebar.html">
+                  <Link to="/job?text=&cat=all">
                     <div className="utf_box">
                       <i className="icon-line-awesome-cubes"></i>
                       <p>Design & Art</p>
                     </div>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>

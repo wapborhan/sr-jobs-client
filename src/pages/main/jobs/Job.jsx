@@ -15,7 +15,7 @@ const Job = () => {
   const [jobSerch, setJobSerch] = useState(
     searchParams.size > 0 ? searchParams.get("text") : ""
   );
-  const [allJobs] = useJobs({ jobCat, jobSerch });
+  const [allJobs, isLoading] = useJobs({ jobCat, jobSerch });
   const [filteredJobs, setFilteredJobs] = useState(allJobs);
 
   const handleSearch = (data) => {
@@ -44,7 +44,11 @@ const Job = () => {
             <JobLeftSide />
           </div>
           <div className="col-xl-9 col-lg-8">
-            <JobRightSide jobs={filteredJobs} allJobs={allJobs} />
+            <JobRightSide
+              jobs={filteredJobs}
+              allJobs={allJobs}
+              loading={isLoading}
+            />
           </div>
         </div>
       </div>

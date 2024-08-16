@@ -10,7 +10,7 @@ const ProfileNav = () => {
   const menuRef = useRef(null);
   const [singleUser] = useSingleUser(user?.email);
 
-  console.log(singleUser);
+  // console.log(singleUser);
 
   const handleLogout = () => {
     logOut();

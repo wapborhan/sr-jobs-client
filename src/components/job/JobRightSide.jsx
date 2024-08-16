@@ -1,23 +1,14 @@
-import { usePDF } from "react-to-pdf";
 import JobCardTwo from "./JobCardTwo";
+import Loader from "../loader/Loader";
 
-const JobRightSide = ({ jobs }) => {
-  const { toPDF, targetRef } = usePDF({ filename: "jobs.pdf" });
-
-  console.log(jobs);
+const JobRightSide = ({ jobs, loading }) => {
   return (
     <>
       <div className="utf-inner-search-section-title">
         <h4>
           <i className="icon-material-outline-search"></i> Search Jobs Listing
           Results
-        </h4>{" "}
-        <button
-          className="inline-block px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline"
-          onClick={() => toPDF()}
-        >
-          Download PDF
-        </button>
+        </h4>
       </div>
       <div className="utf-notify-box-aera margin-top-15">
         <div className="utf-switch-container-item">
@@ -33,17 +24,17 @@ const JobRightSide = ({ jobs }) => {
           </select>
         </div>
       </div>
-      <div
-        className="utf-listings-container-part compact-list-layout margin-top-35"
-        ref={targetRef}
-      >
-        {jobs.length > 0
-          ? jobs.slice(0, 15).map((job, idx) => {
-              return <JobCardTwo key={idx} job={job} />;
-            })
-          : "No Job Found"}
+      <div className="utf-listings-container-part compact-list-layout margin-top-35">
+        {loading ? (
+          <Loader />
+        ) : jobs.length > 0 ? (
+          jobs
+            .slice(0, 15)
+            .map((job, idx) => <JobCardTwo key={idx} job={job} />)
+        ) : (
+          "No Job Found."
+        )}
       </div>
-      {/* <!-- Pagination --> */}
       <div className="clearfix"></div>
       <div className="row">
         <div className="col-md-12">

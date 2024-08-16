@@ -11,7 +11,7 @@ const Footer = () => {
                 <Link to="/">
                   <img
                     className="footer-logo"
-                    src="images/footer_logo.png"
+                    src="/images/logo-dark.png"
                     alt=""
                   />
                 </Link>
@@ -28,25 +28,25 @@ const Footer = () => {
                 <h3>Job Categories</h3>
                 <ul>
                   <li>
-                    <a href="jobs-list-layout-leftside.html">
+                    <a href="#">
                       <i className="icon-feather-chevron-right"></i>
                       <span>Developement</span>
                     </a>
                   </li>
                   <li>
-                    <a href="jobs-list-layout-leftside.html">
+                    <a href="#">
                       <i className="icon-feather-chevron-right"></i>
                       <span>Designing</span>
                     </a>
                   </li>
                   <li>
-                    <a href="jobs-list-layout-leftside.html">
+                    <a href="#">
                       <i className="icon-feather-chevron-right"></i>
                       <span>Marketing</span>
                     </a>
                   </li>
                   <li>
-                    <a href="jobs-list-layout-leftside.html">
+                    <a href="#">
                       <i className="icon-feather-chevron-right"></i>
                       <span>Data Analytics</span>
                     </a>
@@ -66,31 +66,31 @@ const Footer = () => {
                 <h3>Job Type</h3>
                 <ul>
                   <li>
-                    <a href="jobs-list-layout-leftside.html">
+                    <a href="#">
                       <i className="icon-feather-chevron-right"></i>
                       <span>Work from Home</span>
                     </a>
                   </li>
                   <li>
-                    <a href="jobs-list-layout-leftside.html">
+                    <a href="#">
                       <i className="icon-feather-chevron-right"></i>
                       <span>Internship Job</span>
                     </a>
                   </li>
                   <li>
-                    <a href="jobs-list-layout-leftside.html">
+                    <a href="#">
                       <i className="icon-feather-chevron-right"></i>
                       <span>Freelancer Job</span>
                     </a>
                   </li>
                   <li>
-                    <a href="jobs-list-layout-leftside.html">
+                    <a href="#">
                       <i className="icon-feather-chevron-right"></i>
                       <span>Part Time Job</span>
                     </a>
                   </li>
                   <li>
-                    <a href="jobs-list-layout-leftside.html">
+                    <a href="#">
                       <i className="icon-feather-chevron-right"></i>
                       <span>Full Time Job</span>
                     </a>
@@ -142,7 +142,7 @@ const Footer = () => {
                 <h3>Quick Links</h3>
                 <ul>
                   <li>
-                    <a href="jobs-list-layout-leftside.html">
+                    <a href="#">
                       <i className="icon-feather-chevron-right"></i>
                       <span>Jobs Listing</span>
                     </a>
@@ -183,7 +183,9 @@ const Footer = () => {
         <div className="container">
           <div className="row">
             <div className="col-xl-12">
-              Copyright &copy; 2021 All Rights Reserved.
+              Copyright &copy; SR Jobs {new Date().getFullYear()} All Rights
+              Reserved. Developed by{" "}
+              <a href="http://www.srdreamlab.com">SR Dream Lab</a>
             </div>
           </div>
         </div>

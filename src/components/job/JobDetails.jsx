@@ -1,10 +1,13 @@
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigation } from "react-router-dom";
 import JobDetailsHead from "./JobDetailsHead";
 import JobDetailsSidebar from "./JobDetailsSidebar";
 import JobDetailsDesc from "./JobDetailsDesc";
 
 const JobDetails = () => {
   const job = useLoaderData();
+  const { state } = useNavigation();
+
+  console.log(state);
 
   return (
     <>

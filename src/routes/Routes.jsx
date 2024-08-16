@@ -25,6 +25,7 @@ import AddCompany from "../pages/dashboard/company/AddCompany";
 import ViewCompany from "../pages/dashboard/company/ViewCompany";
 import UpdateJob from "../pages/dashboard/jobs/UpdateJob";
 import Users from "../pages/dashboard/users/Users";
+import Categories from "../pages/main/categories/Categories";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,7 @@ export const router = createBrowserRouter([
     children: [
       { path: "/", element: <HomePage /> },
       { path: "job", element: <Job /> },
+      { path: "jobs-categorie", element: <Categories /> },
       {
         path: "job/:id",
         element: (

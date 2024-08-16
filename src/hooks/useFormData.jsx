@@ -1,6 +1,15 @@
 const useFormData = () => {
   const categoriesList = [
-    { value: "IT and Computers", label: "IT and Computers" },
+    {
+      value: "IT and Computers",
+      label: "IT and Computers",
+    },
+    {
+      value: "education-training",
+      label: "Education & Training",
+      icon: "icon-line-awesome-graduation-cap",
+      image: "/images/job-category-01.jpg",
+    },
     { value: "Accounting and Finance", label: "Accounting and Finance" },
     { value: "Clerical & Data Entry", label: "Clerical & Data Entry" },
     { value: "Counseling", label: "Counseling" },

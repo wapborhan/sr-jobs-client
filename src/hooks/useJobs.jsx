@@ -4,7 +4,7 @@ import useAxiosPublic from "./useAxiosPublic";
 const useJobs = ({ jobCat, jobSerch }) => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: allJobs = [] } = useQuery({
+  const { data: allJobs = [], isLoading } = useQuery({
     queryKey: ["allJobs", jobCat, jobSerch],
     queryFn: async () => {
       const res = await axiosPublic.get(
@@ -14,7 +14,7 @@ const useJobs = ({ jobCat, jobSerch }) => {
     },
   });
 
-  return [allJobs];
+  return [allJobs, isLoading];
 };
 
 export default useJobs;
