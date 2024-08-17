@@ -8,7 +8,8 @@ const ProfileNav = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
   const menuRef = useRef(null);
-  const [singleUser] = useSingleUser(user?.email);
+  const encodedEmail = btoa(user?.email);
+  const [singleUser] = useSingleUser(encodedEmail);
 
   // console.log(singleUser);
 
@@ -72,7 +73,7 @@ const ProfileNav = () => {
               <ul className="utf-user-menu-dropdown-nav">
                 <li>
                   <NavLink
-                    to={`/dashboard/profile?email=${singleUser?.email}`}
+                    to={`/dashboard/profile?email=${encodedEmail}`}
                     onClick={handleNavLinkClick}
                   >
                     <i className="icon-feather-user"></i> My Profile
@@ -84,21 +85,13 @@ const ProfileNav = () => {
                     Dashboard
                   </NavLink>
                 </li>
+
                 <li>
                   <NavLink
-                    to="/dashboard/jobs/add"
+                    to="/dashboard/profile/update"
                     onClick={handleNavLinkClick}
                   >
-                    <i className="icon-line-awesome-user-secret"></i> Manage
-                    Jobs Post
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink
-                    to="/dashboard/jobs/view"
-                    onClick={handleNavLinkClick}
-                  >
-                    <i className="icon-material-outline-group"></i> Manage Jobs
+                    <i className="icon-feather-edit"></i> Update Profile
                   </NavLink>
                 </li>
                 <li>

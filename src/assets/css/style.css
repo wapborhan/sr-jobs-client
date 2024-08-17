@@ -2470,7 +2470,7 @@ em.mm-counter+a.mm-fullsubopen+span {
 	width: 100%;
 	height: 100%;
 	display: inline-block;
-	background: url(../images/footer-bg.png) no-repeat;
+	background: url(/images/footer-bg.png) no-repeat;
 	background-size: auto;
 	background-size: cover;
 }
@@ -2558,7 +2558,7 @@ em.mm-counter+a.mm-fullsubopen+span {
 }
 
 .utf_cta_area2_block .utf_subscribe_block {
-	background: linear-gradient(rgba(12, 16, 23, 0.85) 100%, rgba(12, 16, 23, 0.85)100%), url("../images/subscribe_bg.jpg");
+	background: linear-gradient(rgba(12, 16, 23, 0.85) 100%, rgba(12, 16, 23, 0.85)100%), url("/images/subscribe_bg.jpg");
 	background-position: center;
 	background-size: cover;
 	background-attachment: fixed;
@@ -3333,7 +3333,7 @@ body #backtotop a {
 }
 
 .utf-quote-box {
-	background-image: url(../images/quote_bg.jpg);
+	background-image: url(/images/quote_bg.jpg);
 	background-size: cover;
 	position: relative;
 	border-radius: 4px;
@@ -3552,7 +3552,7 @@ body #backtotop a {
 	position: relative;
 	padding-top: 60px;
 	padding-bottom: 60px;
-	background-image: url(../images/page-title.jpg);
+	background-image: url(/images/page-title.jpg);
 	background-position: center;
 	background-size: cover;
 	background-attachment: fixed;
@@ -15444,7 +15444,7 @@ body .pac-container {
 }
 
 .callout-bg-1 {
-	background-image: url('../images/callout-1.jpg');
+	background-image: url('/images/callout-1.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -15456,7 +15456,7 @@ body .pac-container {
 }
 
 .callout-bg-2 {
-	background-image: url('../images/callout-2.jpg');
+	background-image: url('/images/callout-2.jpg');
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -16932,7 +16932,7 @@ Dashboard Headline
 
 #dashboard-titlebar {
 	position: relative;
-	background-image: url(../images/page-title.jpg);
+	background-image: url(/images/page-title.jpg);
 	background-position: center;
 	background-size: cover;
 	background-attachment: fixed;

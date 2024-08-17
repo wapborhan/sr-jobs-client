@@ -75,7 +75,8 @@ const SignUp = () => {
           });
 
         form.reset();
-        navigate("/dashboard/profile");
+        const encodedEmail = btoa(user?.email);
+        navigate(`/dashboard/profile?email=${encodedEmail}`);
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -87,8 +88,13 @@ const SignUp = () => {
     loginWithGoogle()
       .then((result) => {
         const user = result.user;
+        const encodedEmail = btoa(user?.email);
         if (user) {
-          navigate(location?.state ? location.state : "/dashboard/profile");
+          navigate(
+            location?.state
+              ? location.state
+              : `/dashboard/profile?email=${encodedEmail}`
+          );
         }
       })
       .catch((error) => {

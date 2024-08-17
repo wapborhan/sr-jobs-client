@@ -16,7 +16,7 @@ const Banner = () => {
   });
   const onSubmit = (data) => {
     console.log(data);
-    navigate(`/job?text=${data?.searchText}&cat=all}`);
+    navigate(`/job?text=${data?.searchText}&cat=all`);
   };
 
   return (

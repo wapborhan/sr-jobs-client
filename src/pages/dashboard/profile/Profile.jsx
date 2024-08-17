@@ -1,8 +1,10 @@
 import { useLoaderData } from "react-router-dom";
 
 const Profile = () => {
-  // const userData = useLoaderData();
-  const userData = [];
+  const userData = useLoaderData();
+  // const userData = [];
+  console.log(userData);
+
   const { name, photoUrl, email, companyName, accountType } = userData;
 
   return (

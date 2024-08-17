@@ -22,12 +22,12 @@ const SignIn = () => {
         const user = result.user;
 
         form.reset();
-
+        const encodedEmail = btoa(user?.email);
         if (user) {
           navigate(
             location?.state
               ? location.state
-              : `/dashboard/profile/${user?.displayName}`
+              : `/dashboard/profile?email=${encodedEmail}`
           );
         }
       })
@@ -64,11 +64,13 @@ const SignIn = () => {
             console.error(err);
           });
 
+        const encodedEmail = btoa(user?.email);
+
         if (user) {
           navigate(
             location?.state
               ? location.state
-              : `/dashboard/profile/${user?.displayName}`
+              : `/dashboard/profile?email=${encodedEmail}`
           );
         }
       })

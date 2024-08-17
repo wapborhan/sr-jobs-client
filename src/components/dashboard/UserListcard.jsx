@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 const UserListcard = ({ user }) => {
-  const { username, name, photoUrl, email, companyName, accountType } = user;
-
+  const { name, photoUrl, email, companyName, accountType } = user;
+  const encodedEmail = btoa(email);
   return (
     <tr>
       <td>
@@ -27,7 +27,10 @@ const UserListcard = ({ user }) => {
         </span>
       </td>
       <td>
-        <Link to={`/dashboard/profile/${username}`} className="button gray">
+        <Link
+          to={`/dashboard/profile?email=${encodedEmail}`}
+          className="button gray"
+        >
           <i className="icon-feather-eye"></i> View Detail
         </Link>
       </td>

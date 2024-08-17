@@ -1,4 +1,4 @@
-import { Link, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import UserListcard from "../../../components/dashboard/UserListcard";
 
 const Users = () => {

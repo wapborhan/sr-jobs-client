@@ -7,7 +7,6 @@ import Blogs from "../components/pages/blogs/Blogs";
 import ErrorPage from "../components/pages/error/ErrorPage";
 import PrivateRoutes from "./PrivateRoutes";
 import MyJobs from "../components/pages/my-jobs/MyJobs";
-import UpdateProfile from "../components/pages/user/UpdateProfile";
 import About from "../components/pages/about/About";
 import Terms from "../components/pages/terms/Terms";
 import Privacy from "../components/pages/privacy/Privacy";
@@ -26,6 +25,7 @@ import ViewCompany from "../pages/dashboard/company/ViewCompany";
 import UpdateJob from "../pages/dashboard/jobs/UpdateJob";
 import Users from "../pages/dashboard/users/Users";
 import Categories from "../pages/main/categories/Categories";
+import UpdateProfile from "../pages/dashboard/profile/UpdateProfile";
 
 export const router = createBrowserRouter([
   {
@@ -92,9 +92,21 @@ export const router = createBrowserRouter([
       {
         path: "profile/",
         element: <Profile />,
-        loader: ({ params }) =>
+        loader: ({ request }) =>
           fetch(
-            `${import.meta.env.VITE_BACKEND_URL}/user?email=${params.email}`
+            `${import.meta.env.VITE_BACKEND_URL}/user?email=${new URL(
+              request.url
+            ).searchParams.get("email")}`
+          ),
+      },
+      {
+        path: "profile/update",
+        element: <UpdateProfile />,
+        loader: ({ request }) =>
+          fetch(
+            `${import.meta.env.VITE_BACKEND_URL}/user?email=${new URL(
+              request.url
+            ).searchParams.get("email")}`
           ),
       },
       {

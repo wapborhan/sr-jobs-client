@@ -1,21 +1,79 @@
-import React from "react";
+import { useContext, useEffect } from "react";
+import useSingleUser from "../../../hooks/useSingleUser";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import { useForm } from "react-hook-form";
 
 const UpdateProfile = () => {
+  const { user } = useContext(AuthContext);
+  const encodedEmail = btoa(user?.email);
+  const [singleUser] = useSingleUser(encodedEmail);
+
+  const { register, handleSubmit, setValue } = useForm();
+
+  const {
+    accountType,
+    address,
+    bio,
+    companyName,
+    email,
+    name,
+    photoUrl,
+    username,
+  } = singleUser;
+
+  const onSubmit = (data) => {
+    const inputData = {
+      username: data?.username,
+      email: data?.email,
+      name: data?.name,
+      photoUrl: data?.photoUrl,
+      accountType: data?.accountType,
+      companyName: data?.companyName,
+      address: data?.address,
+      bio: data?.bio,
+      socialLinks: {
+        facebook: data?.fb,
+        twitter: data?.tw,
+        linkedin: data?.ld,
+        github: data?.gh,
+      },
+      userType: "user",
+    };
+
+    console.log(inputData);
+  };
+
+  useEffect(() => {
+    if (singleUser) {
+      setValue("username", username);
+      setValue("accountType", accountType);
+      setValue("name", name);
+      setValue("email", email);
+      setValue("companyName", companyName);
+      setValue("address", address);
+      setValue("bio", bio);
+      setValue("photoUrl", photoUrl);
+    }
+  }, [singleUser, setValue]);
+
   return (
     <div className="utf-dashboard-content-inner-aera">
       <div className="row">
-        <div className="col-xl-6">
+        <div className="col-xl-12">
           <div className="dashboard-box margin-top-0 margin-bottom-30">
             <div className="headline">
               <h3>My Profile Details</h3>
             </div>
-            <div className="content with-padding padding-bottom-0">
+            <form
+              className="content with-padding padding-bottom-0"
+              onSubmit={handleSubmit(onSubmit)}
+            >
               <div className="row">
                 <div className="col">
                   <div className="row">
                     <div className="col-xl-12">
                       <div className="row">
-                        <div className="col-xl-5 col-md-3 col-sm-4">
+                        <div className="col-xl-4 col-md-3 col-sm-4">
                           <div
                             className="utf-avatar-wrapper"
                             data-tippy-placement="top"
@@ -23,8 +81,8 @@ const UpdateProfile = () => {
                           >
                             <img
                               className="profile-pic"
-                              src="/images/user-avatar-placeholder.png"
-                              alt=""
+                              src={photoUrl}
+                              alt={name}
                             />
                             <div className="upload-button"></div>
                             <input
@@ -34,96 +92,119 @@ const UpdateProfile = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-xl-7 col-md-9 col-sm-8">
+                        <div className="col-xl-8 col-md-6 col-sm-6">
+                          <div className="utf-submit-field">
+                            <h5>Username</h5>
+                            <input
+                              type="text"
+                              className="utf-with-border"
+                              style={{ background: "#1ca77424" }}
+                              defaultValue={username}
+                              {...register("username")}
+                              disabled
+                              title="Not Changeable"
+                            />
+                          </div>
+                          <div className="utf-submit-field">
+                            <h5>Photo Url</h5>
+                            <input
+                              type="text"
+                              className="utf-with-border"
+                              defaultValue={photoUrl}
+                              {...register("photoUrl")}
+                            />
+                          </div>
                           <div className="utf-submit-field">
                             <h5>Account Type</h5>
-                            <div className="utf-account-type">
-                              <div>
-                                <input
-                                  type="radio"
-                                  name="utf-account-type-radio"
-                                  id="freelancer-radio"
-                                  className="utf-account-type-radio"
-                                  checked
-                                />
-                                <label
-                                  htmlFor="freelancer-radio"
-                                  title="Employer"
-                                  data-tippy-placement="top"
-                                  className="utf-ripple-effect-dark"
+                            <div className="utf-account-type d-flex">
+                              <select
+                                {...register("accountType")}
+                                value={accountType}
+                              >
+                                <option
+                                  value="employer"
+                                  // selected={
+                                  //   accountType === "employer" && "selected"
+                                  // }
                                 >
-                                  <i className="icon-material-outline-business-center"></i>{" "}
                                   Employer
-                                </label>
-                              </div>
-                              <div>
-                                <input
-                                  type="radio"
-                                  name="utf-account-type-radio"
-                                  id="employer-radio"
-                                  className="utf-account-type-radio"
-                                />
-                                <label
-                                  htmlFor="employer-radio"
-                                  title="Candidate"
-                                  data-tippy-placement="top"
-                                  className="utf-ripple-effect-dark"
+                                </option>
+                                <option
+                                  value="candidate"
+                                  // selected={
+                                  //   accountType === "candidate" && "selected"
+                                  // }
                                 >
-                                  <i className="icon-material-outline-account-circle"></i>{" "}
                                   Candidate
-                                </label>
-                              </div>
+                                </option>
+                              </select>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="col-xl-12 col-md-6 col-sm-6">
+                    <div className="col-xl-6 col-md-6 col-sm-6">
                       <div className="utf-submit-field">
-                        <h5>Your Name</h5>
+                        <h5>Name</h5>
                         <input
                           type="text"
                           className="utf-with-border"
-                          value="John Williams"
+                          defaultValue={name}
+                          {...register("name")}
                         />
                       </div>
                     </div>
-                    <div className="col-xl-12 col-md-6 col-sm-6">
-                      <div className="utf-submit-field">
-                        <h5>Phone Number</h5>
-                        <input
-                          type="text"
-                          className="utf-with-border"
-                          value="(+22) 1201 123-456"
-                        />
-                      </div>
-                    </div>
-                    <div className="col-xl-12 col-md-6 col-sm-6">
+                    <div className="col-xl-6 col-md-6 col-sm-6">
                       <div className="utf-submit-field">
                         <h5>Email Address</h5>
                         <input
-                          type="text"
+                          type="email"
                           className="utf-with-border"
-                          value="demo@example.com"
+                          defaultValue={email}
+                          {...register("email")}
                         />
                       </div>
                     </div>
+                    <div className="col-xl-6 col-md-6 col-sm-6">
+                      <div className="utf-submit-field">
+                        <h5>Company Name</h5>
+                        <input
+                          type="text"
+                          className="utf-with-border"
+                          defaultValue={companyName}
+                          {...register("companyName")}
+                        />
+                      </div>
+                    </div>
+                    <div className="col-xl-6 col-md-6 col-sm-6">
+                      <div className="utf-submit-field">
+                        <h5>Address</h5>
+                        <input
+                          type="text"
+                          className="utf-with-border"
+                          defaultValue={address}
+                          {...register("address")}
+                        />
+                      </div>
+                    </div>
+
                     <div className="col-xl-12 col-md-12 col-sm-12">
                       <div className="utf-submit-field">
-                        <h5>Notes</h5>
+                        <h5>Bio</h5>
                         <textarea
                           name="notes"
                           className="utf-with-border"
                           cols="20"
                           rows="3"
+                          defaultValue={bio}
+                          {...register("bio")}
                         >
-                          Lorem Ipsum is simply dummy text of printing and type
-                          setting industry Lorem Ipsum been industry standard
-                          dummy text ever since.
+                          {/* {bio} */}
                         </textarea>
                       </div>
                     </div>
-                    <div className="col-xl-12 col-md-6 col-sm-6">
+                    {/* Social */}
+                    <div className="col-xl-6 col-md-6 col-sm-6">
                       <div className="utf-submit-field">
                         <h5>
                           <i className="icon-brand-facebook"></i> Facebook
@@ -131,11 +212,12 @@ const UpdateProfile = () => {
                         <input
                           type="text"
                           className="utf-with-border"
-                          value="https://www.facebook.com/"
+                          defaultValue="https://www.facebook.com/"
+                          {...register("fb")}
                         />
                       </div>
                     </div>
-                    <div className="col-xl-12 col-md-6 col-sm-6">
+                    <div className="col-xl-6 col-md-6 col-sm-6">
                       <div className="utf-submit-field">
                         <h5>
                           <i className="icon-brand-twitter"></i> Twitter
@@ -143,11 +225,12 @@ const UpdateProfile = () => {
                         <input
                           type="text"
                           className="utf-with-border"
-                          value="https://www.twitter.com/"
+                          defaultValue="https://www.twitter.com/"
+                          {...register("tw")}
                         />
                       </div>
                     </div>
-                    <div className="col-xl-12 col-md-6 col-sm-6">
+                    <div className="col-xl-6 col-md-6 col-sm-6">
                       <div className="utf-submit-field">
                         <h5>
                           <i className="icon-brand-linkedin"></i> Linkedin
@@ -155,32 +238,34 @@ const UpdateProfile = () => {
                         <input
                           type="text"
                           className="utf-with-border"
-                          value="https://www.google.com/"
+                          defaultValue="https://www.linkedin.com/in/"
+                          {...register("ld")}
                         />
                       </div>
                     </div>
-                    <div className="col-xl-12 col-md-6 col-sm-6">
+                    <div className="col-xl-6 col-md-6 col-sm-6">
                       <div className="utf-submit-field">
                         <h5>
-                          <i className="icon-brand-google"></i> Google
+                          <i className="icon-brand-github"></i> Github
                         </h5>
                         <input
                           type="text"
                           className="utf-with-border"
-                          value="https://www.linkedin.com/"
+                          defaultValue="https://www.github.com/"
+                          {...register("gh")}
                         />
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <a
-                href="javascript:void(0);"
+              <button
+                type="submit"
                 className="button ripple-effect big margin-top-10 margin-bottom-20"
               >
                 Save Changes
-              </a>
-            </div>
+              </button>
+            </form>
           </div>
         </div>
 
@@ -228,10 +313,7 @@ const UpdateProfile = () => {
                   </div>
                 </div>
               </div>
-              <a
-                href="javascript:void(0);"
-                className="button ripple-effect big margin-top-10"
-              >
+              <a href="#" className="button ripple-effect big margin-top-10">
                 Changes Password
               </a>
             </div>

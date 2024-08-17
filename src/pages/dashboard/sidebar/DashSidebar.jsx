@@ -132,12 +132,6 @@ const DashSidebar = () => {
                     <i className="icon-feather-user"></i> Users
                   </NavLink>
                 </li>
-                <li>
-                  <a href="index-1.html">
-                    <i className="icon-material-outline-power-settings-new"></i>{" "}
-                    Logout
-                  </a>
-                </li>
               </ul>
             </div>
           </div>
