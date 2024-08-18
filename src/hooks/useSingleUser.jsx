@@ -17,7 +17,7 @@ const useSingleUser = (email) => {
     queryKey: ["singleUser"],
     enabled: !!user,
     queryFn: async () => {
-      const res = await axiosPublic.get(`/user?email=${email}`);
+      const res = await axiosPublic.get(`/user?data=${email}`);
       return res.data;
     },
   });

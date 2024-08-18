@@ -27,7 +27,7 @@ const SignIn = () => {
           navigate(
             location?.state
               ? location.state
-              : `/dashboard/profile?email=${encodedEmail}`
+              : `/dashboard/profile?data=${encodedEmail}`
           );
         }
       })
@@ -70,7 +70,7 @@ const SignIn = () => {
           navigate(
             location?.state
               ? location.state
-              : `/dashboard/profile?email=${encodedEmail}`
+              : `/dashboard/profile?data=${encodedEmail}`
           );
         }
       })

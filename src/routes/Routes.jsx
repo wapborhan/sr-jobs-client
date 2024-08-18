@@ -94,9 +94,9 @@ export const router = createBrowserRouter([
         element: <Profile />,
         loader: ({ request }) =>
           fetch(
-            `${import.meta.env.VITE_BACKEND_URL}/user?email=${new URL(
+            `${import.meta.env.VITE_BACKEND_URL}/user?data=${new URL(
               request.url
-            ).searchParams.get("email")}`
+            ).searchParams.get("data")}`
           ),
       },
       {
@@ -104,9 +104,9 @@ export const router = createBrowserRouter([
         element: <UpdateProfile />,
         loader: ({ request }) =>
           fetch(
-            `${import.meta.env.VITE_BACKEND_URL}/user?email=${new URL(
+            `${import.meta.env.VITE_BACKEND_URL}/user?data=${new URL(
               request.url
-            ).searchParams.get("email")}`
+            ).searchParams.get("data")}`
           ),
       },
       {

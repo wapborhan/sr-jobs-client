@@ -76,7 +76,7 @@ const SignUp = () => {
 
         form.reset();
         const encodedEmail = btoa(user?.email);
-        navigate(`/dashboard/profile?email=${encodedEmail}`);
+        navigate(`/dashboard/profile?data=${encodedEmail}`);
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -93,7 +93,7 @@ const SignUp = () => {
           navigate(
             location?.state
               ? location.state
-              : `/dashboard/profile?email=${encodedEmail}`
+              : `/dashboard/profile?data=${encodedEmail}`
           );
         }
       })

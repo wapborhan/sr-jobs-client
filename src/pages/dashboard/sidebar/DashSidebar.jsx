@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import useSingleUser from "../../../hooks/useSingleUser";
 
 const DashSidebar = () => {
   const { user } = useContext(AuthContext);
+  const [singleUser] = useSingleUser(user?.email);
   return (
     <div className="utf-dashboard-sidebar-item ">
       <div className="utf-dashboard-sidebar-item-inner" data-simplebar>
@@ -34,11 +36,17 @@ const DashSidebar = () => {
             <div className="utf-dashboard-nav-inner">
               <div className="dashboard-profile-box">
                 <span className="avatar-img">
-                  <img alt="" src={user && user?.photoURL} className="photo" />
+                  <img
+                    alt=""
+                    src={user && singleUser?.photoUrl}
+                    className="photo"
+                  />
                 </span>
                 <div className="user-profile-text">
-                  <span className="fullname">{user && user?.displayName}</span>
-                  <span className="user-role">Software Engineer</span>
+                  <span className="fullname">{user && singleUser?.name}</span>
+                  <span className="user-role text-capitalize">
+                    {user && singleUser?.accountType}
+                  </span>
                 </div>
               </div>
               <div className="clearfix"></div>

@@ -28,7 +28,7 @@ const UserListcard = ({ user }) => {
       </td>
       <td>
         <Link
-          to={`/dashboard/profile?email=${encodedEmail}`}
+          to={`/dashboard/profile?data=${encodedEmail}`}
           className="button gray"
         >
           <i className="icon-feather-eye"></i> View Detail

@@ -119,24 +119,10 @@ const UpdateProfile = () => {
                             <div className="utf-account-type d-flex">
                               <select
                                 {...register("accountType")}
-                                value={accountType}
+                                defaultValue={accountType}
                               >
-                                <option
-                                  value="employer"
-                                  // selected={
-                                  //   accountType === "employer" && "selected"
-                                  // }
-                                >
-                                  Employer
-                                </option>
-                                <option
-                                  value="candidate"
-                                  // selected={
-                                  //   accountType === "candidate" && "selected"
-                                  // }
-                                >
-                                  Candidate
-                                </option>
+                                <option value="employer">Employer</option>
+                                <option value="candidate">Candidate</option>
                               </select>
                             </div>
                           </div>

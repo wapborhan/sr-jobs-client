@@ -73,7 +73,7 @@ const ProfileNav = () => {
               <ul className="utf-user-menu-dropdown-nav">
                 <li>
                   <NavLink
-                    to={`/dashboard/profile?email=${encodedEmail}`}
+                    to={`/dashboard/profile?data=${encodedEmail}`}
                     onClick={handleNavLinkClick}
                   >
                     <i className="icon-feather-user"></i> My Profile
