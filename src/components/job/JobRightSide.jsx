@@ -1,5 +1,5 @@
+import Loader from "../shared/Loader";
 import JobCardTwo from "./JobCardTwo";
-import Loader from "../loader/Loader";
 
 const JobRightSide = ({ jobs, loading }) => {
   return (

@@ -1,31 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
-import Root from "../layout/Root";
-import HomePage from "../views/HomePage";
-import SignUp from "../components/pages/signup/SignUp";
-import SignIn from "../components/pages/signin/SignIn";
-import Blogs from "../components/pages/blogs/Blogs";
-import ErrorPage from "../components/pages/error/ErrorPage";
+
 import PrivateRoutes from "./PrivateRoutes";
-import MyJobs from "../components/pages/my-jobs/MyJobs";
-import About from "../components/pages/about/About";
-import Terms from "../components/pages/terms/Terms";
-import Privacy from "../components/pages/privacy/Privacy";
-import JobDetails from "../components/job/JobDetails";
+// Layout
+import Root from "../layout/Root";
 import DashLayout from "../layout/DashLayout";
-import Profile from "../pages/dashboard/profile/Profile";
-import Dashboard from "../pages/dashboard/mainDashboard/Dashboard";
-import AddJobs from "../pages/dashboard/jobs/AddJobs";
-import ViewJobs from "../pages/dashboard/jobs/ViewJobs";
-import BookMarkJobs from "../pages/dashboard/jobs/BookMarkJobs";
-import Job from "../pages/main/jobs/Job";
-import Company from "../pages/main/company/Company";
-import CompanyDetails from "../pages/main/company/CompanyDetails";
-import AddCompany from "../pages/dashboard/company/AddCompany";
-import ViewCompany from "../pages/dashboard/company/ViewCompany";
-import UpdateJob from "../pages/dashboard/jobs/UpdateJob";
-import Users from "../pages/dashboard/users/Users";
-import Categories from "../pages/main/categories/Categories";
-import UpdateProfile from "../pages/dashboard/profile/UpdateProfile";
+// Pages
+import ErrorPage from "../components/pages/error/ErrorPage";
+import * as page from "./";
+import * as loadFunc from "./loadFunct";
 
 export const router = createBrowserRouter([
   {
@@ -33,31 +15,29 @@ export const router = createBrowserRouter([
     element: <Root />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/", element: <HomePage /> },
-      { path: "job", element: <Job /> },
-      { path: "jobs-categorie", element: <Categories /> },
+      { path: "/", element: <page.HomePage /> },
+      { path: "job", element: <page.Job /> },
+      { path: "jobs-categorie", element: <page.Categories /> },
       {
         path: "job/:id",
         element: (
           // <PrivateRoutes>
-          <JobDetails />
+          <page.JobDetails />
           // </PrivateRoutes>
         ),
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_BACKEND_URL}/job/${params.id}`),
+        loader: loadFunc.jobDetailsLoader,
       },
-      { path: "company", element: <Company /> },
+      { path: "company", element: <page.Company /> },
       {
         path: "company/:id",
-        element: <CompanyDetails />,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_BACKEND_URL}/company/${params.id}`),
+        element: <page.CompanyDetails />,
+        loader: loadFunc.companyDetailsLoader,
       },
 
-      { path: "/blogs", element: <Blogs /> },
-      { path: "/about", element: <About /> },
-      { path: "/terms", element: <Terms /> },
-      { path: "/privacy", element: <Privacy /> },
+      { path: "/blogs", element: <page.Blogs /> },
+      { path: "/about", element: <page.About /> },
+      { path: "/terms", element: <page.Terms /> },
+      { path: "/privacy", element: <page.Privacy /> },
     ],
   },
   {
@@ -65,58 +45,46 @@ export const router = createBrowserRouter([
     element: <DashLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "home", element: <Dashboard /> },
-      { path: "jobs/add", element: <AddJobs /> },
+      { path: "home", element: <page.Dashboard /> },
+      { path: "jobs/add", element: <page.AddJobs /> },
       {
         path: "jobs/view",
-        element: <ViewJobs />,
-        loader: () => fetch(`${import.meta.env.VITE_BACKEND_URL}/jobs`),
+        element: <page.ViewJobs />,
+        loader: loadFunc.allJobsFetch,
       },
       {
         path: "jobs/edit/:id",
-        element: <UpdateJob />,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_BACKEND_URL}/job/${params.id}`),
+        element: <page.UpdateJob />,
+        loader: loadFunc.jobDetailsLoader,
       },
-      { path: "company/add", element: <AddCompany /> },
-      { path: "company/view", element: <ViewCompany /> },
+      { path: "company/add", element: <page.AddCompany /> },
+      { path: "company/view", element: <page.ViewCompany /> },
       {
         path: "my-jobs",
         element: (
           <PrivateRoutes>
-            <MyJobs />
+            <page.MyJobs />
           </PrivateRoutes>
         ),
       },
-      { path: "bookmarks", element: <BookMarkJobs /> },
+      { path: "bookmarks", element: <page.BookMarkJobs /> },
       {
         path: "profile/",
-        element: <Profile />,
-        loader: ({ request }) =>
-          fetch(
-            `${import.meta.env.VITE_BACKEND_URL}/user?data=${new URL(
-              request.url
-            ).searchParams.get("data")}`
-          ),
+        element: <page.Profile />,
+        loader: loadFunc.profileLoader,
       },
       {
         path: "profile/update",
-        element: <UpdateProfile />,
-        loader: ({ request }) =>
-          fetch(
-            `${import.meta.env.VITE_BACKEND_URL}/user?data=${new URL(
-              request.url
-            ).searchParams.get("data")}`
-          ),
+        element: <page.UpdateProfile />,
+        loader: loadFunc.profileLoader,
       },
       {
         path: "users",
-        element: <Users />,
-        loader: () => fetch(`${import.meta.env.VITE_BACKEND_URL}/users`),
+        element: <page.Users />,
+        loader: loadFunc.allusersFetch,
       },
-      { path: "settings", element: <UpdateProfile /> },
     ],
   },
-  { path: "/signin", element: <SignIn /> },
-  { path: "/signup", element: <SignUp /> },
+  { path: "/signin", element: <page.SignIn /> },
+  { path: "/signup", element: <page.SignUp /> },
 ]);
