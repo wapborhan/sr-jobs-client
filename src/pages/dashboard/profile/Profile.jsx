@@ -1,11 +1,20 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 
 const Profile = () => {
   const userData = useLoaderData();
   // const userData = [];
   console.log(userData);
 
-  const { name, photoUrl, email, companyName, accountType } = userData;
+  const {
+    name,
+    photoUrl,
+    email,
+    companyName,
+    accountType,
+    bio,
+    address,
+    socialLinks,
+  } = userData;
 
   return (
     <div className="utf-dashboard-content-inner-aera">
@@ -49,7 +58,7 @@ const Profile = () => {
                           </div>
                           <div className="utf-flex-field">
                             <h5>Address</h5>
-                            <h4>Bheramara</h4>
+                            <h4>{address}</h4>
                           </div>
                         </div>
                         <div className="col-xl-3">
@@ -78,21 +87,58 @@ const Profile = () => {
                           <div className="col-xl-12 col-md-6 col-sm-6">
                             <div className="utf-flex-field">
                               <h5>
-                                <i className="icon-brand-facebook"></i> Facebook
+                                {socialLinks && (
+                                  <>
+                                    <Link to={socialLinks?.facebook}>
+                                      {" "}
+                                      <i className="icon-brand-facebook"></i>{" "}
+                                      Facebook
+                                    </Link>
+                                  </>
+                                )}
                               </h5>
                             </div>
                           </div>
                           <div className="col-xl-12 col-md-6 col-sm-6">
                             <div className="utf-flex-field">
                               <h5>
-                                <i className="icon-brand-twitter"></i> Twitter
+                                {socialLinks && (
+                                  <>
+                                    <Link to={socialLinks?.twitter}>
+                                      <i className="icon-brand-twitter"></i>{" "}
+                                      Twitter
+                                    </Link>
+                                  </>
+                                )}
                               </h5>
                             </div>
                           </div>
                           <div className="col-xl-12 col-md-6 col-sm-6">
                             <div className="utf-flex-field">
                               <h5>
-                                <i className="icon-brand-linkedin"></i> Linkedin
+                                {" "}
+                                {socialLinks && (
+                                  <>
+                                    <Link to={socialLinks?.linkedin}>
+                                      <i className="icon-brand-linkedin"></i>{" "}
+                                      Linkedin
+                                    </Link>
+                                  </>
+                                )}
+                              </h5>
+                            </div>
+                          </div>
+                          <div className="col-xl-12 col-md-6 col-sm-6">
+                            <div className="utf-flex-field">
+                              <h5>
+                                {socialLinks && (
+                                  <>
+                                    <Link to={socialLinks?.github}>
+                                      <i className="icon-brand-github"></i>{" "}
+                                      Github
+                                    </Link>
+                                  </>
+                                )}
                               </h5>
                             </div>
                           </div>
@@ -102,11 +148,7 @@ const Profile = () => {
                     <div className="col-xl-12 col-md-12 col-sm-12">
                       <div className="utf-flex-field">
                         <h5>Bio</h5>
-                        <h4>
-                          Lorem Ipsum is simply dummy text of printing and type
-                          setting industry Lorem Ipsum been industry standard
-                          dummy text ever since.
-                        </h4>
+                        <h4>{bio}</h4>
                       </div>
                     </div>
                   </div>

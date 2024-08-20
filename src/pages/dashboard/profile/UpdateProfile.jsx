@@ -2,11 +2,14 @@ import { useContext, useEffect } from "react";
 import useSingleUser from "../../../hooks/useSingleUser";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { toast } from "react-toastify";
 
 const UpdateProfile = () => {
   const { user } = useContext(AuthContext);
   const encodedEmail = btoa(user?.email);
   const [singleUser] = useSingleUser(encodedEmail);
+  const axiosPublic = useAxiosPublic();
 
   const { register, handleSubmit, setValue } = useForm();
 
@@ -40,7 +43,19 @@ const UpdateProfile = () => {
       userType: "user",
     };
 
-    console.log(inputData);
+    console.log(typeof inputData.email);
+
+    const encodedEmail = btoa(user?.email);
+    axiosPublic
+      .put(`/user?data=${encodedEmail}`, inputData)
+      .then((res) => {
+        toast(res.data.message);
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err.response);
+        toast(err.response.data.message);
+      });
   };
 
   useEffect(() => {
@@ -54,6 +69,7 @@ const UpdateProfile = () => {
       setValue("bio", bio);
       setValue("photoUrl", photoUrl);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [singleUser, setValue]);
 
   return (
