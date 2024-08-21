@@ -72,6 +72,12 @@ const ProfileNav = () => {
             <div className="utf-header-notifications-dropdown-block">
               <ul className="utf-user-menu-dropdown-nav">
                 <li>
+                  <NavLink to="/dashboard/home" onClick={handleNavLinkClick}>
+                    <i className="icon-material-outline-dashboard"></i>
+                    Dashboard
+                  </NavLink>
+                </li>
+                <li>
                   <NavLink
                     to={`/dashboard/profile?data=${encodedEmail}`}
                     onClick={handleNavLinkClick}
@@ -79,13 +85,6 @@ const ProfileNav = () => {
                     <i className="icon-feather-user"></i> My Profile
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink to="/dashboard/home" onClick={handleNavLinkClick}>
-                    <i className="icon-material-outline-dashboard"></i>
-                    Dashboard
-                  </NavLink>
-                </li>
-
                 <li>
                   <NavLink
                     to="/dashboard/profile/update"

@@ -1,4 +1,9 @@
+import useCompany from "../../../hooks/useCompany";
+import useJobs from "../../../hooks/useJobs";
+
 const Dashboard = () => {
+  const allCompany = useCompany();
+  const allJobs = useJobs({ jobCat: "all", jobSerch: "" });
   return (
     <div className="utf-dashboard-content-inner-aera">
       <div className="notification success closeable">
@@ -14,8 +19,8 @@ const Dashboard = () => {
             <i className="icon-feather-home"></i>
           </div>
           <div className="fun-fact-text">
-            <h4>1502</h4>
-            <span>Companies View</span>
+            <h4>{allCompany.length}</h4>
+            <span>Companies</span>
           </div>
         </div>
         <div className="fun-fact" data-fun-fact-color="#36bd78">
@@ -23,8 +28,8 @@ const Dashboard = () => {
             <i className="icon-feather-briefcase"></i>
           </div>
           <div className="fun-fact-text">
-            <h4>152</h4>
-            <span>Applied Jobs</span>
+            <h4>{allJobs.length}</h4>
+            <span>Jobs</span>
           </div>
         </div>
         <div className="fun-fact" data-fun-fact-color="#efa80f">
