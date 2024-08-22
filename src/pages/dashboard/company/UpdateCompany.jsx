@@ -1,9 +1,27 @@
 import { useForm } from "react-hook-form";
-import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { toast } from "react-toastify";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useLoaderData } from "react-router-dom";
 
-const AddCompany = () => {
+const UpdateCompany = () => {
   const axiosPublic = useAxiosPublic();
+  const companyData = useLoaderData();
+
+  const {
+    compName,
+    compLogoUrl,
+    compAdress,
+    compCategories,
+    compDetails,
+    compEmail,
+    compNumber,
+    compWebsite,
+    social,
+    _id,
+  } = companyData;
+
+  const splitAddress = compAdress.split(",");
+
   const {
     register,
     handleSubmit,
@@ -27,15 +45,17 @@ const AddCompany = () => {
       },
     };
 
+    console.log(inputData);
+
     axiosPublic
-      .post("/company", inputData)
+      .put(`/company/${_id}`, inputData)
       .then((res) => {
         console.log(res);
-        toast("Company Added.");
+        toast("Company Updated.");
       })
       .catch((err) => {
         console.error(err);
-        toast("Company Added Faild.");
+        toast("Company Update Faild.");
       });
   };
 
@@ -60,7 +80,7 @@ const AddCompany = () => {
                     <input
                       type="text"
                       className="utf-with-border"
-                      placeholder="Company Logo Url"
+                      defaultValue={compLogoUrl}
                       {...register("compLogoUrl", { required: true })}
                     />
                     {errors.compLogoUrl && (
@@ -78,7 +98,7 @@ const AddCompany = () => {
                     <input
                       type="text"
                       className="utf-with-border"
-                      placeholder="Company Name"
+                      defaultValue={compName}
                       {...register("compName", { required: true })}
                     />{" "}
                     {errors.compName && (
@@ -97,7 +117,7 @@ const AddCompany = () => {
                     <input
                       type="text"
                       className="utf-with-border"
-                      placeholder="Company Categories"
+                      defaultValue={compCategories}
                       {...register("compCategories", { required: true })}
                     />{" "}
                     {errors.compCategories && (
@@ -116,7 +136,7 @@ const AddCompany = () => {
                     <input
                       type="email"
                       className="utf-with-border"
-                      placeholder="Email Address"
+                      defaultValue={compEmail}
                       {...register("compEmail", { required: true })}
                     />{" "}
                     {errors.compEmail && (
@@ -133,7 +153,7 @@ const AddCompany = () => {
                     <input
                       type="text"
                       className="utf-with-border"
-                      placeholder="Company Website"
+                      defaultValue={compWebsite}
                       {...register("compWebsite", { required: true })}
                     />{" "}
                     {errors.compWebsite && (
@@ -150,7 +170,7 @@ const AddCompany = () => {
                     <input
                       type="text"
                       className="utf-with-border"
-                      placeholder="Phone Number"
+                      defaultValue={compNumber}
                       {...register("compNumber")}
                     />{" "}
                   </div>
@@ -164,7 +184,7 @@ const AddCompany = () => {
                         <input
                           type="text"
                           className="utf-with-border"
-                          placeholder="Zip Code"
+                          defaultValue={splitAddress[0]}
                           {...register("compZip")}
                         />
                       </div>
@@ -172,7 +192,7 @@ const AddCompany = () => {
                         <input
                           type="text"
                           className="utf-with-border"
-                          placeholder="Address"
+                          defaultValue={splitAddress[1]}
                           {...register("compAdress")}
                         />
                       </div>
@@ -180,7 +200,7 @@ const AddCompany = () => {
                         <input
                           type="text"
                           className="utf-with-border"
-                          placeholder="State"
+                          defaultValue={splitAddress[2]}
                           {...register("compState")}
                         />
                       </div>
@@ -188,7 +208,7 @@ const AddCompany = () => {
                         <input
                           type="text"
                           className="utf-with-border"
-                          placeholder="Country *"
+                          defaultValue={splitAddress[3]}
                           {...register("compCountry", { required: true })}
                         />{" "}
                         {errors.compCountry && (
@@ -209,7 +229,7 @@ const AddCompany = () => {
                       cols="40"
                       rows="2"
                       className="utf-with-border"
-                      placeholder="Company Details..."
+                      defaultValue={compDetails}
                       {...register("compDetails")}
                     ></textarea>
                   </div>
@@ -234,7 +254,7 @@ const AddCompany = () => {
                     <input
                       type="text"
                       className="utf-with-border"
-                      placeholder="https://www.facebook.com/"
+                      defaultValue={social?.facebok}
                       {...register("facebook")}
                     />
                   </div>
@@ -247,7 +267,7 @@ const AddCompany = () => {
                     <input
                       type="text"
                       className="utf-with-border"
-                      placeholder="https://twitter.com/"
+                      defaultValue={social?.twitter}
                       {...register("twitter")}
                     />
                   </div>
@@ -260,7 +280,7 @@ const AddCompany = () => {
                     <input
                       type="text"
                       className="utf-with-border"
-                      placeholder="https://www.linkedin.com/"
+                      defaultValue={social?.linkedin}
                       {...register("linkedin")}
                     />
                   </div>
@@ -282,4 +302,4 @@ const AddCompany = () => {
   );
 };
 
-export default AddCompany;
+export default UpdateCompany;

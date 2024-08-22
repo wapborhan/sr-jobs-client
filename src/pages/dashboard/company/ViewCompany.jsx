@@ -1,8 +1,56 @@
+import Swal from "sweetalert2";
 import CompanyCard from "../../../components/dashboard/CompanyCard";
 import useCompany from "../../../hooks/useCompany";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { useEffect, useState } from "react";
+import Loader from "../../../components/shared/Loader";
 
 const ViewCompany = () => {
-  const [allCompany] = useCompany();
+  const [allCompany, isLoading] = useCompany();
+  const [companys, setCompanys] = useState(allCompany);
+  const [dummyState, setDummyState] = useState(false);
+  const axiosPublic = useAxiosPublic();
+
+  useEffect(() => {
+    if (!isLoading) {
+      setCompanys(allCompany);
+    }
+  }, [allCompany, isLoading]);
+
+  const handleDelete = (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosPublic
+          .delete(`/company/${id}`)
+          .then((res) => {
+            const updatedData = allCompany.filter((item) => item._id !== id);
+            setCompanys(updatedData);
+            setDummyState(!dummyState); // Force re-render
+            Swal.fire({
+              title: "Deleted!",
+              text: `Your Company "${res?.data?.compName}" has been deleted.`,
+              icon: "success",
+            });
+          })
+          .catch((err) => {
+            console.error("Delete failed, error:", err);
+            Swal.fire({
+              title: "Error!",
+              text: "There was a problem deleting the Company.",
+              icon: "error",
+            });
+          });
+      }
+    });
+  };
 
   return (
     <div className="utf-dashboard-content-inner-aera">
@@ -14,11 +62,23 @@ const ViewCompany = () => {
             </div>
             <div className="content">
               <ul className="utf-dashboard-box-list">
-                {allCompany.length > 0
-                  ? allCompany.map((company, idx) => {
-                      return <CompanyCard key={idx} company={company} />;
-                    })
-                  : "Loading"}
+                {isLoading ? (
+                  <Loader />
+                ) : companys.length > 0 ? (
+                  companys.map((company, idx) => {
+                    return (
+                      <CompanyCard
+                        key={idx}
+                        company={company}
+                        handleDelete={handleDelete}
+                      />
+                    );
+                  })
+                ) : (
+                  <div style={{ padding: "40px", margin: "0 auto" }}>
+                    No Company Found.
+                  </div>
+                )}
               </ul>
             </div>
           </div>

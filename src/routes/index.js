@@ -23,6 +23,7 @@ import UpdateJob from "../pages/dashboard/jobs/UpdateJob";
 import Users from "../pages/dashboard/users/Users";
 import Categories from "../pages/main/categories/Categories";
 import UpdateProfile from "../pages/dashboard/profile/UpdateProfile";
+import UpdateCompany from "../pages/dashboard/company/UpdateCompany";
 
 export {
   HomePage,
@@ -48,4 +49,5 @@ export {
   Users,
   Categories,
   UpdateProfile,
+  UpdateCompany,
 };

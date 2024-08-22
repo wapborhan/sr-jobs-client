@@ -46,6 +46,13 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { path: "home", element: <page.Dashboard /> },
+      { path: "company/add", element: <page.AddCompany /> },
+      { path: "company/view", element: <page.ViewCompany /> },
+      {
+        path: "company/edit/:id",
+        element: <page.UpdateCompany />,
+        loader: loadFunc.companyDetailsLoader,
+      },
       { path: "jobs/add", element: <page.AddJobs /> },
       {
         path: "jobs/view",
@@ -57,8 +64,12 @@ export const router = createBrowserRouter([
         element: <page.UpdateJob />,
         loader: loadFunc.jobDetailsLoader,
       },
-      { path: "company/add", element: <page.AddCompany /> },
-      { path: "company/view", element: <page.ViewCompany /> },
+      { path: "bookmarks", element: <page.BookMarkJobs /> },
+      {
+        path: "users",
+        element: <page.Users />,
+        loader: loadFunc.allusersFetch,
+      },
       {
         path: "my-jobs",
         element: (
@@ -67,7 +78,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
-      { path: "bookmarks", element: <page.BookMarkJobs /> },
+
       {
         path: "profile/",
         element: <page.Profile />,
@@ -77,11 +88,6 @@ export const router = createBrowserRouter([
         path: "profile/update",
         element: <page.UpdateProfile />,
         loader: loadFunc.profileLoader,
-      },
-      {
-        path: "users",
-        element: <page.Users />,
-        loader: loadFunc.allusersFetch,
       },
     ],
   },

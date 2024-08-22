@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const CompanyCard = ({ company }) => {
+const CompanyCard = ({ company, handleDelete }) => {
   const {
     _id,
     compAdress,
@@ -11,7 +11,7 @@ const CompanyCard = ({ company }) => {
     compWebsite,
   } = company;
 
-  console.log(company);
+  // console.log(company);
   const country = compAdress.split(",").slice(-1)[0];
   return (
     <li>
@@ -46,16 +46,16 @@ const CompanyCard = ({ company }) => {
                 </li>
               </ul>
               <div className="utf-buttons-to-right">
-                <a
-                  href="#"
+                <Link
+                  to={`/dashboard/company/edit/${_id}`}
                   className="button green ripple-effect ico"
                   title="Edit"
                   data-tippy-placement="top"
                 >
                   <i className="icon-feather-edit"></i>
-                </a>
+                </Link>
                 <a
-                  href="#"
+                  onClick={() => handleDelete(_id)}
                   className="button red ripple-effect ico"
                   title="Remove"
                   data-tippy-placement="top"
