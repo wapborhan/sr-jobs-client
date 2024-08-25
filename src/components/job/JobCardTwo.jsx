@@ -1,25 +1,23 @@
 import moment from "moment";
 import { Link } from "react-router-dom";
 
-const JobCardTwo = ({ job }) => {
+const JobCardTwo = ({ job, active, handleBookmark }) => {
   const {
     title,
     salaryRange,
-    postingDate,
-    image,
+    deadline,
     _id,
     location,
     categories,
     jobType,
-    companyId,
+    companyInf,
   } = job;
-  // console.log(job);
   return (
     <div className="utf-job-listing">
       <div className="utf-job-listing-details">
         <div className="utf-job-listing-company-logo">
-          <Link to={`/company/${companyId}`}>
-            <img src={image} alt="" />
+          <Link to={`/company/${companyInf?._id}`}>
+            <img src={companyInf?.compLogoUrl} alt="" />
           </Link>
         </div>
         <div className="utf-job-listing-description">
@@ -48,17 +46,20 @@ const JobCardTwo = ({ job }) => {
                 <i className="icon-material-outline-account-balance-wallet"></i>{" "}
                 {salaryRange}
               </li>
-              <li>
+              {/* <li>
                 <i className="icon-material-outline-location-on"></i> {location}
-              </li>
+              </li> */}
               <li>
                 <i className="icon-material-outline-access-time"></i>{" "}
-                {moment(postingDate).format("dddd, MMMM Do YYYY, ")}
+                {moment(deadline).fromNow()}
               </li>
             </ul>
           </div>
         </div>
-        <span className="bookmark-icon"></span>
+        <span
+          onClick={handleBookmark}
+          className={`bookmark-icon ${active && "bookmarked"} `}
+        ></span>
       </div>
     </div>
   );

@@ -10,8 +10,8 @@ const HowItWorks = () => {
             <div className="section-title">
               <h3 className="title text-3xl font-bold mb-4">How It Works</h3>
               <p className="text-muted mb-6">
-                Post a job to tell us about your project. We'll quickly match
-                you with the right freelancers.
+                Post a job to tell us about your project. {"We'll"} quickly
+                match you with the right freelancers.
               </p>
               <div className="process-menu nav flex-col space-y-5 md:flex-row">
                 <div className="nav-link active" id="v-pills-home-tab">

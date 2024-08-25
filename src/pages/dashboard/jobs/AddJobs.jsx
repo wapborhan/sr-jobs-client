@@ -5,16 +5,23 @@ import useCategories from "../../../hooks/useCategories";
 import DatePicker from "react-datepicker";
 import useCompany from "../../../hooks/useCompany";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { useRef, useState } from "react";
+import { formats, modules } from "../../../components/shared/EditorConfig";
 
 const AddJobs = () => {
+  const quillRef = useRef();
   const [categories] = useCategories();
   const [allCompany] = useCompany();
   const axiosPublic = useAxiosPublic();
+  const [jobsDescription, setJobsDescription] = useState();
 
   const {
     control,
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -30,6 +37,10 @@ const AddJobs = () => {
     compLogoUrl: company?.compLogoUrl,
   }));
 
+  // const ondescription = (value) => {
+  //   setJobsDescription(value);
+  // };
+
   const onSubmit = (data) => {
     const inputData = {
       companyInf: {
@@ -40,21 +51,15 @@ const AddJobs = () => {
       postedDate: new Date(),
       title: data?.jobTitle,
       categories: data?.jobCategories,
-      vacancy: data?.vacancy,
-      qualification: data?.qualification,
       jobType: data?.jobType,
+      workplaceType: data?.workplaceType,
       experience: data?.experience,
       gender: data?.gender,
       location: data?.location,
       salaryRange: `$${data?.minSalary} - $${data?.maxSalary}`,
-      image: data?.image,
-      locMapLink: data?.locMapLink,
       deadline: data?.deadline,
-      skillsAbilities: data?.skillsAbilities,
-      educationQualification: data?.educationQualification,
-      jobsDescription: data?.jobsDescription,
+      jobsDescription: jobsDescription,
     };
-    // console.log(inputData);
 
     axiosPublic
       .post("/jobs", inputData)
@@ -65,6 +70,8 @@ const AddJobs = () => {
       .catch((err) => {
         console.error(err);
       });
+
+    reset();
   };
   return (
     <form
@@ -159,39 +166,28 @@ const AddJobs = () => {
                     )}
                   </div>
                 </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
+
+                <div className="col-xl-3 col-md-4 col-sm-6">
                   <div className="utf-submit-field">
-                    <h5>Vacancy</h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Vacancy"
-                      {...register("vacancy", { required: true })}
-                    />
-                    {errors.vacancy && (
+                    <h5>Workplace type</h5>
+                    <select
+                      className="selectpickers utf-with-border"
+                      data-size="7"
+                      title="Select Workplace Type"
+                      {...register("workplaceType", { required: true })}
+                    >
+                      <option>On Site</option>
+                      <option>Hybrid</option>
+                      <option>Remote</option>
+                    </select>
+                    {errors.workplaceType && (
                       <span className="text-danger">
                         This field is required
                       </span>
                     )}
                   </div>
                 </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Qualification</h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Qualification"
-                      {...register("qualification", { required: true })}
-                    />
-                    {errors.qualification && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-12">
+                <div className="col-xl-3 col-md-4 col-sm-6">
                   <div className="utf-submit-field w-100">
                     <h5>
                       Deadline{" "}
@@ -241,11 +237,12 @@ const AddJobs = () => {
                       title="Select Job Type"
                       {...register("jobType", { required: true })}
                     >
-                      <option>Full Time Jobs</option>
-                      <option>Part Time Jobs</option>
-                      <option>Work Form Home</option>
-                      <option>Internship Jobs</option>
-                      <option>Temporary Jobs</option>
+                      <option>Full-Time</option>
+                      <option>Part-Time</option>
+                      <option>Work Form</option>
+                      <option>Internship</option>
+                      <option>Temporary</option>
+                      <option>Contract</option>
                     </select>
                     {errors.jobType && (
                       <span className="text-danger">
@@ -356,38 +353,7 @@ const AddJobs = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Image Url</h5>{" "}
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Image Url"
-                      {...register("image", { required: true })}
-                    />
-                    {errors.image && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
-                </div>{" "}
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Google Map Link</h5>{" "}
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Google Map Link"
-                      {...register("locMapLink", { required: true })}
-                    />
-                    {errors.locMapLink && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
-                </div>
+
                 <div className="col-xl-8 col-md-8 col-sm-12">
                   <div className="utf-submit-field">
                     <h5>
@@ -443,33 +409,24 @@ const AddJobs = () => {
                 <div className="col-xl-12 col-md-12 col-sm-12">
                   <div className="utf-submit-field">
                     <h5>Career Description</h5>
-                    <textarea
+                    <ReactQuill
+                      ref={quillRef}
+                      theme="snow"
+                      value={jobsDescription}
+                      onChange={(value) => setJobsDescription(value)}
+                      placeholder={"Write something awesome..."}
+                      modules={modules}
+                      formats={formats}
+                      style={{ height: "300px" }}
+                    />
+                    {/* <textarea
                       cols="40"
                       rows="2"
                       className="utf-with-border"
                       placeholder="Career Description..."
                       {...register("jobsDescription", { required: true })}
-                    ></textarea>{" "}
+                    ></textarea>{" "} */}
                     {errors.jobsDescription && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="col-xl-12 col-md-12 col-sm-12">
-                  <div className="utf-submit-field">
-                    <h5>Education Description</h5>
-                    <textarea
-                      cols="40"
-                      rows="2"
-                      className="utf-with-border"
-                      placeholder="Education Description..."
-                      {...register("educationQualification", {
-                        required: true,
-                      })}
-                    ></textarea>{" "}
-                    {errors.educationQualification && (
                       <span className="text-danger">
                         This field is required
                       </span>

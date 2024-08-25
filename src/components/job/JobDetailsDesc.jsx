@@ -18,7 +18,20 @@ const JobDetailsDesc = ({ job }) => {
             Description
           </h3>
         </div>
-        {jobsDescription}
+        <div
+          className="post__description"
+          dangerouslySetInnerHTML={{ __html: jobsDescription }}
+        />
+        <div className="utf-single-page-section-aera">
+          <div className="utf-boxed-list-headline-item">
+            <h3>
+              <i className="icon-material-outline-business-center"></i> Required
+              Skills and Abilities
+            </h3>
+          </div>
+          {skillsAbilities}
+        </div>
+
         <div className="row">
           <div className="col-xl-6 col-lg-6 col-sm-12">
             <a
@@ -71,62 +84,6 @@ const JobDetailsDesc = ({ job }) => {
             </li>
           </ul>
         </div>
-      </div>
-
-      <div className="utf-single-page-section-aera">
-        <div className="utf-boxed-list-headline-item">
-          <h3>
-            <i className="icon-feather-briefcase"></i> Education Qualification
-          </h3>
-        </div>
-        <p>{educationQualification}</p>
-        {/* <ul className="utf-job-deatails-content-item">
-          <li>
-            <i className="icon-feather-arrow-right"></i> Morbi mattis
-            ullamcorper velit. Phasellus gravida semper nisi nullam vel sem.
-          </li>
-          <li>
-            <i className="icon-feather-arrow-right"></i> Phasellus viverra nulla
-            ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
-          </li>
-          <li>
-            <i className="icon-feather-arrow-right"></i> Etiam ultricies nisi
-            vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui. Etiam
-            rhoncus.
-          </li>
-          <li>
-            <i className="icon-feather-arrow-right"></i> Donec mollis hendrerit
-            risus. Phasellus nec sem in justo pellentesque facilisis.
-          </li>
-          <li>
-            <i className="icon-feather-arrow-right"></i> Praesent congue erat at
-            massa. Sed cursus turpis vitae tortor. Donec posuere vulputate arcu.
-          </li>
-          <li>
-            <i className="icon-feather-arrow-right"></i> Donec elit libero,
-            sodales nec, volutpat a, suscipit non, turpis. Nullam sagittis.
-          </li>
-          <li>
-            <i className="icon-feather-arrow-right"></i> Pellentesque auctor
-            neque nec urna. Proin sapien ipsum, porta a, auctor quis, euismod
-            ut, mi.
-          </li>
-          <li>
-            <i className="icon-feather-arrow-right"></i> Pellentesque habitant
-            morbi tristique senectus et netus et malesuada fames ac turpis
-            egestas.
-          </li>
-        </ul> */}
-      </div>
-
-      <div className="utf-single-page-section-aera">
-        <div className="utf-boxed-list-headline-item">
-          <h3>
-            <i className="icon-material-outline-business-center"></i> Required
-            Skills and Abilities
-          </h3>
-        </div>
-        {skillsAbilities}
       </div>
 
       <div className="utf-single-page-section-aera">
