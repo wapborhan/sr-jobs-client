@@ -24,7 +24,21 @@ const profileLoader = async ({ request }) => {
     request.url
   ).searchParams.get("data")}`;
 
-  return fetch(url);
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error("Server is not responding");
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    return {
+      error: true,
+      message: "Server is not working. Please try again later.",
+    };
+  }
 };
 
 export {

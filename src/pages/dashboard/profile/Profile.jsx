@@ -5,6 +5,14 @@ const Profile = () => {
   // const userData = [];
   console.log(userData);
 
+  if (userData.error) {
+    return (
+      <>
+        <h1 style={{ margin: "20px" }}>{userData?.message}</h1>
+      </>
+    );
+  }
+
   const {
     name,
     photoUrl,

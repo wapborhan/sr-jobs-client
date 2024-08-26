@@ -1,12 +1,9 @@
 import { Link } from "react-router-dom";
-import useSingleCompany from "../../hooks/useSingleCompany";
 
 const JobDetailsHead = ({ job }) => {
-  const { companyId, jobType, title, categories, deadline } = job;
-  const [singleCompany] = useSingleCompany(companyId);
+  const { jobType, title, categories, deadline, companyInf, location } = job;
 
-  const { compLogoUrl, compAdress, _id, compName } = singleCompany;
-  const country = compAdress && compAdress.split(",").slice(-1)[0];
+  const country = location && location.split(",").slice(-1)[0];
   return (
     <div
       className="single-page-header"
@@ -18,8 +15,11 @@ const JobDetailsHead = ({ job }) => {
             <div className="utf-single-page-header-inner-aera">
               <div className="utf-left-side">
                 <div className="utf-header-image">
-                  <Link to={`/company/${_id}`}>
-                    <img src={compLogoUrl} alt={compName} />
+                  <Link to={`/company/${companyInf?._id}`}>
+                    <img
+                      src={companyInf?.compLogoUrl}
+                      alt={companyInf?.compName}
+                    />
                   </Link>
                 </div>
                 <div className="utf-header-details">
@@ -29,7 +29,7 @@ const JobDetailsHead = ({ job }) => {
                   </span>
                   <ul>
                     <li>
-                      {compAdress && country}{" "}
+                      {country && country}{" "}
                       <img
                         className="flag"
                         src="/images/flags/af.svg"

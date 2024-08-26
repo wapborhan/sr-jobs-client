@@ -1,17 +1,14 @@
+import { Link } from "react-router-dom";
+import useCompanyWiseJob from "../../hooks/useCompanyWiseJob";
+import JobCardTwo from "./JobCardTwo";
+
 const JobDetailsDesc = ({ job }) => {
-  const {
-    jobsDescription,
-    image,
-    educationQualification,
-    skillsAbilities,
-    locMapLink,
-  } = job;
+  const { jobsDescription, skillsAbilities, locMapLink, companyInf } = job;
+  const [compWiseJob] = useCompanyWiseJob(companyInf?._id);
+
   return (
     <div className="col-xl-8 col-lg-8 utf-content-right-offset-aera">
       <div className="utf-single-page-section-aera">
-        <div className="job-description-image-aera">
-          <img src={image} alt="" />
-        </div>
         <div className="utf-boxed-list-headline-item">
           <h3>
             <i className="icon-material-outline-description"></i> Jobs
@@ -22,15 +19,28 @@ const JobDetailsDesc = ({ job }) => {
           className="post__description"
           dangerouslySetInnerHTML={{ __html: jobsDescription }}
         />
-        <div className="utf-single-page-section-aera">
-          <div className="utf-boxed-list-headline-item">
-            <h3>
-              <i className="icon-material-outline-business-center"></i> Required
-              Skills and Abilities
-            </h3>
+        {skillsAbilities.length > 0 && (
+          <div
+            className="utf-single-page-section-aera"
+            style={{ marginTop: "15px" }}
+          >
+            <div className="utf-boxed-list-headline-item">
+              <h3>
+                <i className="icon-material-outline-business-center"></i> Skills
+                and Abilities
+              </h3>
+            </div>
+            {skillsAbilities.map((skill) => {
+              return (
+                <>
+                  <ul>
+                    <li>{skill}</li>
+                  </ul>
+                </>
+              );
+            })}
           </div>
-          {skillsAbilities}
-        </div>
+        )}
 
         <div className="row">
           <div className="col-xl-6 col-lg-6 col-sm-12">
@@ -43,7 +53,7 @@ const JobDetailsDesc = ({ job }) => {
           </div>
           <div className="col-xl-6 col-lg-6 col-sm-12">
             <a href="#" className="button save-job-btn">
-              Get Job Alerts <i className="icon-feather-chevron-right"></i>
+              Bookmark <i className="icon-feather-chevron-right"></i>
             </a>
           </div>
         </div>
@@ -106,172 +116,26 @@ const JobDetailsDesc = ({ job }) => {
       <div className="utf-boxed-list-item margin-bottom-60">
         <div className="utf-boxed-list-headline-item">
           <h3>
-            <i className="icon-material-outline-business-center"></i> People
-            Also Viewed
+            <i className="icon-material-outline-business-center"></i> More Jobs
+            This Company
           </h3>
         </div>
         <div className="utf-listings-container-part compact-list-layout">
-          <a href="single-job-page.html" className="utf-job-listing">
-            <div className="utf-job-listing-details">
-              <div className="utf-job-listing-company-logo">
-                {" "}
-                <img src="/images/company_logo_1.png" alt="" />{" "}
-              </div>
-              <div className="utf-job-listing-description">
-                <span className="dashboard-status-button utf-job-status-item green">
-                  <i className="icon-material-outline-business-center"></i> Full
-                  Time
-                </span>
-                <h3 className="utf-job-listing-title">
-                  Website Developer & Software Developer
-                </h3>
-                <div className="utf-job-listing-footer">
-                  <ul>
-                    <li>
-                      <i className="icon-feather-briefcase"></i> Software
-                      Developer
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-account-balance-wallet"></i>{" "}
-                      $35000-$38000
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-location-on"></i>{" "}
-                      Drive Potsdam, NY 676
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-access-time"></i> 15
-                      Minute Ago
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <span className="bookmark-icon"></span>
-          </a>
-          <a href="single-job-page.html" className="utf-job-listing">
-            <div className="utf-job-listing-details">
-              <div className="utf-job-listing-company-logo">
-                {" "}
-                <img src="/images/company_logo_2.png" alt="" />{" "}
-              </div>
-              <div className="utf-job-listing-description">
-                <span className="dashboard-status-button utf-job-status-item green">
-                  <i className="icon-material-outline-business-center"></i> Full
-                  Time
-                </span>
-                <h3 className="utf-job-listing-title">
-                  Head of Developers & MySQL Developers
-                </h3>
-                <div className="utf-job-listing-footer">
-                  <ul>
-                    <li>
-                      <i className="icon-feather-briefcase"></i> Software
-                      Developer
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-account-balance-wallet"></i>{" "}
-                      $35000-$38000
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-location-on"></i>{" "}
-                      Drive Potsdam, NY 676
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-access-time"></i> 30
-                      Minute Ago
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <span className="bookmark-icon"></span>
-          </a>
-          <a href="single-job-page.html" className="utf-job-listing">
-            <div className="utf-job-listing-details">
-              <div className="utf-job-listing-company-logo">
-                {" "}
-                <img src="/images/company_logo_3.png" alt="" />{" "}
-              </div>
-              <div className="utf-job-listing-description">
-                <span className="dashboard-status-button utf-job-status-item green">
-                  <i className="icon-material-outline-business-center"></i> Full
-                  Time
-                </span>
-                <h3 className="utf-job-listing-title">
-                  Frontend/Backendd Developer
-                </h3>
-                <div className="utf-job-listing-footer">
-                  <ul>
-                    <li>
-                      <i className="icon-feather-briefcase"></i> Software
-                      Developer
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-account-balance-wallet"></i>{" "}
-                      $35000-$38000
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-location-on"></i>{" "}
-                      Drive Potsdam, NY 676
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-access-time"></i> 55
-                      Minute Ago
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <span className="bookmark-icon"></span>
-          </a>
-          <a href="single-job-page.html" className="utf-job-listing">
-            <div className="utf-job-listing-details">
-              <div className="utf-job-listing-company-logo">
-                {" "}
-                <img src="images/company_logo_4.png" alt="" />{" "}
-              </div>
-              <div className="utf-job-listing-description">
-                <span className="dashboard-status-button utf-job-status-item yellow">
-                  <i className="icon-material-outline-business-center"></i> Part
-                  Time
-                </span>
-                <h3 className="utf-job-listing-title">
-                  Application Developer & Web Designer
-                </h3>
-                <div className="utf-job-listing-footer">
-                  <ul>
-                    <li>
-                      <i className="icon-feather-briefcase"></i> Software
-                      Developer
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-account-balance-wallet"></i>{" "}
-                      $35000-$38000
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-location-on"></i>{" "}
-                      Drive Potsdam, NY 676
-                    </li>
-                    <li>
-                      <i className="icon-material-outline-access-time"></i> 1
-                      Days Ago
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <span className="bookmark-icon"></span>
-          </a>
+          {compWiseJob.slice(0, 3).map((job) => {
+            return <JobCardTwo job={job} key={job?._id} />;
+          })}
         </div>
         <div className="utf-centered-button margin-top-10">
-          {" "}
-          <a
-            href="jobs-list-layout-leftside.html"
-            className="button utf-button-sliding-icon"
-          >
-            View More Jobs <i className="icon-feather-chevron-right"></i>
-          </a>{" "}
+          {compWiseJob.length > 3 ? (
+            <Link
+              to={`/company/${companyInf?._id}`}
+              className="button utf-button-sliding-icon"
+            >
+              View More Jobs <i className="icon-feather-chevron-right"></i>
+            </Link>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </div>
