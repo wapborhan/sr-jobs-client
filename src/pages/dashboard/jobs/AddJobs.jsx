@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
@@ -6,8 +7,6 @@ import DatePicker from "react-datepicker";
 import useCompany from "../../../hooks/useCompany";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import { useRef, useState } from "react";
 import { formats, modules } from "../../../components/shared/EditorConfig";
 
 const AddJobs = () => {
@@ -36,10 +35,6 @@ const AddJobs = () => {
     _id: company?._id,
     compLogoUrl: company?.compLogoUrl,
   }));
-
-  // const ondescription = (value) => {
-  //   setJobsDescription(value);
-  // };
 
   const onSubmit = (data) => {
     const inputData = {
@@ -214,14 +209,6 @@ const AddJobs = () => {
                             This field is required
                           </span>
                         )}
-                        {/* <input
-                          type="text"
-                          className="keyword-input utf-with-border"
-                          placeholder="CSS, Photoshop, Js, Bootstrap"
-                        />
-                        <button className="keyword-input-button ripple-effect">
-                          <i className="icon-material-outline-add"></i>
-                        </button> */}
                       </div>
                       <div className="keywords-list"></div>
                       <div className="clearfix"></div>
@@ -419,13 +406,7 @@ const AddJobs = () => {
                       formats={formats}
                       style={{ height: "300px" }}
                     />
-                    {/* <textarea
-                      cols="40"
-                      rows="2"
-                      className="utf-with-border"
-                      placeholder="Career Description..."
-                      {...register("jobsDescription", { required: true })}
-                    ></textarea>{" "} */}
+
                     {errors.jobsDescription && (
                       <span className="text-danger">
                         This field is required

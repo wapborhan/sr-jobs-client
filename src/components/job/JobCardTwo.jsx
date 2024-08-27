@@ -2,16 +2,8 @@ import moment from "moment";
 import { Link } from "react-router-dom";
 
 const JobCardTwo = ({ job, active, handleBookmark }) => {
-  const {
-    title,
-    salaryRange,
-    deadline,
-    _id,
-    location,
-    categories,
-    jobType,
-    companyInf,
-  } = job;
+  const { title, salaryRange, deadline, _id, categories, jobType, companyInf } =
+    job;
   return (
     <div className="utf-job-listing">
       <div className="utf-job-listing-details">
@@ -29,7 +21,7 @@ const JobCardTwo = ({ job, active, handleBookmark }) => {
             <i className="icon-material-outline-business-center"></i> {jobType}
           </span>
           <h3 className="utf-job-listing-title">
-            <Link to={_id}>{title}</Link>
+            <Link to={`/job/${_id}`}>{title}</Link>
 
             {/* <span
               className="utf-verified-badge"

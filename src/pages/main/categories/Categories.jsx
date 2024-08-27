@@ -1,12 +1,13 @@
-import { Link } from "react-router-dom";
 import CatCard from "../../../components/job/CatCard";
 import useFormData from "../../../hooks/useFormData";
+import TitleBar from "../../../components/shared/TitleBar";
 
 const Categories = () => {
   const [categoriesList] = useFormData();
 
   return (
-    <div className="section margin-top-60 margin-bottom-70">
+    <div className="section margin-top-60s margin-bottom-70">
+      <TitleBar title="All Categories" subtitle="Categories" />
       <div className="container">
         <div className="row">
           <div className="col-xl-12">

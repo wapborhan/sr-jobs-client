@@ -3,7 +3,7 @@ import useCompanyWiseJob from "../../hooks/useCompanyWiseJob";
 import JobCardTwo from "./JobCardTwo";
 
 const JobDetailsDesc = ({ job }) => {
-  const { jobsDescription, skillsAbilities, locMapLink, companyInf } = job;
+  const { jobsDescription, skillsAbilities, companyInf } = job;
   const [compWiseJob] = useCompanyWiseJob(companyInf?._id);
 
   return (
@@ -93,23 +93,6 @@ const JobDetailsDesc = ({ job }) => {
               </a>
             </li>
           </ul>
-        </div>
-      </div>
-
-      <div className="utf-single-page-section-aera">
-        <div className="utf-boxed-list-headline-item">
-          <h3>
-            <i className="icon-material-outline-location-on"></i> Jobs Location
-          </h3>
-        </div>
-        <div id="utf-single-job-map-container-item">
-          {locMapLink}
-          <div
-            id="singleListingMap"
-            data-latitude="48.8566"
-            data-longitude="2.3522"
-            data-map-icon="im im-icon-Hamburger"
-          ></div>
         </div>
       </div>
 

@@ -1,9 +1,14 @@
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import ReactQuill from "react-quill";
+import { formats, modules } from "../../../components/shared/EditorConfig";
 import { toast } from "react-toastify";
 
 const AddCompany = () => {
+  const quillRef = useRef();
   const axiosPublic = useAxiosPublic();
+  const [compDetails, setCompDetails] = useState();
   const {
     register,
     handleSubmit,
@@ -19,7 +24,7 @@ const AddCompany = () => {
       compNumber: data?.compNumber,
       compEmail: data?.compEmail,
       compAdress: `${data?.compZip}, ${data?.compAdress}, ${data?.compState}, ${data?.compCountry}`,
-      compDetails: data?.compDetails,
+      compDetails: compDetails,
       social: {
         facebok: data?.facebook,
         linkedin: data?.linkedin,
@@ -205,13 +210,16 @@ const AddCompany = () => {
                 <div className="col-xl-12 col-md-12 col-sm-12">
                   <div className="utf-submit-field">
                     <h5> Company Details</h5>
-                    <textarea
-                      cols="40"
-                      rows="2"
-                      className="utf-with-border"
-                      placeholder="Company Details..."
-                      {...register("compDetails")}
-                    ></textarea>
+                    <ReactQuill
+                      ref={quillRef}
+                      theme="snow"
+                      value={compDetails}
+                      onChange={(value) => setCompDetails(value)}
+                      placeholder={"Company Details..."}
+                      modules={modules}
+                      formats={formats}
+                      style={{ height: "300px" }}
+                    />
                   </div>
                 </div>
               </div>

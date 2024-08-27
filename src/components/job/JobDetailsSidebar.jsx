@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom";
+import useFormData from "../../hooks/useFormData";
+
 const JobDetailsSidebar = ({ jobs }) => {
   const {
     salaryRange,
@@ -11,9 +14,14 @@ const JobDetailsSidebar = ({ jobs }) => {
     location,
   } = jobs;
 
+  const [categoriesList] = useFormData();
+
   return (
-    <div className="col-xl-4 col-lg-4">
-      <div className="utf-sidebar-container-aera">
+    <div className="col-xl-4 col-lg-4" style={{ position: "relative" }}>
+      <div
+        className="utf-sidebar-container-aera"
+        style={{ position: "sticky", top: "100px" }}
+      >
         <div className="utf-sidebar-widget-item">
           <h3>Offered Salary</h3>
           <div className="utf-right-side">
@@ -75,47 +83,19 @@ const JobDetailsSidebar = ({ jobs }) => {
         </div>
 
         <div className="utf-sidebar-widget-item">
-          <h3>Tags Cloud</h3>
+          <h3>Categories Cloud</h3>
           <div className="task-tags">
-            <a href="#">
-              <span>Business</span>
-            </a>
-            <a href="#">
-              <span>Investment </span>
-            </a>
-            <a href="#">
-              <span>Audit</span>
-            </a>
-            <a href="#">
-              <span>Assurance</span>
-            </a>
-            <a href="#">
-              <span>Consulting </span>
-            </a>
-            <a href="#">
-              <span>Partnership</span>
-            </a>
-            <a href="#">
-              <span>Secutity</span>
-            </a>
-            <a href="#">
-              <span>Camera</span>
-            </a>
+            {categoriesList.map((cat) => {
+              return (
+                <Link to={`/job?text=&cat=${cat?.value}`} key={cat.label}>
+                  <span>{cat?.label}</span>
+                </Link>
+              );
+            })}
           </div>
         </div>
 
-        <div className="utf-sidebar-widget-item">
-          <h3>Bookmark Jobs</h3>
-          <p className="bookmark-text-item">950 People Bookmarked Jobs</p>
-          <button className="bookmark-button margin-bottom-10">
-            {" "}
-            <span className="bookmark-icon"></span>{" "}
-            <span className="bookmark-text">Login to Bookmark Jobs</span>{" "}
-            <span className="bookmarked-text">Login to Bookmark Jobs</span>{" "}
-          </button>
-        </div>
-
-        <div className="utf-sidebar-widget-item">
+        {/* <div className="utf-sidebar-widget-item">
           <h3>Print Job & Report Job</h3>
           <a href="#" className="button dark">
             Print Jobs <i className="icon-line-awesome-print"></i>
@@ -123,13 +103,13 @@ const JobDetailsSidebar = ({ jobs }) => {
           <a href="#" className="button dark">
             Report Jobs <i className="icon-feather-flag"></i>
           </a>
-        </div>
+        </div> */}
 
         <div className="utf-sidebar-widget-item">
           <div className="utf-detail-banner-add-section">
-            <a href="#">
-              <img src="images/banner-add-2.jpg" alt="banner-add-2" />
-            </a>
+            <Link to="https://www.srdreamlab.com" target="__Blank">
+              <img src="/images/banner-add-2.jpg" alt="banner-add-2" />
+            </Link>
           </div>
         </div>
       </div>

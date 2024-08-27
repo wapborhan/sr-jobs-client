@@ -5,6 +5,7 @@ import BackToTop from "../components/shared/BackToTop";
 import ScrollToTop from "../components/shared/ScrollToTop";
 import { useContext } from "react";
 import { AuthContext } from "../Provider/AuthProvider";
+import Subscription from "./Subscription";
 
 const Root = () => {
   const { loading } = useContext(AuthContext);
@@ -27,6 +28,7 @@ const Root = () => {
         <ScrollToTop />
         <Outlet />
         <BackToTop />
+        <Subscription />
         <Footer />
       </div>
     </>

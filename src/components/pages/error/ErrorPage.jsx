@@ -1,4 +1,3 @@
-import React from "react";
 import { NavLink } from "react-router-dom";
 
 const ErrorPage = () => {
@@ -11,13 +10,14 @@ const ErrorPage = () => {
           The page your are looking for does not exist. It might have been moved
           or delete.
         </h3>
-
-        <NavLink
-          to="/"
-          className="bg-[#766df4] uppercase text-white rounded-md inline-block py-2 px-5"
-        >
-          Go back Home
-        </NavLink>
+        <div className="utf-centered-button">
+          <NavLink
+            to="/"
+            className="button ripple-effect big margin-top-10 margin-bottom-20"
+          >
+            Back to Home
+          </NavLink>
+        </div>
       </div>
     </div>
   );

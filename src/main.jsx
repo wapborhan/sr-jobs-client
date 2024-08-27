@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./assets/css/bootstrap-grid.css";
 import "./assets/css/icons.css";
 import "./assets/css/style.css";
+import "react-quill/dist/quill.snow.css";
 import { RouterProvider } from "react-router-dom";
 import { router } from "./routes/Routes.jsx";
 import AuthProvider from "./Provider/AuthProvider.jsx";

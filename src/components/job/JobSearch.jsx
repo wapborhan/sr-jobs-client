@@ -5,6 +5,14 @@ import useFormData from "../../hooks/useFormData";
 const JobSearch = ({ handleSearch }) => {
   const [categoriesList] = useFormData();
 
+  const catList = [
+    {
+      value: "all",
+      label: "ALL Categories",
+    },
+    ...categoriesList,
+  ];
+
   const { control, register, handleSubmit } = useForm({
     defaultValues: {
       searchCategories: {},
@@ -17,7 +25,7 @@ const JobSearch = ({ handleSearch }) => {
   };
 
   return (
-    <div className="inner_search_block_section padding-top-40 padding-bottom-40">
+    <div className="inner_search_block_section padding-top-10 padding-bottom-40">
       <div className="container">
         <div className="col-md-12">
           <form
@@ -43,7 +51,7 @@ const JobSearch = ({ handleSearch }) => {
                     {...field}
                     className="w-100 curson-pointer"
                     placeholder="Select Categories"
-                    options={categoriesList}
+                    options={catList}
                     onChange={(selectedOption) => {
                       field.onChange(
                         selectedOption ? selectedOption.value : null

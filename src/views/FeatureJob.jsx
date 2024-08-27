@@ -31,14 +31,18 @@ const FeatureJob = () => {
 
               {/*  */}
             </div>
-            <div className="utf-centered-button margin-top-10">
-              <Link
-                to="/job"
-                className="button utf-ripple-effect-dark utf-button-sliding-icon margin-top-20"
-              >
-                Browse All Jobs <i className="icon-feather-chevron-right"></i>
-              </Link>
-            </div>
+            {allJobs.length > 4 ? (
+              <div className="utf-centered-button margin-top-10">
+                <Link
+                  to="/job"
+                  className="button utf-ripple-effect-dark utf-button-sliding-icon margin-top-20"
+                >
+                  Browse All Jobs <i className="icon-feather-chevron-right"></i>
+                </Link>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

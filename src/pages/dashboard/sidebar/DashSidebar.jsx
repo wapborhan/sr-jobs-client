@@ -47,8 +47,9 @@ const DashSidebar = () => {
                   <span className="user-role text-capitalize">
                     {user && singleUser?.accountType}
                   </span>
-                </div>
+                </div>{" "}
               </div>
+
               <div className="clearfix"></div>
               <ul>
                 <li>

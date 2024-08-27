@@ -4,6 +4,7 @@ import JobLeftSide from "../../../components/job/JobLeftSide";
 import JobRightSide from "../../../components/job/JobRightSide";
 import useJobs from "../../../hooks/useJobs";
 import { useSearchParams } from "react-router-dom";
+import TitleBar from "../../../components/shared/TitleBar";
 
 const Job = () => {
   document.title = "SR Jobs | All Jobs";
@@ -42,6 +43,7 @@ const Job = () => {
 
   return (
     <>
+      <TitleBar title="All Jobs" subtitle="Jobs" />
       <JobSearch handleSearch={handleSearch} />
       <div className="container">
         <div className="row">

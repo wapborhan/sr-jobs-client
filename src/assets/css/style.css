@@ -3764,12 +3764,12 @@ body #backtotop a {
 	left: 0;
 	z-index: 15;
 	opacity: 1;
-	background: linear-gradient(to right, rgba(48, 48, 48, 0.9) 50%, rgba(48, 48, 48, 0.4) 100%, rgba(48, 48, 48, 0) 95%);
+	background: linear-gradient(to right, rgb(48 48 48 / 60%) 50%, rgba(48, 48, 48, 0.4) 100%, rgba(48, 48, 48, 0) 95%);
 }
 
 .single-page-header:after {
 	z-index: 5;
-	background-color: #f7f7f7;
+	background-color: transparent;
 }
 
 .single-page-header .background-image-container {

@@ -4,12 +4,14 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { useForm } from "react-hook-form";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const UpdateProfile = () => {
   const { user } = useContext(AuthContext);
   const encodedEmail = btoa(user?.email);
   const [singleUser] = useSingleUser(encodedEmail);
   const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
 
   const { register, handleSubmit, setValue } = useForm();
 
@@ -43,14 +45,15 @@ const UpdateProfile = () => {
       userType: "user",
     };
 
-    console.log(typeof inputData.email);
-
     const encodedEmail = btoa(user?.email);
     axiosPublic
       .put(`/user?data=${encodedEmail}`, inputData)
       .then((res) => {
         toast(res.data.message);
         console.log(res);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       })
       .catch((err) => {
         console.error(err.response);
