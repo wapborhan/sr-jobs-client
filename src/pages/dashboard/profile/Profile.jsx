@@ -1,10 +1,13 @@
+import { useContext } from "react";
 import { Link, useLoaderData } from "react-router-dom";
+import useMyJobs from "../../../hooks/useMyJobs";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import JobCardTwo from "../../../components/job/JobCardTwo";
 
 const Profile = () => {
   const userData = useLoaderData();
-  // const userData = [];
-  console.log(userData);
-
+  const { user } = useContext(AuthContext);
+  const [myJobs] = useMyJobs(user?.email);
   if (userData.error) {
     return (
       <>
@@ -169,21 +172,16 @@ const Profile = () => {
         <div className="col-xl-6">
           <div id="test1" className="dashboard-box margin-top-0">
             <div className="headline">
-              <h3>My Comapny Job</h3>
+              <h3>My Job</h3>
             </div>
             <div className="content with-padding">
               <div className="row">
                 <div className="col-xl-12 col-md-6 col-sm-6">
-                  <div className="utf-flex-field">
-                    <h5>Confirm New Password</h5>
-                    <input
-                      type="password"
-                      className="utf-with-border"
-                      title="The password must be at least 8 characters"
-                      data-tippy-placement="top"
-                      placeholder="********"
-                    />
-                  </div>
+                  {myJobs.length > 0
+                    ? myJobs.slice(0, 5).map((job) => {
+                        return <JobCardTwo job={job} key={job?._id} />;
+                      })
+                    : ""}
                 </div>
               </div>
             </div>
@@ -197,16 +195,11 @@ const Profile = () => {
             <div className="content with-padding">
               <div className="row">
                 <div className="col-xl-12 col-md-6 col-sm-6">
-                  <div className="utf-flex-field">
-                    <h5>Confirm New Password</h5>
-                    <input
-                      type="password"
-                      className="utf-with-border"
-                      title="The password must be at least 8 characters"
-                      data-tippy-placement="top"
-                      placeholder="********"
-                    />
-                  </div>
+                  {myJobs.length > 0
+                    ? myJobs.slice(0, 5).map((job) => {
+                        return <JobCardTwo job={job} key={job?._id} />;
+                      })
+                    : ""}
                 </div>
               </div>
             </div>

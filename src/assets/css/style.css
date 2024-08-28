@@ -11550,6 +11550,7 @@ screen and (-ms-high-contrast: none) {
 	background-position: 50%;
 	display: block;
 	position: relative;
+	background-image: url(/images/section-background.jpg);
 }
 
 .utf-photo-section-block:before {

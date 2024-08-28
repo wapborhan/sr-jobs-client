@@ -1,4 +1,7 @@
-const allJobsFetch = () => fetch(`${import.meta.env.VITE_BACKEND_URL}/jobs`);
+const myJobsFetch = () =>
+  fetch(
+    `${import.meta.env.VITE_BACKEND_URL}/my-jobs?email=borhanuddin979@gmail.com`
+  );
 const allusersFetch = () => fetch(`${import.meta.env.VITE_BACKEND_URL}/users`);
 
 const companyDetailsLoader = async ({ params }) => {
@@ -42,7 +45,7 @@ const profileLoader = async ({ request }) => {
 };
 
 export {
-  allJobsFetch,
+  myJobsFetch,
   allusersFetch,
   profileLoader,
   jobDetailsLoader,

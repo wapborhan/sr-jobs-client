@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import useSingleUser from "../../../hooks/useSingleUser";
+import useMyJobs from "../../../hooks/useMyJobs";
 
 const DashSidebar = () => {
   const { user } = useContext(AuthContext);
+  const [myJobs] = useMyJobs(user?.email);
   const [singleUser] = useSingleUser(user?.email);
   return (
     <div className="utf-dashboard-sidebar-item ">
@@ -79,7 +81,7 @@ const DashSidebar = () => {
                 <li>
                   <NavLink to="/dashboard/jobs/view">
                     <i className="icon-material-outline-group"></i> Manage Jobs{" "}
-                    <span className="nav-tag">5</span>
+                    <span className="nav-tag">{myJobs && myJobs.length}</span>
                   </NavLink>
                 </li>
                 {/* <li>

@@ -1,20 +1,28 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
-import useCategories from "../../../hooks/useCategories";
 import DatePicker from "react-datepicker";
 import useCompany from "../../../hooks/useCompany";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import ReactQuill from "react-quill";
 import { formats, modules } from "../../../components/shared/EditorConfig";
+import useSingleUser from "../../../hooks/useSingleUser";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import useFormData from "../../../hooks/useFormData";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddJobs = () => {
   const quillRef = useRef();
-  const [categories] = useCategories();
+  const [categoriesList] = useFormData();
   const [allCompany] = useCompany();
+  const { user } = useContext(AuthContext);
+  const [singleUser] = useSingleUser(btoa(user?.email));
   const axiosPublic = useAxiosPublic();
   const [jobsDescription, setJobsDescription] = useState();
+  const navigate = useNavigate();
+  // console.log(singleUser);
 
   const {
     control,
@@ -38,35 +46,34 @@ const AddJobs = () => {
 
   const onSubmit = (data) => {
     const inputData = {
+      ...data,
       companyInf: {
         _id: data?.companyInf?._id,
         compName: data?.companyInf?.compName,
         compLogoUrl: data?.companyInf?.compLogoUrl,
       },
+      userEmail: singleUser?.email,
       postedDate: new Date(),
-      title: data?.jobTitle,
-      categories: data?.jobCategories,
-      jobType: data?.jobType,
-      workplaceType: data?.workplaceType,
-      experience: data?.experience,
-      gender: data?.gender,
-      location: data?.location,
       salaryRange: `$${data?.minSalary} - $${data?.maxSalary}`,
-      deadline: data?.deadline,
       jobsDescription: jobsDescription,
     };
+
+    console.log(inputData);
 
     axiosPublic
       .post("/jobs", inputData)
       .then((res) => {
-        alert("Post Succesfull.");
-        console.log(res);
+        toast("Post Succesfull.");
+        reset();
+        setTimeout(() => {
+          navigate("/dashboard/jobs/view");
+        }, 2000);
       })
       .catch((err) => {
         console.error(err);
       });
 
-    reset();
+    // reset();
   };
   return (
     <form
@@ -79,7 +86,7 @@ const AddJobs = () => {
             <div className="headline">
               <h3>General Information</h3>
             </div>
-            <div className="content with-padding padding-bottom-10">
+            <div className="content with-padding padding-bottom-40">
               <div className="row">
                 <div className="col-xl-6 col-md-6 col-sm-6">
                   <div className="utf-submit-field">
@@ -111,13 +118,13 @@ const AddJobs = () => {
                   <div className="utf-submit-field">
                     <h5>Job Category</h5>
                     <Controller
-                      name="jobCategories"
+                      name="categories"
                       control={control}
                       render={({ field }) => (
                         <Select
                           {...field}
                           className="w-100 selectct"
-                          options={categories}
+                          options={categoriesList}
                           styles={{
                             control: (baseStyles) => ({
                               ...baseStyles,
@@ -132,7 +139,7 @@ const AddJobs = () => {
                               selectedOption ? selectedOption.value : null
                             );
                           }}
-                          value={categories.find(
+                          value={categoriesList.find(
                             (option) => option.value === field.value
                           )}
                         />
@@ -152,9 +159,9 @@ const AddJobs = () => {
                       type="text"
                       className="utf-with-border"
                       placeholder="Job Title"
-                      {...register("jobTitle", { required: true })}
+                      {...register("title", { required: true })}
                     />
-                    {errors.jobTitle && (
+                    {errors.title && (
                       <span className="text-danger">
                         This field is required
                       </span>
@@ -171,9 +178,9 @@ const AddJobs = () => {
                       title="Select Workplace Type"
                       {...register("workplaceType", { required: true })}
                     >
-                      <option>On Site</option>
-                      <option>Hybrid</option>
-                      <option>Remote</option>
+                      <option value="on-site">On Site</option>
+                      <option value="hybrid">Hybrid</option>
+                      <option value="remote">Remote</option>
                     </select>
                     {errors.workplaceType && (
                       <span className="text-danger">
@@ -224,12 +231,11 @@ const AddJobs = () => {
                       title="Select Job Type"
                       {...register("jobType", { required: true })}
                     >
-                      <option>Full-Time</option>
-                      <option>Part-Time</option>
-                      <option>Work Form</option>
-                      <option>Internship</option>
-                      <option>Temporary</option>
-                      <option>Contract</option>
+                      <option value="full-time">Full-Time</option>
+                      <option value="part-time">Part-Time</option>
+                      <option value="internship">Internship</option>
+                      <option value="temporary">Temporary</option>
+                      <option value="contract">Contract</option>
                     </select>
                     {errors.jobType && (
                       <span className="text-danger">
@@ -248,12 +254,14 @@ const AddJobs = () => {
                       title="Select Experience"
                       {...register("experience", { required: true })}
                     >
-                      <option>1 Year</option>
-                      <option>1.5 Year</option>
-                      <option>2 Year</option>
-                      <option>2.5 Year</option>
-                      <option>3 Year</option>
-                    </select>{" "}
+                      <option value="1-year">1 Year</option>
+                      <option value="1.5-year">1.5 Year</option>
+                      <option value="2-year">2 Year</option>
+                      <option value="2.5-year">2.5 Year</option>
+                      <option value="3-year">3 Year</option>
+                      <option value="5-year">5 Year</option>
+                      <option value="5-plus-year">5+ Year</option>
+                    </select>
                     {errors.experience && (
                       <span className="text-danger">
                         This field is required
@@ -271,9 +279,10 @@ const AddJobs = () => {
                       title="Select Gender"
                       {...register("gender", { required: true })}
                     >
-                      <option>Both</option>
-                      <option>Male</option>
-                      <option>Female</option>
+                      <option value="both">Both</option>
+                      <option value="male">Male</option>
+                      <option value="female">Female</option>
+                      <option value="third-gender">Third Gender</option>
                     </select>{" "}
                     {errors.gender && (
                       <span className="text-danger">

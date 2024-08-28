@@ -54,11 +54,7 @@ export const router = createBrowserRouter([
         loader: loadFunc.companyDetailsLoader,
       },
       { path: "jobs/add", element: <page.AddJobs /> },
-      {
-        path: "jobs/view",
-        element: <page.ViewJobs />,
-        loader: loadFunc.allJobsFetch,
-      },
+      { path: "jobs/view", element: <page.ViewJobs /> },
       {
         path: "jobs/edit/:id",
         element: <page.UpdateJob />,

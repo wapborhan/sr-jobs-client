@@ -1,14 +1,21 @@
-import { useLoaderData } from "react-router-dom";
 import JobCard from "../../../components/dashboard/JobCard";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { AuthContext } from "../../../Provider/AuthProvider";
+import useMyJobs from "../../../hooks/useMyJobs";
 
 const ViewJobs = () => {
-  const loadJobs = useLoaderData();
-  const [allJobs, setAllJobs] = useState(loadJobs);
+  const { user } = useContext(AuthContext);
+  const [myJobs] = useMyJobs(user?.email);
+  const [allJobs, setAllJobs] = useState(myJobs);
   const [dummyState, setDummyState] = useState(false);
   const axiosPublic = useAxiosPublic();
+  console.log(allJobs);
+
+  useEffect(() => {
+    setAllJobs(myJobs);
+  }, [myJobs]);
 
   const handleDelete = (id) => {
     Swal.fire({
@@ -55,7 +62,7 @@ const ViewJobs = () => {
             </div>
             <div className="content">
               <ul className="utf-dashboard-box-list">
-                {allJobs &&
+                {allJobs.length > 0 ? (
                   allJobs.map((job) => {
                     return (
                       <JobCard
@@ -64,12 +71,17 @@ const ViewJobs = () => {
                         handleDelete={handleDelete}
                       />
                     );
-                  })}
+                  })
+                ) : (
+                  <div className="padding-top-40 text-center padding-bottom-40">
+                    No Jobs Found
+                  </div>
+                )}
               </ul>
             </div>
           </div>
           <div className="clearfix"></div>
-          <div className="utf-pagination-container-aera margin-top-20 margin-bottom-0">
+          {/* <div className="utf-pagination-container-aera margin-top-20 margin-bottom-0">
             <nav className="pagination">
               <ul>
                 <li className="utf-pagination-arrow">
@@ -99,7 +111,7 @@ const ViewJobs = () => {
                 </li>
               </ul>
             </nav>
-          </div>
+          </div> */}
           <div className="clearfix"></div>
         </div>
       </div>
