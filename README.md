@@ -2,7 +2,7 @@
 
 ### Live Link
 
-[https://sr-jobs-2df84.web.app/](https://sr-jobs-2df84.web.app/)
+[https://sr-jobsbd.web.app/](https://sr-jobsbd.web.app/)
 
 ### Description
 
@@ -28,7 +28,7 @@ To run the Brand Shop project on your local machine, you need to have the follow
 1. Clone the repository to your local machine:
 
 ```bash
-  git clone https://github.com/Porgramming-Hero-web-course/b8a11-client-side-wapborhan
+  git clone https://github.com/wapborhan/sr-jobs-client.git
 ```
 
 You can do this by running the following command from the project directory:
