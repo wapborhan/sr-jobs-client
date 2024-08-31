@@ -1,40 +1,33 @@
 import { Controller, useForm } from "react-hook-form";
 import CreatableSelect from "react-select/creatable";
 import Select from "react-select";
-// import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import { formats, modules } from "../../../components/shared/EditorConfig";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import DatePicker from "react-datepicker";
 import { useLoaderData } from "react-router-dom";
 import useFormData from "../../../hooks/useFormData";
-import { useState } from "react";
+import { useRef, useState } from "react";
+import ReactQuill from "react-quill";
+import { toast } from "react-toastify";
 
 const UpdateJob = () => {
+  const quillRef = useRef();
+  const [jobsDescriptions, setJobsDescriptions] = useState();
   const jodData = useLoaderData();
-  const [categoriesList, jobTypeList, experienceList, genderList] =
-    useFormData();
-  // const axiosPublic = useAxiosPublic();
+  const axiosPublic = useAxiosPublic();
+  const [
+    categoriesList,
+    jobTypeList,
+    experienceList,
+    genderList,
+    workplaceList,
+  ] = useFormData();
 
   const {
-    control,
-    register,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    defaultValues: {
-      skillsAbilities: [],
-      deadline: null,
-    },
-  });
-
-  const {
+    _id,
     title,
-    vacancy,
-    qualification,
     deadline,
     location,
-    image,
-    locMapLink,
-    educationQualification,
     jobsDescription,
     categories,
     jobType,
@@ -42,9 +35,8 @@ const UpdateJob = () => {
     gender,
     salaryRange,
     skillsAbilities,
+    workplaceType,
   } = jodData;
-
-  // console.log(jodData);
 
   const catIndex = categoriesList.findIndex(
     (category) => category.value === categories
@@ -52,78 +44,60 @@ const UpdateJob = () => {
   const typeIndex = jobTypeList.findIndex(
     (category) => category.value === jobType
   );
+  const workPlaceIndex = workplaceList.findIndex(
+    (category) => category.value === workplaceType
+  );
   const experienceIndex = experienceList.findIndex(
     (category) => category.value === experience
   );
   const genderIndex = genderList.findIndex(
     (category) => category.value === gender
   );
+
+  const {
+    control,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      skillsAbilities: skillsAbilities,
+      deadline: deadline ? new Date(deadline) : null,
+    },
+  });
+
   const range = salaryRange.split("-");
 
   const onSubmit = (data) => {
     const inputData = {
-      companyInf: {
-        _id: data?.companyInf?._id,
-        compName: data?.companyInf?.compName,
-        compLogoUrl: data?.companyInf?.compLogoUrl,
-      },
-      postedDate: new Date(),
-      title: data?.jobTitle,
-      categories: data?.jobCategories,
-      vacancy: data?.vacancy,
-      qualification: data?.qualification,
-      jobType: data?.jobType,
-      experience: data?.experience,
-      gender: data?.gender,
+      title: data?.title,
+      categories: data?.jobCategories?.value,
+
+      workplaceType: data?.workplaceTypes?.value,
+      jobType: data?.jobTypes?.value,
+      experience: data?.experiences?.value,
+      gender: data?.genders?.value,
+
       location: data?.location,
       salaryRange: `$${data?.minSalary} - $${data?.maxSalary}`,
-      image: data?.image,
-      locMapLink: data?.locMapLink,
+
       deadline: data?.deadline,
       skillsAbilities: data?.skillsAbilities,
-      educationQualification: data?.educationQualification,
-      jobsDescription: data?.jobsDescription,
+
+      jobsDescription: jobsDescriptions,
     };
-    console.log(inputData);
+    // console.log(inputData);
 
-    // axiosPublic
-    //   .post("/jobs", inputData)
-    //   .then((res) => {
-    //     alert("Post Succesfull.");
-    //     console.log(res);
-    //   })
-    //   .catch((err) => {
-    //     console.error(err);
-    //   });
-  };
-
-  const handleChange = (newValue) => {
-    // Update form state with selected values
-    setValue(
-      "skillsAbilities",
-      newValue.map((item) => item.value),
-      { shouldDirty: true }
-    );
-    setValues(
-      newValue.map((item) => {
-        value: item.value;
-        label: item.value;
+    axiosPublic
+      .put(`/job/${_id}`, inputData)
+      .then((res) => {
+        toast("Update Successfuly");
+        console.log(res);
       })
-    );
+      .catch((err) => {
+        console.error(err);
+      });
   };
-
-  const newSkillsAbilities = skillsAbilities.map((val) => ({
-    value: val,
-    label: val,
-  }));
-
-  const orderOptions = (values) => {
-    return values
-      .filter((v) => v.isFixed)
-      .concat(values.filter((v) => !v.isFixed));
-  };
-
-  const [skilsValue, setValues] = useState(orderOptions(newSkillsAbilities));
 
   return (
     <form
@@ -136,7 +110,7 @@ const UpdateJob = () => {
             <div className="headline">
               <h3>General Information</h3>
             </div>
-            <div className="content with-padding padding-bottom-10">
+            <div className="content with-padding padding-bottom-40">
               <div className="row">
                 <div className="col-xl-12 col-md-12 col-sm-12">
                   <div className="utf-submit-field">
@@ -146,9 +120,9 @@ const UpdateJob = () => {
                       className="utf-with-border"
                       placeholder="Job Title"
                       defaultValue={title}
-                      {...register("jobTitle", { required: true })}
+                      {...register("title", { required: true })}
                     />
-                    {errors.jobTitle && (
+                    {errors.title && (
                       <span className="text-danger">
                         This field is required
                       </span>
@@ -161,12 +135,11 @@ const UpdateJob = () => {
                     <Controller
                       name="jobCategories"
                       control={control}
+                      defaultValue={categoriesList[catIndex]}
                       render={({ field }) => (
                         <Select
-                          {...field}
                           className="w-100 selectct"
                           options={categoriesList}
-                          defaultValue={categoriesList[catIndex]}
                           styles={{
                             control: (baseStyles) => ({
                               ...baseStyles,
@@ -176,17 +149,18 @@ const UpdateJob = () => {
                               margin: 0,
                             }),
                           }}
+                          value={
+                            categoriesList.find(
+                              (option) => option.value === field.value?.value
+                            ) || null
+                          }
                           onChange={(selectedOption) => {
-                            field.onChange(
-                              selectedOption ? selectedOption.value : null
-                            );
+                            field.onChange(selectedOption || null);
                           }}
-                          value={categoriesList.find(
-                            (option) => option.value === field.value
-                          )}
                         />
                       )}
                     />
+
                     {errors.jobCategories && (
                       <span className="text-danger">
                         This field is required
@@ -194,87 +168,18 @@ const UpdateJob = () => {
                     )}
                   </div>
                 </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
+                <div className="col-xl-3 col-md-3 col-sm-6">
                   <div className="utf-submit-field">
-                    <h5>Vacancy</h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Vacancy"
-                      defaultValue={vacancy}
-                      {...register("vacancy", { required: true })}
-                    />
-                    {errors.vacancy && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Qualification</h5>
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Qualification"
-                      defaultValue={qualification}
-                      {...register("qualification", { required: true })}
-                    />
-                    {errors.qualification && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="col-xl-6 col-md-6 col-sm-12">
-                  <div className="utf-submit-field w-100">
-                    <h5>
-                      Deadline{" "}
-                      <i className="help-icon" data-tippy-placement="top"></i>
-                    </h5>
-                    <div className="keywords-container">
-                      <div className="keyword-input-container w-100">
-                        <Controller
-                          name="deadline"
-                          control={control}
-                          // className="w-100"
-                          render={({ field }) => (
-                            <DatePicker
-                              {...field}
-                              className="datePick !w-100"
-                              showIcon
-                              dateFormat="dd-MM-yyyy"
-                              selected={deadline}
-                              placeholderText="Select date"
-                              onChange={(date) => field.onChange(date)}
-                            />
-                          )}
-                        />
-                        {errors.deadline && (
-                          <span className="text-danger">
-                            This field is required
-                          </span>
-                        )}
-                      </div>
-                      <div className="keywords-list"></div>
-                      <div className="clearfix"></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-xl-4 col-md-4 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Job Type</h5>
+                    <h5>Workplace type</h5>
                     <Controller
-                      name="jobType"
+                      name="workplaceTypes"
                       control={control}
+                      defaultValue={workplaceList[workPlaceIndex]}
                       render={({ field }) => (
                         <Select
                           {...field}
                           className="w-100 selectct"
-                          options={jobTypeList}
-                          defaultValue={jobTypeList[typeIndex]}
+                          options={workplaceList}
                           styles={{
                             control: (baseStyles) => ({
                               ...baseStyles,
@@ -285,11 +190,10 @@ const UpdateJob = () => {
                             }),
                           }}
                           onChange={(selectedOption) => {
-                            field.onChange(
-                              selectedOption ? selectedOption.value : null
-                            );
+                            field.onChange(selectedOption || null);
                           }}
-                          value={jobTypeList.find(
+                          defaultValue={workplaceList[workPlaceIndex]}
+                          value={workplaceList.find(
                             (option) => option.value === field.value
                           )}
                         />
@@ -303,16 +207,115 @@ const UpdateJob = () => {
                     )}
                   </div>
                 </div>
+                <div className="col-xl-3 col-md-3 col-sm-12">
+                  <div className="utf-submit-field w-100">
+                    <h5>
+                      Deadline{" "}
+                      <i className="help-icon" data-tippy-placement="top"></i>
+                    </h5>
+                    <div className="keywords-container">
+                      <div className="keyword-input-container w-100">
+                        <Controller
+                          name="deadline"
+                          control={control}
+                          render={({ field }) => (
+                            <DatePicker
+                              {...field}
+                              className="datePick !w-100"
+                              showIcon
+                              dateFormat="dd-MM-yyyy"
+                              selected={
+                                field.value ? new Date(field.value) : null
+                              } // Show the controlled value
+                              placeholderText="Select date"
+                              onChange={(date) => field.onChange(date)} // Updates form state on change
+                            />
+                          )}
+                        />
+
+                        {errors.deadline && (
+                          <span className="text-danger">
+                            This field is required
+                          </span>
+                        )}
+                      </div>
+                      {/* <div className="keywords-list"></div> */}
+                      <div className="clearfix"></div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-xl-4 col-md-4 col-sm-6">
+                  <div className="utf-submit-field">
+                    <h5>Job Type</h5>
+                    <Controller
+                      name="jobTypes"
+                      control={control}
+                      defaultValue={jobTypeList[typeIndex]}
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          className="w-100 selectct"
+                          options={jobTypeList}
+                          styles={{
+                            control: (baseStyles) => ({
+                              ...baseStyles,
+                              boxShadow: "none",
+                              paddingTop: 0,
+                              paddingBottom: 0,
+                              margin: 0,
+                            }),
+                          }}
+                          value={
+                            jobTypeList.find(
+                              (option) => option.value === field.value?.value
+                            ) || null
+                          }
+                          onChange={(selectedOption) => {
+                            field.onChange(selectedOption || null);
+                          }}
+                        />
+                      )}
+                    />
+                    {errors.jobType && (
+                      <span className="text-danger">
+                        This field is required
+                      </span>
+                    )}
+                  </div>
+                </div>
                 <div className="col-xl-4 col-md-4 col-sm-6">
                   <div className="utf-submit-field">
                     <h5>Experience</h5>
-                    <Select
-                      className="basic-single selectct"
-                      classNamePrefix="select"
+                    <Controller
+                      name="experiences"
+                      control={control}
                       defaultValue={experienceList[experienceIndex]}
-                      name="experience"
-                      options={experienceList}
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          className="w-100 selectct"
+                          options={experienceList}
+                          styles={{
+                            control: (baseStyles) => ({
+                              ...baseStyles,
+                              boxShadow: "none",
+                              paddingTop: 0,
+                              paddingBottom: 0,
+                              margin: 0,
+                            }),
+                          }}
+                          value={
+                            experienceList.find(
+                              (option) => option.value === field.value?.value
+                            ) || null
+                          }
+                          onChange={(selectedOption) => {
+                            field.onChange(selectedOption || null);
+                          }}
+                        />
+                      )}
                     />
+
                     {errors.experience && (
                       <span className="text-danger">
                         This field is required
@@ -323,12 +326,34 @@ const UpdateJob = () => {
                 <div className="col-xl-4 col-md-4 col-sm-6">
                   <div className="utf-submit-field">
                     <h5>Gender</h5>
-                    <Select
-                      className="basic-single selectct"
-                      classNamePrefix="select"
+                    <Controller
+                      name="genders"
+                      control={control}
                       defaultValue={genderList[genderIndex]}
-                      name="gender"
-                      options={genderList}
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          className="w-100 selectct"
+                          options={genderList}
+                          styles={{
+                            control: (baseStyles) => ({
+                              ...baseStyles,
+                              boxShadow: "none",
+                              paddingTop: 0,
+                              paddingBottom: 0,
+                              margin: 0,
+                            }),
+                          }}
+                          value={
+                            genderList.find(
+                              (option) => option.value === field.value?.value
+                            ) || null
+                          }
+                          onChange={(selectedOption) => {
+                            field.onChange(selectedOption || null);
+                          }}
+                        />
+                      )}
                     />
                     {errors.gender && (
                       <span className="text-danger">
@@ -398,40 +423,6 @@ const UpdateJob = () => {
                     </div>
                   </div>
                 </div>
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Image Url</h5>{" "}
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Image Url"
-                      defaultValue={image}
-                      {...register("image", { required: true })}
-                    />
-                    {errors.image && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
-                </div>{" "}
-                <div className="col-xl-6 col-md-6 col-sm-6">
-                  <div className="utf-submit-field">
-                    <h5>Google Map Link</h5>{" "}
-                    <input
-                      type="text"
-                      className="utf-with-border"
-                      placeholder="Google Map Link"
-                      defaultValue={locMapLink}
-                      {...register("locMapLink", { required: true })}
-                    />
-                    {errors.locMapLink && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
-                </div>
                 <div className="col-xl-8 col-md-8 col-sm-12">
                   <div className="utf-submit-field">
                     <h5>
@@ -447,22 +438,28 @@ const UpdateJob = () => {
                         <Controller
                           name="skillsAbilities"
                           control={control}
-                          render={({ field: { onChange, value, ref } }) => (
+                          defaultValue={skillsAbilities}
+                          render={({
+                            field: { onChange, onBlur, value, ref },
+                          }) => (
                             <CreatableSelect
+                              isMulti
                               components={{
                                 DropdownIndicator: null,
                               }}
                               inputRef={ref}
-                              isMulti
-                              // onChange={(newValue) => {
-                              //   onChange(newValue.map((item) => item.value));
-                              // }}
-                              onChange={handleChange}
-                              // value={value?.map((val) => ({
-                              //   value: val,
-                              //   label: val,
-                              // }))}
-                              value={skilsValue}
+                              onChange={(newValue) => {
+                                onChange(newValue.map((item) => item.value));
+                              }}
+                              onBlur={onBlur}
+                              value={
+                                value
+                                  ? value.map((val) => ({
+                                      value: val,
+                                      label: val,
+                                    }))
+                                  : []
+                              }
                               placeholder="Type something and press enter..."
                             />
                           )}
@@ -482,35 +479,17 @@ const UpdateJob = () => {
                 <div className="col-xl-12 col-md-12 col-sm-12">
                   <div className="utf-submit-field">
                     <h5>Career Description</h5>
-                    <textarea
-                      cols="40"
-                      rows="2"
-                      className="utf-with-border"
-                      placeholder="Career Description..."
+                    <ReactQuill
+                      ref={quillRef}
+                      theme="snow"
                       defaultValue={jobsDescription}
-                      {...register("jobsDescription", { required: true })}
-                    ></textarea>{" "}
+                      onChange={(value) => setJobsDescriptions(value)}
+                      placeholder={"Write something awesome..."}
+                      modules={modules}
+                      formats={formats}
+                      style={{ height: "300px" }}
+                    />
                     {errors.jobsDescription && (
-                      <span className="text-danger">
-                        This field is required
-                      </span>
-                    )}
-                  </div>
-                </div>
-                <div className="col-xl-12 col-md-12 col-sm-12">
-                  <div className="utf-submit-field">
-                    <h5>Education Description</h5>
-                    <textarea
-                      cols="40"
-                      rows="2"
-                      className="utf-with-border"
-                      defaultValue={educationQualification}
-                      placeholder="Education Description..."
-                      {...register("educationQualification", {
-                        required: true,
-                      })}
-                    ></textarea>{" "}
-                    {errors.educationQualification && (
                       <span className="text-danger">
                         This field is required
                       </span>

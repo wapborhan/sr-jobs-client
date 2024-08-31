@@ -95,8 +95,19 @@ const useFormData = () => {
     { value: "female", label: "Female" },
     { value: "both", label: "Both" },
   ];
+  const workplaceList = [
+    { value: "on-site", label: "On Site" },
+    { value: "hybrid", label: "Hybrid" },
+    { value: "remote", label: "Remote" },
+  ];
 
-  return [categoriesList, jobTypeList, experienceList, genderList];
+  return [
+    categoriesList,
+    jobTypeList,
+    experienceList,
+    genderList,
+    workplaceList,
+  ];
 };
 
 export default useFormData;
