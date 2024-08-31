@@ -34,11 +34,11 @@ To run the Brand Shop project on your local machine, you need to have the follow
 You can do this by running the following command from the project directory:
 
 ```bash
-   npm install
+   yarn 
 ```
 
 ```bash
-   npm run dev
+   yarn dev
 ```
 
 Note: Need server site for run proper
