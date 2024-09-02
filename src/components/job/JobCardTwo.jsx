@@ -1,9 +1,45 @@
 import moment from "moment";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../Provider/AuthProvider";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
-const JobCardTwo = ({ job, active, handleBookmark }) => {
+const JobCardTwo = ({ job }) => {
+  const [active, setActive] = useState(false);
+  const axiosPublic = useAxiosPublic();
+  const { user } = useContext(AuthContext);
   const { title, salaryRange, deadline, _id, categories, jobType, companyInf } =
     job;
+
+  const handleBookmark = (data) => {
+    setActive(!active);
+    if (active) {
+      axiosPublic
+        .delete(`bookmark/${data.jobId}`)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.error(err));
+    } else {
+      axiosPublic
+        .post(`bookmark`, data)
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => console.error(err));
+    }
+  };
+
+  useEffect(() => {
+    axiosPublic
+      .get(`http://localhost:3300/bookmark`)
+      .then((res) => {
+        const existBookmark = res.data.some((mark) => mark.jobId === _id);
+        setActive(existBookmark);
+      })
+      .catch((err) => console.error(err));
+  }, [_id, axiosPublic]);
+
   return (
     <div className="utf-job-listing">
       <div className="utf-job-listing-details">
@@ -22,12 +58,6 @@ const JobCardTwo = ({ job, active, handleBookmark }) => {
           </span>
           <h3 className="utf-job-listing-title">
             <Link to={`/job/${_id}`}>{title}</Link>
-
-            {/* <span
-              className="utf-verified-badge"
-              title="Verified Employer"
-              data-tippy-placement="top"
-            ></span> */}
           </h3>
           <div className="utf-job-listing-footer">
             <ul>
@@ -38,9 +68,6 @@ const JobCardTwo = ({ job, active, handleBookmark }) => {
                 <i className="icon-material-outline-account-balance-wallet"></i>{" "}
                 {salaryRange}
               </li>
-              {/* <li>
-                <i className="icon-material-outline-location-on"></i> {location}
-              </li> */}
               <li>
                 <i className="icon-material-outline-access-time"></i>{" "}
                 {moment(deadline).fromNow()}
@@ -49,8 +76,14 @@ const JobCardTwo = ({ job, active, handleBookmark }) => {
           </div>
         </div>
         <span
-          onClick={handleBookmark}
-          className={`bookmark-icon ${active && "bookmarked"} `}
+          onClick={() =>
+            handleBookmark({
+              jobId: _id,
+              userEmail: user?.email,
+              markDate: new Date(),
+            })
+          }
+          className={`bookmark-icon ${active ? "bookmarked" : ""}`}
         ></span>
       </div>
     </div>

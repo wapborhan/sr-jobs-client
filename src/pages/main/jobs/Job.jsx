@@ -9,7 +9,7 @@ import TitleBar from "../../../components/shared/TitleBar";
 const Job = () => {
   document.title = "SR Jobs | All Jobs";
   const [searchParams] = useSearchParams();
-  const [active, setActive] = useState(false);
+
   const [jobCat, setJobCat] = useState(
     searchParams.size > 0 ? searchParams.get("cat") : "all"
   );
@@ -26,10 +26,6 @@ const Job = () => {
       job.title.toLowerCase().includes(data?.searchText.toLowerCase())
     );
     setFilteredJobs(filtered);
-  };
-
-  const handleBookmark = () => {
-    setActive(!active);
   };
 
   useEffect(() => {
@@ -55,8 +51,6 @@ const Job = () => {
               jobs={filteredJobs}
               allJobs={allJobs}
               loading={isLoading}
-              active={active}
-              handleBookmark={handleBookmark}
             />
           </div>
         </div>

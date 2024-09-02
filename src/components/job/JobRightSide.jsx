@@ -1,7 +1,7 @@
 import Loader from "../shared/Loader";
 import JobCardTwo from "./JobCardTwo";
 
-const JobRightSide = ({ jobs, loading, active, handleBookmark }) => {
+const JobRightSide = ({ jobs, loading }) => {
   return (
     <>
       <div className="utf-inner-search-section-title">
@@ -30,14 +30,7 @@ const JobRightSide = ({ jobs, loading, active, handleBookmark }) => {
         ) : jobs.length > 0 ? (
           jobs
             .slice(0, 15)
-            .map((job, idx) => (
-              <JobCardTwo
-                key={idx}
-                job={job}
-                active={active}
-                handleBookmark={handleBookmark}
-              />
-            ))
+            .map((job, idx) => <JobCardTwo key={idx} job={job} />)
         ) : (
           "No Job Found."
         )}
