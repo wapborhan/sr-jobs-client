@@ -16,7 +16,9 @@ const JobCardTwo = ({ job }) => {
     setActive(!active);
     if (active) {
       axiosPublic
-        .delete(`bookmark/${data.jobId}`)
+        .delete(
+          `bookmark/${data.jobId}?email=${encodeURIComponent(user?.email)}`
+        )
         .then((res) => {
           console.log(res.data.message);
           toast(res.data.message);
@@ -35,13 +37,15 @@ const JobCardTwo = ({ job }) => {
 
   useEffect(() => {
     axiosPublic
-      .get(`http://localhost:3300/bookmark`)
+      .get(`http://localhost:3300/bookmark?email=${user?.email}`)
       .then((res) => {
-        const existBookmark = res.data.some((mark) => mark.jobId === _id);
+        const existBookmark = res.data.some((mark) => mark.jobId?._id === _id);
         setActive(existBookmark);
+
+        console.log(existBookmark);
       })
       .catch((err) => console.error(err));
-  }, [_id, axiosPublic]);
+  }, [user]);
 
   return (
     <div className="utf-job-listing">
@@ -82,7 +86,7 @@ const JobCardTwo = ({ job }) => {
           onClick={() =>
             handleBookmark({
               jobId: _id,
-              userEmail: user?.email,
+              bookmarkerEmail: user?.email,
               markDate: new Date(),
             })
           }

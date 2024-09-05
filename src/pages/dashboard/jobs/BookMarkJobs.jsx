@@ -1,26 +1,23 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useContext } from "react";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import JobCardTwo from "../../../components/job/JobCardTwo";
 import useJobs from "../../../hooks/useJobs";
+import { AuthContext } from "../../../Provider/AuthProvider";
 
 const BookMarkJobs = () => {
   const [bookmarks, setBookmarks] = useState([]);
+  const { user } = useContext(AuthContext);
   const [allJobs] = useJobs({ jobCat: "all", jobSerch: "" });
   const axiosPublic = useAxiosPublic();
 
   const fetchBookmarks = useCallback(() => {
     axiosPublic
-      .get(`/bookmark`)
+      .get(`/bookmark?email=${user?.email}`)
       .then((res) => {
-        const bookmarkedJobIds = res.data.map((bookmark) => bookmark.jobId);
-
-        const mybookmark = allJobs.filter((job) =>
-          bookmarkedJobIds.includes(job._id)
-        );
-        setBookmarks(mybookmark);
+        setBookmarks(res.data);
       })
       .catch((err) => console.error(err));
-  }, [axiosPublic, allJobs]);
+  }, [axiosPublic, user]);
 
   useEffect(() => {
     if (allJobs.length > 0) {
@@ -39,7 +36,9 @@ const BookMarkJobs = () => {
             <div className="content">
               <ul className="utf-dashboard-box-list padding-left-10 padding-right-10 padding-top-10 padding-bottom-10">
                 {bookmarks.length > 0 ? (
-                  bookmarks.map((job) => <JobCardTwo key={job._id} job={job} />)
+                  bookmarks.map((job) => (
+                    <JobCardTwo key={job._id} job={job?.jobId} />
+                  ))
                 ) : (
                   <p>No bookmarked jobs available.</p>
                 )}
