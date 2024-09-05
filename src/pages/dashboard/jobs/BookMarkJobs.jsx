@@ -1,4 +1,33 @@
+import { useEffect, useState, useCallback } from "react";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import JobCardTwo from "../../../components/job/JobCardTwo";
+import useJobs from "../../../hooks/useJobs";
+
 const BookMarkJobs = () => {
+  const [bookmarks, setBookmarks] = useState([]);
+  const [allJobs] = useJobs({ jobCat: "all", jobSerch: "" });
+  const axiosPublic = useAxiosPublic();
+
+  const fetchBookmarks = useCallback(() => {
+    axiosPublic
+      .get(`/bookmark`)
+      .then((res) => {
+        const bookmarkedJobIds = res.data.map((bookmark) => bookmark.jobId);
+
+        const mybookmark = allJobs.filter((job) =>
+          bookmarkedJobIds.includes(job._id)
+        );
+        setBookmarks(mybookmark);
+      })
+      .catch((err) => console.error(err));
+  }, [axiosPublic, allJobs]);
+
+  useEffect(() => {
+    if (allJobs.length > 0) {
+      fetchBookmarks();
+    }
+  }, [fetchBookmarks, allJobs]);
+
   return (
     <div className="utf-dashboard-content-inner-aera">
       <div className="row">
@@ -8,63 +37,18 @@ const BookMarkJobs = () => {
               <h3>Bookmarked Jobs</h3>
             </div>
             <div className="content">
-              <ul className="utf-dashboard-box-list">
-                <li>
-                  <div className="utf-job-listing">
-                    <div className="utf-job-listing-details">
-                      <a href="#" className="utf-job-listing-company-logo">
-                        {" "}
-                        <img src="/images/company_logo_1.png" alt="" />{" "}
-                      </a>
-                      <div className="utf-job-listing-description">
-                        <span className="dashboard-status-button utf-job-status-item green">
-                          <i className="icon-material-outline-business-center"></i>{" "}
-                          Full Time
-                        </span>
-                        <h3 className="utf-job-listing-title">
-                          <a href="#">
-                            Web Designer, Graphic Designer and UI/UX Designer
-                          </a>
-                        </h3>
-                        <div className="utf-job-listing-footer">
-                          <ul>
-                            <li>
-                              <i className="icon-feather-briefcase"></i>{" "}
-                              Software Developer
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-location-on"></i>{" "}
-                              2767 Concord Street, Charlotte
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-account-balance-wallet"></i>{" "}
-                              $35000-$38000
-                            </li>
-                            <li>
-                              <i className="icon-material-outline-access-time"></i>{" "}
-                              15 Minute Ago
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="utf-buttons-to-right">
-                    <a
-                      href="#"
-                      className="button red"
-                      title="Remove"
-                      data-tippy-placement="top"
-                    >
-                      <i className="icon-feather-trash-2"></i> Remove
-                    </a>{" "}
-                  </div>
-                </li>
+              <ul className="utf-dashboard-box-list padding-left-10 padding-right-10 padding-top-10 padding-bottom-10">
+                {bookmarks.length > 0 ? (
+                  bookmarks.map((job) => <JobCardTwo key={job._id} job={job} />)
+                ) : (
+                  <p>No bookmarked jobs available.</p>
+                )}
               </ul>
             </div>
           </div>
           <div className="clearfix"></div>
-          <div className="utf-pagination-container-aera margin-top-20 margin-bottom-0">
+          {/* Pagination Logic */}
+          {/* <div className="utf-pagination-container-aera margin-top-20 margin-bottom-0">
             <nav className="pagination">
               <ul>
                 <li className="utf-pagination-arrow">
@@ -94,7 +78,7 @@ const BookMarkJobs = () => {
                 </li>
               </ul>
             </nav>
-          </div>
+          </div> */}
           <div className="clearfix"></div>
         </div>
       </div>

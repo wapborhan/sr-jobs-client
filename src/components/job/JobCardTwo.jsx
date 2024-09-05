@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { toast } from "react-toastify";
 
 const JobCardTwo = ({ job }) => {
   const [active, setActive] = useState(false);
@@ -17,14 +18,16 @@ const JobCardTwo = ({ job }) => {
       axiosPublic
         .delete(`bookmark/${data.jobId}`)
         .then((res) => {
-          console.log(res);
+          console.log(res.data.message);
+          toast(res.data.message);
         })
         .catch((err) => console.error(err));
     } else {
       axiosPublic
         .post(`bookmark`, data)
         .then((res) => {
-          console.log(res);
+          console.log(res.data.message);
+          toast(res.data.message);
         })
         .catch((err) => console.error(err));
     }
