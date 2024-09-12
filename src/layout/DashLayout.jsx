@@ -3,11 +3,18 @@ import DashHeader from "./DashHeader";
 import BackToTop from "../components/shared/BackToTop";
 import DashSidebar from "../pages/dashboard/sidebar/DashSidebar";
 import ScrollToTop from "../components/shared/ScrollToTop";
-import { useContext } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
+import { useEffect, useState } from "react";
 
 const DashLayout = () => {
-  const { loading } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
       {loading ? (

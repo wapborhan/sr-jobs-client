@@ -24,6 +24,8 @@ import Users from "../pages/dashboard/users/Users";
 import Categories from "../pages/main/categories/Categories";
 import UpdateProfile from "../pages/dashboard/profile/UpdateProfile";
 import UpdateCompany from "../pages/dashboard/company/UpdateCompany";
+import ApplyJob from "../components/job/ApplyJob";
+import AppliedJobs from "../pages/dashboard/jobs/AppliedJobs";
 
 export {
   HomePage,
@@ -50,4 +52,6 @@ export {
   Categories,
   UpdateProfile,
   UpdateCompany,
+  ApplyJob,
+  AppliedJobs,
 };

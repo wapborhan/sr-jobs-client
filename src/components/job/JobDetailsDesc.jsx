@@ -1,10 +1,18 @@
 import { Link } from "react-router-dom";
 import useCompanyWiseJob from "../../hooks/useCompanyWiseJob";
 import JobCardTwo from "./JobCardTwo";
+import moment from "moment";
 
 const JobDetailsDesc = ({ job }) => {
-  const { jobsDescription, skillsAbilities, companyInf } = job;
+  const { jobsDescription, skillsAbilities, companyInf, deadline, _id } = job;
   const [compWiseJob] = useCompanyWiseJob(companyInf?._id);
+
+  const postingDate = moment(new Date());
+  const deadlineDate = moment(deadline);
+
+  const deadLines = () => {
+    alert("Deadline");
+  };
 
   return (
     <div className="col-xl-8 col-lg-8 utf-content-right-offset-aera">
@@ -30,26 +38,33 @@ const JobDetailsDesc = ({ job }) => {
                 and Abilities
               </h3>
             </div>
-            {skillsAbilities.map((skill) => {
-              return (
-                <>
-                  <ul>
-                    <li>{skill}</li>
-                  </ul>
-                </>
-              );
-            })}
+            <ul>
+              {skillsAbilities.map((skill, idx) => {
+                return <li key={idx}>{skill}</li>;
+              })}
+            </ul>
           </div>
         )}
 
         <div className="row">
           <div className="col-xl-6 col-lg-6 col-sm-12">
-            <a
-              href="#small-dialog"
-              className="apply-now-button popup-with-zoom-anim margin-top-0"
-            >
-              Apply Now <i className="icon-feather-chevron-right"></i>
-            </a>
+            {postingDate < deadlineDate ? (
+              <Link
+                to={`/apply/${_id}`}
+                id="popup-with-form"
+                className="apply-now-button popup-with-zoom-anim margin-top-0"
+              >
+                Apply Now <i className="icon-feather-chevron-right"></i>
+              </Link>
+            ) : (
+              <a
+                href="#"
+                onClick={deadLines}
+                className="apply-now-button popup-with-zoom-anim margin-top-0"
+              >
+                Apply Now <i className="icon-feather-chevron-right"></i>
+              </a>
+            )}
           </div>
           <div className="col-xl-6 col-lg-6 col-sm-12">
             <a href="#" className="button save-job-btn">
@@ -57,6 +72,7 @@ const JobDetailsDesc = ({ job }) => {
             </a>
           </div>
         </div>
+
         <div className="utf-detail-social-sharing margin-top-25">
           <span>
             <strong>Social Sharing:-</strong>

@@ -3,12 +3,19 @@ import Header from "./Header";
 import Footer from "./Footer";
 import BackToTop from "../components/shared/BackToTop";
 import ScrollToTop from "../components/shared/ScrollToTop";
-import { useContext } from "react";
-import { AuthContext } from "../Provider/AuthProvider";
+import { useEffect, useState } from "react";
 import Subscription from "./Subscription";
 
 const Root = () => {
-  const { loading } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
   return (
     <>
       {loading ? (

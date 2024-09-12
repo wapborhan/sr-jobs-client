@@ -95,38 +95,12 @@ const DashSidebar = () => {
                     <i className="icon-feather-heart"></i> Bookmarks Jobs
                   </NavLink>
                 </li>
-                {/* <li>
-                  <a href="#">
-                    <i className="icon-line-awesome-file-text"></i> Freelancer
+                <li>
+                  <NavLink to="/dashboard/applied">
+                    <i className="icon-line-awesome-file-text"></i> Applied Job
                     Tasks
-                  </a>
-                  <ul className="dropdown-nav">
-                    <li>
-                      <a href="dashboard-freelancer-manage-tasks-list.html">
-                        <i className="icon-feather-chevron-right"></i>{" "}
-                        Freelancer Manage Tasks
-                      </a>
-                    </li>
-                    <li>
-                      <a href="dashboard-manage-bidders-list.html">
-                        <i className="icon-feather-chevron-right"></i>{" "}
-                        Freelancer Manage Bidders
-                      </a>
-                    </li>
-                    <li>
-                      <a href="dashboard-freelancer-active-bids.html">
-                        <i className="icon-feather-chevron-right"></i>{" "}
-                        Freelancer Active Bids
-                      </a>
-                    </li>
-                    <li>
-                      <a href="dashboard-freelancer-add-post-bids.html">
-                        <i className="icon-feather-chevron-right"></i>{" "}
-                        Freelancer Post Bids
-                      </a>
-                    </li>
-                  </ul>
-                </li> */}
+                  </NavLink>
+                </li>
                 {/* <li>
                   <a href="dashboard-reviews.html">
                     <i className="icon-material-outline-rate-review"></i>{" "}

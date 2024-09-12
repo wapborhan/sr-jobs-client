@@ -12694,7 +12694,7 @@ button.mfp-close {
   font-size: 20px;
   top: 2px;
   left: 0;
-  position: relative;
+  /* position: relative; */
   height: 10px;
 }
 
@@ -13314,7 +13314,7 @@ screen and (max-height: 300px) {
 .dialog-with-tabs#small-dialog {
   padding: 0;
   color: #666;
-  max-width: 540px;
+  max-width: 70%;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.25);
 }
 
@@ -21310,6 +21310,10 @@ a.attachment-box:hover,
 .message-by h5 i,
 .message-bubble.me .message-text {
   background-color: #1ca774;
+}
+
+button.button:disabled {
+  background-color: #444;
 }
 
 a.utf-header-notifications-button {

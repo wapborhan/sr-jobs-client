@@ -20,7 +20,7 @@ const JobCardTwo = ({ job }) => {
           `bookmark/${data.jobId}?email=${encodeURIComponent(user?.email)}`
         )
         .then((res) => {
-          console.log(res.data.message);
+          // console.log(res.data.message);
           toast(res.data.message);
         })
         .catch((err) => console.error(err));
@@ -28,7 +28,7 @@ const JobCardTwo = ({ job }) => {
       axiosPublic
         .post(`bookmark`, data)
         .then((res) => {
-          console.log(res.data.message);
+          // console.log(res.data.message);
           toast(res.data.message);
         })
         .catch((err) => console.error(err));
@@ -42,7 +42,7 @@ const JobCardTwo = ({ job }) => {
         const existBookmark = res.data.some((mark) => mark.jobId?._id === _id);
         setActive(existBookmark);
 
-        console.log(existBookmark);
+        // console.log(existBookmark);
       })
       .catch((err) => console.error(err));
   }, [user]);

@@ -27,6 +27,15 @@ export const router = createBrowserRouter([
         ),
         loader: loadFunc.jobDetailsLoader,
       },
+      {
+        path: "apply/:id",
+        element: (
+          // <PrivateRoutes>
+          <page.ApplyJob />
+          // </PrivateRoutes>
+        ),
+        loader: loadFunc.jobDetailsLoader,
+      },
       { path: "company", element: <page.Company /> },
       {
         path: "company/:id",
@@ -61,6 +70,7 @@ export const router = createBrowserRouter([
         loader: loadFunc.jobDetailsLoader,
       },
       { path: "bookmarks", element: <page.BookMarkJobs /> },
+      { path: "applied", element: <page.AppliedJobs /> },
       {
         path: "users",
         element: <page.Users />,

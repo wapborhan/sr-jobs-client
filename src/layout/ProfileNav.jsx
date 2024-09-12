@@ -9,9 +9,7 @@ const ProfileNav = () => {
   const navigate = useNavigate();
   const menuRef = useRef(null);
   const encodedEmail = btoa(user?.email);
-  const [singleUser] = useSingleUser(encodedEmail);
-
-  // console.log(singleUser);
+  const [singleUser, isPending] = useSingleUser(encodedEmail);
 
   const handleLogout = () => {
     logOut();
@@ -20,6 +18,13 @@ const ProfileNav = () => {
   };
 
   useEffect(() => {
+    if (!isPending) {
+      if (singleUser.length === 0) {
+        logOut();
+        navigate("/");
+      }
+    }
+
     const handleClickOutside = (event) => {
       if (menuRef.current && !menuRef.current.contains(event.target)) {
         setMenu(false);

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useFormData from "../../hooks/useFormData";
+import moment from "moment";
 
 const JobDetailsSidebar = ({ jobs }) => {
   const {
@@ -75,7 +76,10 @@ const JobDetailsSidebar = ({ jobs }) => {
                 <li>
                   <i className="icon-material-outline-access-time"></i>{" "}
                   <span>Deadline</span>
-                  <h5>{deadline}</h5>
+                  <h5>
+                    {/* {deadline} */}
+                    {moment(deadline).format("Do MMMM YYYY")}
+                  </h5>
                 </li>
               </ul>
             </div>
