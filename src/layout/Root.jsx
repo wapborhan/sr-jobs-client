@@ -5,6 +5,7 @@ import BackToTop from "../components/shared/BackToTop";
 import ScrollToTop from "../components/shared/ScrollToTop";
 import { useEffect, useState } from "react";
 import Subscription from "./Subscription";
+import MobileMenu from "./MobileMenu";
 
 const Root = () => {
   const [loading, setLoading] = useState(true);
@@ -29,7 +30,8 @@ const Root = () => {
         </div>
       ) : (
         ""
-      )}
+      )}{" "}
+      <MobileMenu />
       <div id="wrapper">
         <Header />
         <ScrollToTop />

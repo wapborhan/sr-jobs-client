@@ -1,13 +1,15 @@
-import { useContext } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import useMyJobs from "../../../hooks/useMyJobs";
-import { AuthContext } from "../../../Provider/AuthProvider";
 import JobCardTwo from "../../../components/job/JobCardTwo";
+import useAppliedJob from "../../../hooks/useAppliedJob";
+import useLoginUser from "../../../hooks/useLoginUser";
+import AppliedCard from "../../../components/job/AppliedCard";
 
 const Profile = () => {
   const userData = useLoaderData();
-  const { user } = useContext(AuthContext);
-  const [myJobs] = useMyJobs(user?.email);
+  const [loggedInUser] = useLoginUser();
+  const [myJobs] = useMyJobs(loggedInUser?.email);
+  const [appliedJobs] = useAppliedJob(loggedInUser?._id);
   if (userData.error) {
     return (
       <>
@@ -172,16 +174,20 @@ const Profile = () => {
         <div className="col-xl-6">
           <div id="test1" className="dashboard-box margin-top-0">
             <div className="headline">
-              <h3>My Job</h3>
+              <h3>My Applied Job</h3>
             </div>
-            <div className="content with-padding">
+            <div className="content with-paddings">
               <div className="row">
                 <div className="col-xl-12 col-md-6 col-sm-6">
-                  {myJobs.length > 0
-                    ? myJobs.slice(0, 5).map((job) => {
-                        return <JobCardTwo job={job} key={job?._id} />;
-                      })
-                    : ""}
+                  <div className="contents">
+                    <ul className="utf-dashboard-box-list">
+                      {appliedJobs.length > 0
+                        ? appliedJobs.slice(0, 5).map((job) => {
+                            return <AppliedCard job={job} key={job?._id} />;
+                          })
+                        : ""}
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>

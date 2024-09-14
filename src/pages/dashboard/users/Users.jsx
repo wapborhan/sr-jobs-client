@@ -4,8 +4,6 @@ import UserListcard from "../../../components/dashboard/UserListcard";
 const Users = () => {
   const allUsers = useLoaderData();
 
-  console.log(allUsers);
-
   return (
     <div className="utf-dashboard-content-inner-aera">
       <div className="row">

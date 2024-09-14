@@ -2,20 +2,20 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "./useAxiosPublic";
 import useAuth from "./useAuth";
 
-const useCompany = () => {
+const useAppliedJob = (id) => {
   const axiosPublic = useAxiosPublic();
   const { user } = useAuth();
 
-  const { data: allCompany = [], isLoading } = useQuery({
-    queryKey: ["allCompany"],
+  const { data: appliedJob = [] } = useQuery({
+    queryKey: ["appliedJob"],
     enabled: !!user,
     queryFn: async () => {
-      const res = await axiosPublic.get("/company");
+      const res = await axiosPublic.get(`/apply?id=${id}`);
       return res.data;
     },
   });
 
-  return [allCompany, isLoading];
+  return [appliedJob];
 };
 
-export default useCompany;
+export default useAppliedJob;

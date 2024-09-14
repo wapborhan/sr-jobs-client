@@ -1,11 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 
-import PrivateRoutes from "./PrivateRoutes";
+// import PrivateRoutes from "./PrivateRoutes";
 // Layout
 import Root from "../layout/Root";
 import DashLayout from "../layout/DashLayout";
 // Pages
-import ErrorPage from "../components/pages/error/ErrorPage";
+import ErrorPage from "../components/shared/error/ErrorPage";
 import * as page from "./";
 import * as loadFunc from "./loadFunct";
 
@@ -43,7 +43,6 @@ export const router = createBrowserRouter([
         loader: loadFunc.companyDetailsLoader,
       },
 
-      { path: "/blogs", element: <page.Blogs /> },
       { path: "/about", element: <page.About /> },
       { path: "/terms", element: <page.Terms /> },
       { path: "/privacy", element: <page.Privacy /> },
@@ -76,14 +75,7 @@ export const router = createBrowserRouter([
         element: <page.Users />,
         loader: loadFunc.allusersFetch,
       },
-      {
-        path: "my-jobs",
-        element: (
-          <PrivateRoutes>
-            <page.MyJobs />
-          </PrivateRoutes>
-        ),
-      },
+
       {
         path: "profile/",
         element: <page.Profile />,

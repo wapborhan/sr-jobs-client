@@ -1804,8 +1804,15 @@ li.mm-vertical.mm-opened>.mm-panel {
   right: 0
 }
 
+.mm-navbar {
+  display: flex !important;
+  width: 100%;
+  justify-content: center;
+  position: absolute !important;
+}
+
 .mm-panel .mm-navbar {
-  display: none
+  display: none;
 }
 
 .mm-panel.mm-hasnavbar .mm-navbar {
@@ -1921,7 +1928,7 @@ li.mm-vertical.mm-opened>.mm-panel {
 
 .mm-panels>.mm-panel>.mm-listview:first-child,
 .mm-panels>.mm-panel>.mm-navbar+.mm-listview {
-  margin-top: -10px;
+  margin-top: 20px;
 }
 
 .mm-menu {
@@ -1952,7 +1959,7 @@ li.mm-vertical.mm-opened>.mm-panel {
 
 .mm-menu .mm-listview>li a:not(.mm-next) {
   -webkit-tap-highlight-color: rgba(255, 255, 255, .5);
-  tap-highlight-color: rgba(255, 255, 255, .5)
+  /* tap-highlight-color: rgba(255, 255, 255, .5) */
 }
 
 .mm-menu .mm-listview>li.mm-selected>a:not(.mm-next),
@@ -17838,6 +17845,7 @@ ul.utf-dashboard-box-list>li:hover .utf-manage-resume-overview-aera-inner .utf-m
     width: 100%;
     flex-wrap: wrap;
     height: auto !important;
+    padding-top: 70px;
   }
 
   .utf-dashboard-content-container-aera {

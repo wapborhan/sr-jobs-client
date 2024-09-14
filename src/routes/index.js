@@ -1,12 +1,10 @@
 import HomePage from "../views/HomePage";
-import SignUp from "../components/pages/signup/SignUp";
 import SignIn from "../components/pages/signin/SignIn";
-import Blogs from "../components/pages/blogs/Blogs";
+import SignUp from "../components/pages/signup/SignUp";
 
-import MyJobs from "../components/pages/my-jobs/MyJobs";
-import About from "../components/pages/about/About";
-import Terms from "../components/pages/terms/Terms";
-import Privacy from "../components/pages/privacy/Privacy";
+import About from "../pages/about/About";
+import Terms from "../pages/terms/Terms";
+import Privacy from "../pages/privacy/Privacy";
 import JobDetails from "../components/job/JobDetails";
 
 import Profile from "../pages/dashboard/profile/Profile";
@@ -29,10 +27,8 @@ import AppliedJobs from "../pages/dashboard/jobs/AppliedJobs";
 
 export {
   HomePage,
-  SignUp,
   SignIn,
-  Blogs,
-  MyJobs,
+  SignUp,
   About,
   Terms,
   Privacy,

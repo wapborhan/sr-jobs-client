@@ -1,4 +1,12 @@
+import { Link } from "react-router-dom";
+import AppliedCard from "../../../components/job/AppliedCard";
+import useAppliedJob from "../../../hooks/useAppliedJob";
+import useLoginUser from "../../../hooks/useLoginUser";
+
 const AppliedJobs = () => {
+  const [loggedInUser] = useLoginUser();
+  const [appliedJob] = useAppliedJob(loggedInUser?._id);
+
   return (
     <div className="utf-dashboard-content-container-aera" data-simplebar>
       <div id="dashboard-titlebar" className="utf-dashboard-headline-item">
@@ -8,10 +16,10 @@ const AppliedJobs = () => {
             <nav id="breadcrumbs">
               <ul>
                 <li>
-                  <a href="index-1.html">Home</a>
+                  <Link to="/">Home</Link>
                 </li>
                 <li>
-                  <a href="dashboard.html">Dashboard</a>
+                  <Link to="/dashboard/home">Dashboard</Link>
                 </li>
                 <li>Manage Resume</li>
               </ul>
@@ -28,68 +36,10 @@ const AppliedJobs = () => {
               </div>
               <div className="content">
                 <ul className="utf-dashboard-box-list">
-                  <li>
-                    <div className="utf-manage-resume-overview-aera utf-manage-candidate">
-                      <div className="utf-manage-resume-overview-aera-inner">
-                        <div className="utf-manage-resume-avatar">
-                          <a href="#">
-                            <img src="/images/user_big_1.jpg" alt="" />
-                          </a>
-                        </div>
-                        <div className="utf-manage-resume-item">
-                          <h4>
-                            <a href="#">John Williams</a>
-                            <span className="dashboard-status-button green">
-                              <i className="icon-material-outline-business-center"></i>{" "}
-                              Full Time
-                            </span>
-                          </h4>
-                          <span className="utf-manage-resume-detail-item">
-                            <a href="#">
-                              <i className="icon-feather-mail"></i>{" "}
-                              demo@example.com
-                            </a>
-                          </span>
-                          <span className="utf-manage-resume-detail-item">
-                            <i className="icon-feather-phone"></i> (+12)
-                            0123-654-987
-                          </span>
-                          <span className="utf-manage-resume-detail-item">
-                            <a href="#">
-                              <i className="icon-material-outline-location-on"></i>{" "}
-                              2767 Concord Street
-                            </a>
-                          </span>
-                          <div className="utf-buttons-to-right">
-                            <a
-                              href="#small-dialog"
-                              className="popup-with-zoom-anim button ripple-effect"
-                              title="Send Message"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-mail"></i> Send
-                            </a>
-                            <a
-                              href="#"
-                              className="button green ripple-effect ico"
-                              title="Download CV"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-download"></i>
-                            </a>
-                            <a
-                              href="#"
-                              className="button red ripple-effect ico"
-                              title="Remove"
-                              data-tippy-placement="top"
-                            >
-                              <i className="icon-feather-trash-2"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </li>
+                  {appliedJob &&
+                    appliedJob.map((job) => (
+                      <AppliedCard job={job} key={job._id} />
+                    ))}
                 </ul>
               </div>
             </div>

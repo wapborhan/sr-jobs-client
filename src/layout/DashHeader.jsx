@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import NavBar from "./NavBar";
 import ProfileNav from "./ProfileNav";
 
@@ -13,15 +14,13 @@ const DashHeader = () => {
           <div className="container">
             <div className="utf-left-side">
               <div id="logo">
-                {" "}
-                <a href="index-1.html">
+                <Link to="/">
                   <img src="/images/logo-dark.png" alt="" />
-                </a>{" "}
+                </Link>
               </div>
               <NavBar />
               <div className="clearfix"></div>
             </div>
-
             <ProfileNav />
           </div>
         </div>
